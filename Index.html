@@ -1,0 +1,1966 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Master Anatomy List</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+:root{
+  /* MedMasters card system tokens, unchanged */
+  --navy:#0B1530;
+  --navy-55:rgba(11,21,48,0.55);
+  --navy-15:rgba(11,21,48,0.15);
+  --terra:#8B3A2E;
+  --white:#FFFFFF;
+
+  --ground:#FFFFFF;
+  --card:#FFFFFF;
+  --ink:#0B1530;
+  --ink-soft:#545B6E;
+  --ink-mute:#606778;
+  --control:#6D7383;
+  --hair:rgba(11,21,48,0.15);
+  --hair-strong:rgba(11,21,48,0.28);
+  --tint:#F5EDEB;
+  --gold-dark:#7A5C1E;
+  --terra-dark:#8B3A2E;
+  --wash:#F7F7F8;
+  --r:8px;
+  --maxw:1180px;
+  --wcols:4;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink);
+  font-family:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{margin:0;text-wrap:balance;line-height:1.2}
+p{margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:var(--terra-dark)}
+:focus-visible{outline:2px solid var(--terra-dark);outline-offset:2px;border-radius:4px}
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0 0 0 0);white-space:nowrap;border:0;
+}
+.muted{color:var(--ink-mute)}
+.ok{color:var(--gold-dark);font-weight:600}
+
+.skip{
+  position:absolute;left:-9999px;top:0;background:var(--card);color:var(--ink);
+  padding:12px 18px;border:1px solid var(--ink);border-radius:var(--r);z-index:100;font-weight:600;
+}
+.skip:focus{left:16px;top:16px}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+
+/* ---------- masthead ---------- */
+.masthead{padding-block:44px 20px}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:3.3px;text-transform:uppercase;color:var(--terra);margin-bottom:8px}
+.course{font-size:9.5px;font-weight:700;letter-spacing:2.09px;text-transform:uppercase;color:var(--ink-mute);margin-bottom:14px}
+h1{font-family:"Open Sans",Georgia,serif;font-weight:800;letter-spacing:-0.6px;font-size:clamp(28px,4.6vw,40px)}
+.kicker{font-size:9.5px;font-weight:700;letter-spacing:2.09px;text-transform:uppercase;color:var(--terra-dark);margin-top:12px}
+.lede{margin-top:14px;font-size:16.5px;color:var(--ink-soft);max-width:70ch}
+
+.floor{border:1px solid var(--hair);border-radius:var(--r);padding:20px 22px;margin-top:22px;max-width:74ch}
+.floor h2{font-size:9.5px;font-weight:700;letter-spacing:2.09px;text-transform:uppercase;color:var(--terra-dark);margin-bottom:10px}
+.floor p{font-size:14.5px;color:var(--ink-soft);margin-bottom:8px}
+.floor p:last-child{margin-bottom:0}
+
+/* ---------- identity ---------- */
+.identity{
+  display:flex;gap:18px;flex-wrap:wrap;align-items:center;
+  border:1px solid var(--hair);border-radius:var(--r);padding:18px 20px;margin-top:22px;
+}
+.identity.needsname{border-color:var(--terra-dark)}
+.who{display:flex;align-items:center;gap:12px;flex:1 1 260px;max-width:460px}
+.who-name{font-weight:700}
+.who-sub{font-size:13px;color:var(--ink-mute)}
+.field{flex:1 1 200px;max-width:320px}
+.field label{display:block;font-size:9.5px;font-weight:700;letter-spacing:2.09px;text-transform:uppercase;color:var(--ink-mute);margin-bottom:6px}
+.field input{width:100%;padding:9px 11px;border:1px solid var(--control);border-radius:4px;background:var(--card)}
+.actions{display:flex;gap:10px;flex-wrap:wrap}
+
+.avatar{
+  width:28px;height:28px;border-radius:999px;color:#fff;flex:none;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;letter-spacing:.3px;
+}
+
+.roster{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-top:14px}
+.roster-label{font-size:9.5px;font-weight:700;letter-spacing:2.09px;text-transform:uppercase;color:var(--ink-mute)}
+.roster-person{display:inline-flex;align-items:center;gap:7px;font-size:13.5px}
+
+/* ---------- buttons ---------- */
+.btn{
+  border:1px solid var(--ink);background:var(--ink);color:#fff;border-radius:4px;
+  padding:9px 16px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;
+}
+.btn:hover{opacity:.86}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--hair-strong)}
+.btn.ghost:hover{background:var(--wash);border-color:var(--ink-soft)}
+.btn.terra{background:var(--terra);border-color:var(--terra);color:#fff}
+.btn.small{padding:7px 12px;margin-top:8px}
+.linkbtn{
+  background:none;border:0;padding:4px 2px;color:var(--terra-dark);
+  font-size:13px;font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:3px;
+}
+.toggleset{display:inline-flex;border:1px solid var(--hair-strong);border-radius:4px;overflow:hidden}
+.toggleset button{
+  background:var(--card);border:0;padding:8px 14px;cursor:pointer;
+  font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--ink-soft);
+}
+.toggleset button + button{border-left:1px solid var(--hair)}
+.toggleset button[aria-pressed="true"]{background:var(--ink);color:#fff}
+
+/* ---------- notices ---------- */
+.notice{
+  border:1px solid var(--hair-strong);border-left-width:1px;border-radius:var(--r);
+  padding:14px 16px;margin-top:18px;font-size:14.5px;color:var(--ink-soft);
+}
+.notice strong{color:var(--terra-dark)}
+.notice[hidden]{display:none}
+
+/* ---------- dashboard ---------- */
+.dash{margin-top:26px}
+.dash-lead{font-size:9.5px;font-weight:700;letter-spacing:2.09px;text-transform:uppercase;color:var(--ink-mute);margin-bottom:10px}
+.dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:10px}
+.dash-tile{
+  border:1px solid var(--hair);border-radius:var(--r);padding:14px 16px;
+  display:flex;flex-direction:column;gap:2px;
+}
+.dash-n{font-size:23px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.1}
+.dash-l{font-size:12px;color:var(--ink-mute)}
+
+/* ---------- toolbar ---------- */
+.toolbar{
+  position:sticky;top:0;z-index:20;background:var(--ground);
+  border-bottom:1px solid var(--hair);padding-block:12px;margin-top:26px;
+}
+.toolrow{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;min-width:0}
+/* A select sizes itself to its longest option, which for the worksheet
+   list is far wider than a phone. min-width:0 lets it shrink instead. */
+.tool{display:flex;flex-direction:column;gap:5px;flex:0 1 190px;min-width:0;max-width:100%}
+.tool label{font-size:9.5px;font-weight:700;letter-spacing:2.09px;text-transform:uppercase;color:var(--ink-mute);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tool input,.tool select,.select{
+  padding:8px 10px;border:1px solid var(--control);border-radius:4px;background:var(--card);
+}
+.tool input,.tool select{width:100%;min-width:0;max-width:100%}
+.tool.grow{flex:2 1 220px}
+.count-line{font-size:13.5px;color:var(--ink-mute);padding-block:10px 0;font-variant-numeric:tabular-nums}
+
+/* ---------- headings in the list ---------- */
+.unithead{
+  font-family:"Open Sans",Georgia,serif;font-weight:800;font-size:19px;
+  margin-top:34px;padding-bottom:8px;border-bottom:1px solid var(--hair);
+}
+.wshead{font-size:9.5px;font-weight:700;letter-spacing:2.09px;text-transform:uppercase;color:var(--terra-dark);margin-top:22px}
+.empty{font-size:14.5px;color:var(--ink-mute);padding:20px 0}
+
+/* ---------- section cards ---------- */
+.groupcard{border:1px solid var(--hair);border-radius:var(--r);margin-top:10px;overflow:hidden}
+.gctoggle{
+  width:100%;display:flex;justify-content:space-between;align-items:center;gap:14px;
+  background:var(--card);border:0;padding:14px 16px;cursor:pointer;text-align:left;
+}
+.gcname{font-weight:700;font-size:15px}
+.gccount{
+  font-size:11px;font-weight:700;color:var(--ink-mute);border:1px solid var(--hair);
+  border-radius:3px;padding:2px 8px;font-variant-numeric:tabular-nums;flex:none;
+}
+.gctoggle:hover .gcname{color:var(--terra-dark)}
+
+.gridhead,.gridrow{
+  display:grid;
+  grid-template-columns:minmax(170px,1fr) calc(4 * 40px) calc(var(--wcols) * 40px) 132px 74px 62px;
+  gap:8px;align-items:center;padding:7px 16px;border-top:1px solid var(--hair);
+}
+.gridhead{background:var(--wash);font-size:9px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--ink-mute)}
+.gridrow.proposed{background:var(--tint)}
+.cell.name{font-size:14.5px}
+.cell.name.lvl1{padding-left:16px}
+.cell.name.lvl2{padding-left:32px}
+.cell.votes,.cell.wheres{display:grid;grid-auto-flow:column;grid-auto-columns:40px}
+.gridhead .cell.votes,.gridhead .cell.wheres{display:grid;grid-auto-flow:column;grid-auto-columns:40px}
+.hcol{font-size:8.5px;letter-spacing:0;text-align:center;white-space:nowrap}
+
+.votecell,.wherecell{display:flex;align-items:center;justify-content:center;height:30px}
+.votecell input,.wherecell input{position:absolute;opacity:0;width:1px;height:1px}
+.votecell label,.wherecell label{
+  width:20px;height:20px;border:1px solid var(--control);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;font-weight:700;color:#fff;
+}
+.votecell label{border-radius:999px}
+.wherecell label{border-radius:3px}
+.votecell input:checked + label{background:var(--ink);border-color:var(--ink)}
+.votecell input[value="cut"]:checked + label{background:var(--terra);border-color:var(--terra)}
+.votecell input[value="cond"]:checked + label,
+.wherecell input:checked + label{background:var(--gold-dark);border-color:var(--gold-dark)}
+.votecell input:focus-visible + label,.wherecell input:focus-visible + label{outline:2px solid var(--terra-dark);outline-offset:2px}
+.count{color:inherit}
+.votecell input:not(:checked) + label .count,
+.wherecell input:not(:checked) + label .count{color:var(--ink-mute)}
+
+.chip{
+  display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;
+  border:1px solid var(--hair-strong);border-radius:3px;padding:2px 7px;white-space:nowrap;color:var(--ink-soft);
+}
+.chip-active{border-color:var(--hair-strong)}
+.chip-review{border-color:var(--gold-dark);color:var(--gold-dark)}
+.chip-add{border-color:var(--terra);color:var(--terra-dark);background:var(--tint)}
+.chip-revise{border-color:var(--gold-dark);color:var(--gold-dark)}
+.chip-remove{border-color:var(--terra);color:var(--terra-dark)}
+.chip-archived{color:var(--ink-mute)}
+.chip-none{color:var(--ink-mute)}
+.chip-some{border-color:var(--gold-dark);color:var(--gold-dark)}
+.chip-all{border-color:var(--ink);color:var(--ink)}
+.tag{
+  display:inline-block;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  border:1px solid var(--terra);color:var(--terra-dark);border-radius:3px;padding:1px 6px;margin-left:6px;
+}
+
+/* ---------- detail panel ---------- */
+.detailwrap{border-top:1px solid var(--hair);background:var(--wash)}
+.detail{padding:18px 16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
+.dsec h4{font-size:9.5px;font-weight:700;letter-spacing:2.09px;text-transform:uppercase;color:var(--terra-dark);margin-bottom:8px}
+.dclass{font-size:14px;color:var(--ink-soft)}
+.dhint{font-size:12.5px;color:var(--ink-mute);margin-top:6px}
+.dwhere,.dvotes{display:flex;flex-wrap:wrap;gap:8px}
+.pill{
+  display:inline-flex;align-items:center;gap:7px;border:1px solid var(--control);border-radius:999px;
+  padding:7px 13px;font-size:13.5px;cursor:pointer;background:var(--card);min-height:34px;
+}
+.pill:hover{border-color:var(--ink-soft)}
+.ta{
+  width:100%;margin-top:8px;padding:9px 11px;border:1px solid var(--control);
+  border-radius:4px;background:var(--card);resize:vertical;font-size:14.5px;
+}
+.select{width:100%;max-width:320px}
+.dlist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.dlist li{display:flex;gap:10px;align-items:flex-start;font-size:14px}
+.dquote{color:var(--ink-soft);font-size:13.5px}
+
+.histwrap{overflow-x:auto;margin-top:10px}
+.histtable{border-collapse:collapse;width:100%;min-width:520px;font-size:12.5px}
+.histtable th,.histtable td{text-align:left;padding:6px 9px;border-bottom:1px solid var(--hair);vertical-align:top}
+.histtable th{font-size:9px;letter-spacing:1.4px;text-transform:uppercase;color:var(--ink-mute);font-weight:700}
+
+/* ---------- table view ---------- */
+.tablewrap{overflow-x:auto;border:1px solid var(--hair);border-radius:var(--r);margin-top:12px}
+.maintable{border-collapse:collapse;width:100%;min-width:860px;font-size:14px}
+.maintable th,.maintable td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--hair);vertical-align:top}
+.maintable thead th{
+  position:sticky;top:0;background:var(--wash);z-index:1;
+  font-size:9px;letter-spacing:1.4px;text-transform:uppercase;color:var(--ink-mute);font-weight:700;
+}
+.maintable .tname{font-weight:600;font-size:14.5px}
+.trow.proposed{background:var(--tint)}
+.tdetail td{padding:0;background:var(--wash)}
+
+/* ---------- propose panel ---------- */
+.panel{border:1px solid var(--hair);border-radius:var(--r);padding:20px;margin-top:18px}
+.panel[hidden]{display:none}
+.panel h2{font-size:9.5px;font-weight:700;letter-spacing:2.09px;text-transform:uppercase;color:var(--terra-dark);margin-bottom:12px}
+.formgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.formgrid label{display:block;font-size:9.5px;font-weight:700;letter-spacing:2.09px;text-transform:uppercase;color:var(--ink-mute);margin-bottom:6px}
+.formgrid input,.formgrid select,.formgrid textarea{
+  width:100%;padding:9px 11px;border:1px solid var(--control);border-radius:4px;background:var(--card);
+}
+.formfoot{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.err{color:var(--terra-dark);font-size:13.5px;margin-top:10px;font-weight:600}
+.err[hidden]{display:none}
+
+/* ---------- export ---------- */
+#exportText{width:100%;min-height:180px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px}
+
+/* ---------- status line ---------- */
+.status{
+  position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:60;
+  background:var(--ink);color:#fff;border-radius:999px;padding:9px 18px;font-size:13.5px;
+  max-width:calc(100% - 32px);text-align:center;
+}
+.status[hidden]{display:none}
+
+footer{border-top:1px solid var(--hair);margin-top:54px;padding-block:22px 60px;font-size:13.5px;color:var(--ink-mute)}
+
+/* ---------- narrow screens and iframes ---------- */
+@media (max-width:1040px){
+  .gridhead{display:none}
+  .gridrow{
+    grid-template-columns:1fr;gap:10px;padding:14px 16px;
+  }
+  .cell.votes,.cell.wheres{grid-auto-columns:40px;justify-content:start}
+  .cell.name{font-weight:600}
+  .toolbar{position:static}
+}
+@media (max-width:640px){
+  .masthead{padding-block:30px 14px}
+  .detail{grid-template-columns:1fr;gap:18px}
+  .wrap{padding:0 16px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#list">Skip to the structure list</a>
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="eyebrow">Solano Community College</p>
+    <p class="course">BIOL 004 &middot; Human Anatomy</p>
+    <h1>Master Anatomy List</h1>
+    <p class="kicker">Faculty collaboration workspace</p>
+    <p class="lede">One shared list of every structure we currently test in lab, worked on by the whole anatomy faculty. Everything you mark is filed under your name and sits alongside everyone else's, so nothing you do replaces anybody else's work.</p>
+
+    <section class="floor" aria-labelledby="floorTitle">
+      <h2 id="floorTitle">What this list is</h2>
+      <p><strong>This is the minimum, not the maximum.</strong> It is the shared floor the department writes exams from, so any exam in any section can draw on anything that ends up here.</p>
+      <p>It is not a ceiling on your teaching. Every one of us keeps the freedom to go further. If a structure does not make the minimum list, you can still put it on your own list and test your own students on it.</p>
+      <p>So marking something Recommend Remove is about what all of us must cover. It is not a vote to stop anyone covering it.</p>
+    </section>
+
+    <div class="identity" id="identity">
+      <div class="who" id="who"></div>
+      <div class="field" id="signinField">
+        <label for="nameInput">Working as</label>
+        <input id="nameInput" type="text" autocomplete="name" placeholder="e.g. S. Rennie" maxlength="40">
+      </div>
+      <div class="actions">
+        <button class="btn" id="signinBtn" type="button">Start</button>
+        <button class="btn ghost" id="switchBtn" type="button" hidden>Not you?</button>
+        <button class="btn terra" id="addBtn" type="button" aria-expanded="false" aria-controls="addPanel" hidden>Propose a structure</button>
+        <button class="btn ghost" id="refreshBtn" type="button">Check for new work</button>
+        <button class="btn ghost" id="exportBtn" type="button">Export</button>
+      </div>
+    </div>
+
+    <div class="roster" id="roster" hidden></div>
+    <div class="notice" id="modeNotice" hidden></div>
+
+    <section class="panel" id="addPanel" hidden aria-labelledby="addTitle">
+      <h2 id="addTitle">Propose a structure</h2>
+      <form id="addForm">
+        <div class="formgrid">
+          <div>
+            <label for="newName">Structure name</label>
+            <input id="newName" type="text" maxlength="120" autocomplete="off">
+          </div>
+          <div>
+            <label for="newUnit">Unit</label>
+            <select id="newUnit"></select>
+          </div>
+          <div>
+            <label for="newWorksheet">Worksheet</label>
+            <select id="newWorksheet"></select>
+          </div>
+          <div>
+            <label for="newSection">Section</label>
+            <input id="newSection" type="text" maxlength="80" placeholder="Faculty additions" autocomplete="off">
+          </div>
+          <div style="grid-column:1/-1">
+            <label for="newWhy">Why it belongs on the minimum list</label>
+            <textarea id="newWhy" rows="2"></textarea>
+          </div>
+        </div>
+        <p class="err" id="addError" role="alert" hidden></p>
+        <div class="formfoot">
+          <button class="btn" type="submit">Propose it</button>
+          <button class="btn ghost" type="button" id="addCancel">Cancel</button>
+        </div>
+        <p class="dhint">It goes on the list straight away marked Recommend Add, so the department can talk about it before it becomes required.</p>
+      </form>
+    </section>
+
+    <section class="panel" id="exportPanel" hidden aria-labelledby="exportTitle">
+      <h2 id="exportTitle">Export the current list</h2>
+      <p class="dhint">Everything matching your filters, as CSV. Select it all and paste it wherever you need it.</p>
+      <label class="sr-only" for="exportText">Exported CSV</label>
+      <textarea id="exportText" readonly></textarea>
+      <div class="formfoot">
+        <button class="btn ghost" type="button" id="exportClose">Done</button>
+      </div>
+    </section>
+
+    <section class="dash" id="dashWrap" aria-labelledby="dashTitle">
+      <h2 class="sr-only" id="dashTitle">Where the review stands</h2>
+      <div id="dash"></div>
+    </section>
+  </div>
+</header>
+
+<div class="toolbar">
+  <div class="wrap">
+    <div class="toolrow">
+      <div class="tool grow">
+        <label for="q">Search</label>
+        <input id="q" type="search" placeholder="Structure, region, note or comment" autocomplete="off">
+      </div>
+      <div class="tool">
+        <label for="fUnit">Unit</label>
+        <select id="fUnit"></select>
+      </div>
+      <div class="tool">
+        <label for="fWorksheet">Worksheet</label>
+        <select id="fWorksheet"></select>
+      </div>
+      <div class="tool">
+        <label for="fWhere">Resource</label>
+        <select id="fWhere"></select>
+      </div>
+      <div class="tool">
+        <label for="fStatus">Status</label>
+        <select id="fStatus"></select>
+      </div>
+      <div class="tool">
+        <label for="fReview">Review</label>
+        <select id="fReview"></select>
+      </div>
+      <div class="tool">
+        <label for="clearBtn">Filters</label>
+        <button class="btn ghost" type="button" id="clearBtn">Clear all</button>
+      </div>
+      <div class="tool">
+        <span class="tool-label" id="viewLabel" style="font-size:9.5px;font-weight:700;letter-spacing:2.09px;text-transform:uppercase;color:var(--ink-mute)">View</span>
+        <div class="toggleset" role="group" aria-labelledby="viewLabel">
+          <button type="button" id="viewSections" aria-pressed="true">Sections</button>
+          <button type="button" id="viewTable" aria-pressed="false">Table</button>
+        </div>
+      </div>
+    </div>
+    <p class="count-line" id="count"></p>
+  </div>
+</div>
+
+<main>
+  <div class="wrap">
+    <div id="list"></div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Master Anatomy List, BIOL 004 Human Anatomy, Solano Community College. Prepared by Dr. Sharilyn Rennie.</p>
+    <p>Nothing on this page is deleted. Structures that should come off are marked Recommend Remove and stay on the record.</p>
+  </div>
+</footer>
+
+<p class="status" id="status" role="status" aria-live="polite" hidden></p>
+
+<script>
+/* ==================================================================
+ * Master Anatomy List, faculty collaboration workspace
+ * Solano Community College, BIOL 004 Human Anatomy
+ *
+ * Standalone frontend. No Claude APIs. Vanilla JS only.
+ * Runs three ways with no code change:
+ *   1. Inside Google Apps Script HTML Service, talking to Code.gs
+ *      through google.script.run.
+ *   2. From a plain web host, talking to an Apps Script web app
+ *      over the network (set API_URL below).
+ *   3. On its own with local test data, for building and demoing.
+ *
+ * Everything that touches storage goes through the DataService
+ * section. Nothing else in this file reads or writes data directly.
+ * ================================================================== */
+(function(){
+"use strict";
+
+/* ------------------------------------------------------------------ *
+ * Configuration
+ * ------------------------------------------------------------------ */
+
+/* Only used in mode 2. Leave empty when the page is served by Apps
+ * Script itself, which is the intended production setup. */
+var API_URL = "";
+
+var POLL_MS = 20000;         /* how often to pick up other people's work */
+var LOCAL_KEY = "mal-local-state-v1";
+var ME_KEY = "mal-me";
+
+/* ------------------------------------------------------------------ *
+ * Vocabulary
+ * ------------------------------------------------------------------ */
+var MODULE_NAMES = {
+  1:"Unit 1: Orientation, Microscopy, Histology and Skin",
+  2:"Unit 2: Skeletal System and Joints",
+  3:"Unit 3: Upper Limb, Thorax and Heart",
+  4:"Unit 4: Lower Limb, Respiratory, Neck and Abdomen",
+  5:"Unit 5: Urinary, Reproductive and Nervous System"
+};
+
+var VOTES = [
+  {k:"keep",      short:"Keep",   label:"Keep it"},
+  {k:"cond",      short:"Cond.",  label:"Keep with conditions"},
+  {k:"undecided", short:"Unsure", label:"Undecided"},
+  {k:"cut",       short:"Cut",    label:"Remove it"}
+];
+var VOTE_LABEL = {keep:"Keep", cond:"Keep with conditions", undecided:"Undecided", cut:"Remove"};
+
+var STATUSES = [
+  {k:"active",   label:"Active",            hint:"On the minimum list as it stands"},
+  {k:"review",   label:"Under Review",      hint:"The department is still talking about it"},
+  {k:"add",      label:"Recommend Add",     hint:"Proposed for the list, not yet agreed"},
+  {k:"revise",   label:"Recommend Revise",  hint:"Stays, but the wording or scope needs work"},
+  {k:"remove",   label:"Recommend Remove",  hint:"Proposed to come off the minimum list"},
+  {k:"archived", label:"Archived",          hint:"Off the working list, kept for the record"}
+];
+var STATUS_LABEL = {};
+STATUSES.forEach(function(s){ STATUS_LABEL[s.k] = s.label; });
+var DEFAULT_STATUS = "active";
+
+var WHERE = [
+  {k:"slide",     label:"Histo",     full:"Tested on a histology slide"},
+  {k:"model",     label:"Model",     full:"Tested on a model"},
+  {k:"cadaver",   label:"Cadav",    full:"Tested on the cadaver"},
+  {k:"bone",      label:"Bone",     full:"Tested from the bone box"},
+  {k:"radiology", label:"Rad",      full:"Tested on a radiograph or scan"},
+  {k:"other",     label:"Other",     full:"Tested somewhere else"},
+  {k:"skill",     label:"Skill",     full:"A skill the student performs rather than a structure they find"},
+  {k:"knowledge", label:"Asked",     full:"Asked as a question rather than pointed at"}
+];
+var WHERE_MAP = {};
+WHERE.forEach(function(w){ WHERE_MAP[w.k] = w; });
+
+var PALETTE = ["#B3261E","#1B5E20","#0B4F6C","#6A1B9A","#8D4E00","#00695C","#AD1457","#37474F","#4527A0","#5D4037"];
+
+/* ------------------------------------------------------------------ *
+ * The seed list: every structure from the Fall 2024 Anatomy Worksheets,
+ * Units 1 through 5. This is the starting master list. Faculty
+ * proposals are added on top of it through the data service.
+ * ------------------------------------------------------------------ */
+var SEED = [
+ {m:1,f:"1.0",ft:"Anatomical Position, Directional Terms, and Planes of Section",b:"Directional terminology",t:[],nw:1,items:["Superior (cranial, rostral)", "Inferior (caudal)", "Anterior (ventral)", "Posterior (dorsal)", "Medial", "Lateral", "Proximal", "Distal", "Deep", "Superficial"]},
+ {m:1,f:"1.0",ft:"Anatomical Position, Directional Terms, and Planes of Section",b:"Body planes and sections",t:[],nw:1,items:["Sagittal plane (sagittal section)", "Midsagittal plane (median plane)", "Parasagittal plane", "Frontal plane (coronal plane)", "Transverse plane (horizontal plane, cross section)", "Oblique plane (oblique section)"]},
+ {m:1,f:"1.1",ft:"The Compound Microscope",b:"Structure of the compound microscope",t:["Microscope"],items:["Revolving nosepiece", "Lever to adjust iris diaphragm", "Scanning objective lens (4x)", "Condenser", "Low power objective lens (10x)", "Field of view", "High power objective lens (40x)", "Stage", "High \"dry\" power objective lens (100x)", "Eyepiece (ocular lens)", "Coarse adjustment knob", "Arm", "Fine adjustment knob", "Lamp", "Total magnification (objective x ocular)"]},
+ {m:1,f:"1.2",ft:"Epithelial Tissue",b:"Simple epithelia",t:["Slide"],items:["Simple squamous epithelium", "Simple cuboidal epithelium", "Simple columnar epithelium", "Pseudostratified columnar epithelium", "Apical surface", "Basement membrane", "Lamina propria", "Nuclei", "Microvilli (brush border)", "Goblet cells", "Cilia"]},
+ {m:1,f:"1.2",ft:"Epithelial Tissue",b:"Stratified epithelia",t:["Slide"],items:["Stratified squamous epithelium, non-keratinized", "Stratified squamous epithelium, keratinized", "Transitional epithelium", "Apical surface", "Basement membrane", "Lamina propria", "Nuclei"]},
+ {m:1,f:"1.3",ft:"Connective Tissue",b:"Loose connective tissue",t:["Slide"],items:["Loose areolar connective tissue", "Adipose connective tissue", "Reticular connective tissue", "Nuclei", "Collagen fibers", "Elastic fibers", "Fibroblasts", "Mast cells", "Adipocytes (fat cells) with fat vacuoles", "Blood vessels", "Reticular fibers"]},
+ {m:1,f:"1.3",ft:"Connective Tissue",b:"Dense connective tissue",t:["Slide"],items:["Dense regular connective tissue", "Dense irregular connective tissue", "Elastic connective tissue", "Nuclei", "Collagen fibers", "Fibroblasts", "Elastin fibers"]},
+ {m:1,f:"1.3",ft:"Connective Tissue",b:"Cartilage and osseous tissue",t:["Slide"],items:["Hyaline cartilage", "Elastic cartilage", "Fibrocartilage", "Osseous tissue", "Nuclei", "Perichondrium", "Lacunae", "Chondrocytes", "Extracellular matrix", "Elastin fibers", "Collagen fibers", "Osteons", "Central canal", "Lamellae", ">Concentric lamellae", ">Interstitial lamellae", ">Circumferential lamellae", "Osteocytes", "Canaliculi", "Perforating (Volkmann's) canal", "Periosteum", ">Fibrous layer", ">Osteogenic layer (cellular layer)", "Perforating (Sharpey's) fibers"]},
+ {m:1,f:"1.4",ft:"Muscle Tissue",b:"Skeletal muscle tissue",t:["Slide"],items:["Skeletal muscle fibers", "Sarcomere", "Sarcolemma", "Z disc", "A band", "I band", "M line", "Actin", "Myosin", "Muscle fiber", "Endomysium", "Fascicle", "Perimysium", "Multinucleate"]},
+ {m:1,f:"1.4",ft:"Muscle Tissue",b:"Cardiac muscle tissue",t:["Slide"],items:["Cardiac muscle fibers", "A band", "I band", "Intercalated discs"]},
+ {m:1,f:"1.4",ft:"Muscle Tissue",b:"Smooth muscle tissue",t:["Slide"],items:["Smooth muscle fibers"]},
+ {m:1,f:"1.5",ft:"The Microscopic Structure of Nervous Tissue",b:"Nervous tissue",t:["Slide"],items:["Multipolar neurons", "Spinal cord", "Nerve", "Cell bodies", "Nucleolus", "Cell processes", "Dendrites", "Axons", "Axon hillocks", "Glial cells", "White matter", "Gray matter", "Ventral horn", "Dorsal horn", "Schwann cells", "Nodes of Ranvier", "Epineurium", "Perineurium", "Endoneurium"]},
+ {m:1,f:"1.6",ft:"The Microscopic Structure of Blood Vessels and Formed Elements",b:"Blood vessels",t:["Slide"],items:["Artery", "Vein", "Nerve", "Tunica intima", "Endothelium", "Internal elastic lamina", "Tunica media", "Smooth muscle", "Dense elastic connective tissue", "Tunica externa", "Lumen", "Erythrocytes"]},
+ {m:1,f:"1.6",ft:"The Microscopic Structure of Blood Vessels and Formed Elements",b:"Formed elements of blood",t:["Slide"],items:["Plasma", "Formed elements", "Erythrocytes", "Thrombocytes", "Leukocytes", "Neutrophils", "Lymphocytes", "Monocytes", "Eosinophils", "Basophils"]},
+ {m:1,f:"1.7",ft:"The Integumentary System",b:"Thick skin",t:["Slide", "Model"],items:["Epidermis", "Stratified squamous epithelial tissue", "Keratinocytes", "Keratin", "Stratum corneum", "Stratum lucidum", "Stratum granulosum", "Stratum spinosum", "Stratum basale", "Epidermal ridges", "Basement membrane", "Dermis", "Areolar connective tissue", "Dense irregular connective tissue", "Fibroblasts", "Papillary layer", "Dermal papillae", ">Capillary loops", ">Free nerve endings", ">Meissner's corpuscles (tactile corpuscles)", "Reticular layer", "Pacinian corpuscles (lamellar corpuscles)", "Hypodermis (superficial fascia, subcutaneous layer)", "Adipose connective tissue", "Adipocytes"]},
+ {m:1,f:"1.7",ft:"The Integumentary System",b:"Thin skin",t:["Slide", "Model"],items:["Epidermis", "Stratified squamous epithelial tissue", "Keratinocytes", "Keratin", "Stratum corneum", "Stratum granulosum", "Stratum spinosum", "Stratum basale", "Dermis", "Areolar connective tissue", "Dense irregular connective tissue", "Fibroblasts", "Papillary layer", "Dermal papillae", ">Capillary loops", ">Free nerve endings", "Reticular layer", "Sweat gland (eccrine gland)", "Pore", "Secretory cells", "Duct", "Hair", ">Hair shaft", ">Hair root", ">Hair bulb", ">Hair papilla (dermal papilla of the follicle)", "Hair follicle", "Arrector pili muscle", "Sebaceous gland", "Hypodermis", "Adipose connective tissue", "Adipocytes"]},
+ {m:2,f:"2.1",ft:"The Appendicular Skeleton I - Bones of the Pectoral Girdle and Upper Limbs",b:"Clavicle",t:["Bone"],items:["Clavicle", "Sternal end", "Acromial end", "Conoid tubercle"]},
+ {m:2,f:"2.1",ft:"The Appendicular Skeleton I - Bones of the Pectoral Girdle and Upper Limbs",b:"Scapula",t:["Bone"],items:["Scapula", "Acromion", "Glenoid cavity", "Superior border", "Coracoid process", "Supraglenoid tubercle", "Superior angle", "Scapular spine", "Infraglenoid tubercle", "Suprascapular notch", "Infraspinous fossa", "Axillary (lateral) border", "Supraspinous fossa", "Vertebral (medial) border", "Subscapular fossa", "Inferior angle"]},
+ {m:2,f:"2.1",ft:"The Appendicular Skeleton I - Bones of the Pectoral Girdle and Upper Limbs",b:"Humerus",t:["Bone"],items:["Humerus", "Head", "Deltoid tuberosity", "Trochlea", "Anatomical neck", "Radial groove", "Coronoid fossa", "Surgical neck", "Lateral epicondyle", "Capitulum", "Greater tubercle", "Lateral supracondylar ridge", "Radial fossa", "Lesser tubercle", "Medial epicondyle", "Olecranon fossa", "Intertubercular sulcus (bicipital groove)", "Medial supracondylar ridge"]},
+ {m:2,f:"2.1",ft:"The Appendicular Skeleton I - Bones of the Pectoral Girdle and Upper Limbs",b:"Radius",t:["Bone"],items:["Radius", "Head and neck", "Styloid process", "Interosseous crest", "Radial tuberosity", "Ulnar notch"]},
+ {m:2,f:"2.1",ft:"The Appendicular Skeleton I - Bones of the Pectoral Girdle and Upper Limbs",b:"Ulna",t:["Bone"],items:["Ulna", "Head", "Styloid process", "Interosseous crest", "Ulnar tuberosity", "Radial notch", "Coronoid process", "Trochlear notch", "Olecranon process"]},
+ {m:2,f:"2.1",ft:"The Appendicular Skeleton I - Bones of the Pectoral Girdle and Upper Limbs",b:"Carpals",t:["Bone"],items:["Carpals", "Scaphoid", "Lunate", "Triangular", "Pisiform", "Hamate", "Capitate", "Trapezoid", "Trapezium"]},
+ {m:2,f:"2.1",ft:"The Appendicular Skeleton I - Bones of the Pectoral Girdle and Upper Limbs",b:"Metacarpals",t:["Bone"],items:["Metacarpals"]},
+ {m:2,f:"2.1",ft:"The Appendicular Skeleton I - Bones of the Pectoral Girdle and Upper Limbs",b:"Phalanges",t:["Bone"],items:["Phalanges", "Distal phalanges", "Middle phalanges", "Proximal phalanges"]},
+ {m:2,f:"2.2",ft:"The Appendicular Skeleton II - Bones of the Pelvic Girdle and Lower Limbs",b:"Coxal bone",t:["Bone"],items:["Coxal bone (os coxa)"]},
+ {m:2,f:"2.2",ft:"The Appendicular Skeleton II - Bones of the Pelvic Girdle and Lower Limbs",b:"Ilium",t:["Bone"],items:["Ilium", "Iliac crest", "Anterior superior iliac spine (ASIS)", "Auricular surface", "Anterior inferior iliac spine (AIIS)", "Iliac fossa", "Posterior superior iliac spine (PSIS)", "Greater sciatic notch", "Posterior inferior iliac spine (PIIS)", "Ala"]},
+ {m:2,f:"2.2",ft:"The Appendicular Skeleton II - Bones of the Pelvic Girdle and Lower Limbs",b:"Ischium",t:["Bone"],items:["Ischium", "Ischial spine", "Lesser sciatic notch", "Ischial tuberosity", "Ramus of the ischium"]},
+ {m:2,f:"2.2",ft:"The Appendicular Skeleton II - Bones of the Pelvic Girdle and Lower Limbs",b:"Pubis",t:["Bone"],items:["Pubis", "Pubic body", "Pubic symphysis", "Superior ramus", "Pubic crest", "Inferior ramus", "Pubic tubercle"]},
+ {m:2,f:"2.2",ft:"The Appendicular Skeleton II - Bones of the Pelvic Girdle and Lower Limbs",b:"Acetabulum",t:["Bone"],items:["Acetabulum"]},
+ {m:2,f:"2.2",ft:"The Appendicular Skeleton II - Bones of the Pelvic Girdle and Lower Limbs",b:"Obturator foramen",t:["Bone"],items:["Obturator foramen"]},
+ {m:2,f:"2.2",ft:"The Appendicular Skeleton II - Bones of the Pelvic Girdle and Lower Limbs",b:"Femur",t:["Bone"],items:["Femur", "Head", "Intertrochanteric crest", "Fovea capitis", "Gluteal tuberosity", "Neck", "Linea aspera", "Greater trochanter", "Lateral supracondylar line", "Medial supracondylar line", "Lesser trochanter", "Lateral epicondyle", "Medial epicondyle", "Intertrochanteric line", "Lateral condyle", "Medial condyle", "Patellar surface", "Intercondylar fossa", "Adductor tubercle"]},
+ {m:2,f:"2.2",ft:"The Appendicular Skeleton II - Bones of the Pelvic Girdle and Lower Limbs",b:"Patella",t:["Bone"],items:["Patella"]},
+ {m:2,f:"2.2",ft:"The Appendicular Skeleton II - Bones of the Pelvic Girdle and Lower Limbs",b:"Tibia",t:["Bone"],items:["Tibia", "Lateral condyle", "Fibular notch", "Medial condyle", "Anterior crest (border)", "Intercondylar eminence", "Medial malleolus", "Tibial tuberosity"]},
+ {m:2,f:"2.2",ft:"The Appendicular Skeleton II - Bones of the Pelvic Girdle and Lower Limbs",b:"Fibula",t:["Bone"],items:["Fibula", "Head of fibula", "Lateral malleolus"]},
+ {m:2,f:"2.2",ft:"The Appendicular Skeleton II - Bones of the Pelvic Girdle and Lower Limbs",b:"Tarsals",t:["Bone"],items:["Tarsals", "Talus", "Calcaneus", "Navicular", "Medial cuneiform", "Intermediate cuneiform", "Lateral cuneiform", "Cuboid"]},
+ {m:2,f:"2.2",ft:"The Appendicular Skeleton II - Bones of the Pelvic Girdle and Lower Limbs",b:"Metatarsals",t:["Bone"],items:["Metatarsals"]},
+ {m:2,f:"2.2",ft:"The Appendicular Skeleton II - Bones of the Pelvic Girdle and Lower Limbs",b:"Phalanges",t:["Bone"],items:["Phalanges", "Proximal phalanges", "Middle phalanges", "Distal phalanges"]},
+ {m:2,f:"2.3",ft:"The Axial Skeleton I - Vertebral Column and Thoracic Cage",b:"Regions and curvatures",t:["Bone"],items:["Cervical vertebrae (C1-C7)", "Cervical curvature", "Thoracic vertebrae (T1-T12)", "Thoracic curvature", "Lumbar vertebrae (L1-L5)", "Lumbar curvature", "Sacral vertebrae (S1-S5)", "Sacral curvature", "Coccygeal vertebrae"]},
+ {m:2,f:"2.3",ft:"The Axial Skeleton I - Vertebral Column and Thoracic Cage",b:"Intervertebral discs",t:["Bone"],items:["Intervertebral disc", "Nucleus pulposus", "Anulus fibrosis"]},
+ {m:2,f:"2.3",ft:"The Axial Skeleton I - Vertebral Column and Thoracic Cage",b:"Typical vertebra",t:["Bone"],items:["Body (centrum)", "Lamina", "Pedicles", "Spinous process", "Vertebral foramen", "Transverse processes", "Superior articular process and facet", "Vertebral arch", "Inferior articular process and facet", "Intervertebral notch", "Intervertebral foramen"]},
+ {m:2,f:"2.3",ft:"The Axial Skeleton I - Vertebral Column and Thoracic Cage",b:"Cervical vertebrae",t:["Bone"],items:["Transverse foramina", "Atlas (C1)", "Axis (C2)", "Odontoid process (dens)", "Bifid spinous process"]},
+ {m:2,f:"2.3",ft:"The Axial Skeleton I - Vertebral Column and Thoracic Cage",b:"Thoracic vertebrae",t:["Bone"],items:["Articular facets on transverse processes", "Articular facets (demifacets) on the body"]},
+ {m:2,f:"2.3",ft:"The Axial Skeleton I - Vertebral Column and Thoracic Cage",b:"Sacrum",t:["Bone"],items:["Sacrum", "Fused vertebral bodies", "Auricular surface", "Transverse ridges", "Superior articular processes and facets", "Sacral promontory", "Sacral canal", "Ala", "Anterior sacral foramina", "Posterior sacral foramina"]},
+ {m:2,f:"2.3",ft:"The Axial Skeleton I - Vertebral Column and Thoracic Cage",b:"Coccyx",t:["Bone"],items:["Coccyx"]},
+ {m:2,f:"2.3",ft:"The Axial Skeleton I - Vertebral Column and Thoracic Cage",b:"Ribs",t:["Bone"],items:["Rib", "Head", "Neck", "Articular tubercle", "Angle of rib", "Shaft (body)", "Costal groove", "Costal cartilage", "Vertebrosternal ribs", "Vertebrochondral ribs", "Floating ribs (vertebral ribs)"]},
+ {m:2,f:"2.3",ft:"The Axial Skeleton I - Vertebral Column and Thoracic Cage",b:"Sternum",t:["Bone"],items:["Sternum", "Manubrium", "Jugular (suprasternal) notch", "Body", "Clavicular notch", "Xiphoid process"]},
+ {m:2,f:"2.4",ft:"The Axial Skeleton II: The Skull",b:"Frontal bone",t:["Bone"],items:["Frontal bone", "Supraorbital foramen (notch)", "Glabella", "Frontal sinuses"]},
+ {m:2,f:"2.4",ft:"The Axial Skeleton II: The Skull",b:"Parietal bone",t:["Bone"],items:["Parietal bone", "Sagittal suture", "Squamous suture", "Coronal suture", "Lambdoidal (lambdoid) suture"]},
+ {m:2,f:"2.4",ft:"The Axial Skeleton II: The Skull",b:"Occipital bone",t:["Bone"],items:["Occipital bone", "Foramen magnum", "Lambdoidal suture", "Occipital condyles", "Hypoglossal canal", "External occipital protuberance", "Superior nuchal line", "Inferior nuchal line"]},
+ {m:2,f:"2.4",ft:"The Axial Skeleton II: The Skull",b:"Temporal bone",t:["Bone"],items:["Temporal bones", "Zygomatic process of the temporal bone", "Mandibular fossa", "Squamosal suture", "External auditory meatus (external acoustic meatus)", "Styloid process", "Mastoid process", "Stylomastoid foramen", "Petrous ridge", "Internal auditory meatus (internal acoustic meatus)", "Jugular foramen", "Carotid foramen (carotid canal)"]},
+ {m:2,f:"2.4",ft:"The Axial Skeleton II: The Skull",b:"Sphenoid bone",t:["Bone"],items:["Sphenoid bone", "Body", "Sella turcica", "Greater wings", "Lesser wings", "Optic canal (optic foramen)", "Superior orbital fissure", "Foramen rotundum", "Foramen ovale", "Foramen spinosum", "Foramen lacerum", "Sphenoid sinus"]},
+ {m:2,f:"2.4",ft:"The Axial Skeleton II: The Skull",b:"Ethmoid bone",t:["Bone"],items:["Ethmoid bone", "Cribriform plate", "Olfactory foramina", "Crista galli", "Ethmoid sinuses", "Perpendicular plate", "Superior nasal conchae", "Middle nasal conchae"]},
+ {m:2,f:"2.4",ft:"The Axial Skeleton II: The Skull",b:"Nasal bones",t:["Bone"],items:["Nasal bones"]},
+ {m:2,f:"2.4",ft:"The Axial Skeleton II: The Skull",b:"Maxilla",t:["Bone"],items:["Maxilla", "Palatine process of the maxilla", "Incisive fossa (foramen)", "Infraorbital foramen", "Alveolar margin (alveolar ridge)", "Maxillary sinus"]},
+ {m:2,f:"2.4",ft:"The Axial Skeleton II: The Skull",b:"Mandible",t:["Bone"],items:["Mandible", "Body of the mandible", "Mandibular angle", "Ramus", "Coronoid process", "Mandibular condyle", "Mandibular foramen", "Mental foramen", "Alveolar margin (alveolar ridge)"]},
+ {m:2,f:"2.4",ft:"The Axial Skeleton II: The Skull",b:"Lacrimal bones",t:["Bone"],items:["Lacrimal bones", "Lacrimal canal (sulcus)"]},
+ {m:2,f:"2.4",ft:"The Axial Skeleton II: The Skull",b:"Zygomatic bones",t:["Bone"],items:["Zygomatic bones", "Temporal process of the zygomatic bone"]},
+ {m:2,f:"2.4",ft:"The Axial Skeleton II: The Skull",b:"Vomer",t:["Bone"],items:["Vomer"]},
+ {m:2,f:"2.4",ft:"The Axial Skeleton II: The Skull",b:"Palatine bones",t:["Bone"],items:["Palatine bones", "Horizontal plate of the palatine bone", "Hard palate", "Transverse palatine suture", "Median palatine suture"]},
+ {m:2,f:"2.4",ft:"The Axial Skeleton II: The Skull",b:"Inferior nasal conchae",t:["Bone"],items:["Inferior nasal conchae"]},
+ {m:2,f:"2.4",ft:"The Axial Skeleton II: The Skull",b:"Auditory ossicles",t:["Bone"],items:["Auditory ossicles", "Malleus (hammer)", "Incus (anvil)", "Stapes (stirrup)"]},
+ {m:2,f:"2.4",ft:"The Axial Skeleton II: The Skull",b:"Special parts of the skull",t:["Bone"],items:["Pterion", "Orbits", "Nasal cavity", "Hyoid bone", "Superior meatus", "Middle meatus", "Inferior meatus"]},
+ {m:2,f:"2.4",ft:"The Axial Skeleton II: The Skull",b:"Paranasal sinuses",t:["Bone"],items:["Frontal sinus", "Sphenoid sinus", "Maxillary sinus"]},
+ {m:2,f:"2.5",ft:"The Joints - Fibrous, Cartilaginous and Synovial",b:"Joint classification",t:[],nw:1,items:["Fibrous joints", "Cartilaginous joints", "Synovial joints", "Synarthroses", "Amphiarthroses", "Diarthroses"]},
+ {m:2,f:"2.5",ft:"The Joints - Fibrous, Cartilaginous and Synovial",b:"Fibrous and cartilaginous joint types",t:["Bone", "Model"],items:["Suture", "Synchondrosis", "Symphysis"]},
+ {m:2,f:"2.5",ft:"The Joints - Fibrous, Cartilaginous and Synovial",b:"Synovial joint types",t:["Bone", "Model"],items:["Hinge joint", "Ball-and-socket joint"]},
+ {m:2,f:"2.6",ft:"The Structure of Bones and Muscles",b:"Long bone gross anatomy",t:["Model", "Slide"],items:["Compact bone (tissue)", "Diaphysis", "Spongy bone (tissue)", "Epiphysis", "Trabeculae (structure)", "Epiphyseal line", "Medullary cavity", "Articular cartilage", "Periosteum", "Endosteum"]},
+ {m:2,f:"2.6",ft:"The Structure of Bones and Muscles",b:"Bone microscopic anatomy",t:["Model", "Slide"],items:["Osteon", "Lamellae", ">Concentric lamellae", ">Interstitial lamellae", ">Circumferential lamellae", "Central (Haversian) canal", "Perforating (Volkmann's) canal", "Perforating (Sharpey's) fibers", "Endosteum", "Periosteum", ">Fibrous layer", ">Osteogenic layer (cellular layer)", "Canaliculus", "Lacuna", "Trabecula", "Collagen fibers", "Red marrow"]},
+ {m:2,f:"2.6",ft:"The Structure of Bones and Muscles",b:"Skeletal muscle fiber microscopic anatomy",t:["Model", "Slide"],items:["Skeletal muscle fiber (muscle cell)", "Sarcolemma", "Sarcoplasm", "Peripheral nuclei", "T-tubule", "Sarcoplasmic reticulum", "Terminal cisternae", "Triad", "Endomysium", "Myofibril", "Sarcomere", ">Z-disc (Z-line)", ">I-band (light band)", ">A-band (dark band)", ">H-zone", ">M-line", "Myofilaments", ">Thin filament (actin)", ">>Tropomyosin", ">>Troponin", ">>Nebulin", ">Thick filament (myosin)", ">>Myosin head (cross bridge)", ">>Myosin tail", ">Titin"]},
+ {m:3,f:"3.1",ft:"Anatomy of the Chest and Anterior Brachium",b:"Skeletal muscle system",t:["Cadaver", "Model"],items:["Pectoralis major", "Pectoralis minor", "Serratus anterior", "Subscapularis", "Coracobrachialis", "Biceps brachii, long head", "Biceps brachii, short head", "Brachialis"]},
+ {m:3,f:"3.1",ft:"Anatomy of the Chest and Anterior Brachium",b:"Arteries",t:["Cadaver", "Model"],items:["Subclavian artery", "Axillary artery", "Brachial artery"]},
+ {m:3,f:"3.1",ft:"Anatomy of the Chest and Anterior Brachium",b:"Deep veins",t:["Cadaver", "Model"],items:["Subclavian vein", "Axillary vein", "Brachial vein"]},
+ {m:3,f:"3.1",ft:"Anatomy of the Chest and Anterior Brachium",b:"Superficial veins",t:["Cadaver", "Model"],items:["Basilic vein", "Cephalic vein", "Median cubital vein"]},
+ {m:3,f:"3.1",ft:"Anatomy of the Chest and Anterior Brachium",b:"Nervous system",t:["Cadaver", "Model"],items:["Musculocutaneous nerve", "Median nerve", "Ulnar nerve"]},
+ {m:3,f:"3.2",ft:"Anatomy of the Posterior Thorax, Shoulder and Posterior Brachium",b:"Superficial muscles of the back and shoulder",t:["Cadaver", "Model"],items:["Trapezius", "Latissimus dorsi", "Teres major", "Deltoid"]},
+ {m:3,f:"3.2",ft:"Anatomy of the Posterior Thorax, Shoulder and Posterior Brachium",b:"Deeper muscles of the back and shoulder",t:["Cadaver", "Model"],items:["Rhomboid minor", "Rhomboid major", "Levator scapulae", "Supraspinatus", "Infraspinatus", "Teres minor"]},
+ {m:3,f:"3.2",ft:"Anatomy of the Posterior Thorax, Shoulder and Posterior Brachium",b:"Muscles of the posterior brachium",t:["Cadaver", "Model"],items:["Triceps brachii, long head", "Triceps brachii, lateral head", "Triceps brachii, medial head"]},
+ {m:3,f:"3.2",ft:"Anatomy of the Posterior Thorax, Shoulder and Posterior Brachium",b:"Peripheral nerves",t:["Cadaver", "Model"],items:["Radial nerve"]},
+ {m:3,f:"3.3",ft:"Anatomy of the Anterior Antebrachium (forearm)",b:"Superficial layer",t:["Cadaver", "Model"],items:["Pronator teres", "Flexor carpi radialis", "Palmaris longus", "Flexor carpi ulnaris"]},
+ {m:3,f:"3.3",ft:"Anatomy of the Anterior Antebrachium (forearm)",b:"Intermediate layer",t:["Cadaver", "Model"],items:["Flexor digitorum superficialis"]},
+ {m:3,f:"3.3",ft:"Anatomy of the Anterior Antebrachium (forearm)",b:"Deep layer",t:["Cadaver", "Model"],items:["Flexor digitorum profundus", "Flexor pollicis longus", "Pronator quadratus"]},
+ {m:3,f:"3.3",ft:"Anatomy of the Anterior Antebrachium (forearm)",b:"Arteries",t:["Cadaver", "Model"],items:["Brachial artery", "Radial artery", "Ulnar artery"]},
+ {m:3,f:"3.3",ft:"Anatomy of the Anterior Antebrachium (forearm)",b:"Superficial veins",t:["Cadaver", "Model"],items:["Basilic vein", "Cephalic vein"]},
+ {m:3,f:"3.3",ft:"Anatomy of the Anterior Antebrachium (forearm)",b:"Nervous system",t:["Cadaver", "Model"],items:["Ulnar nerve", "Median nerve", "Musculocutaneous nerve", "Radial nerve"]},
+ {m:3,f:"3.4",ft:"Anatomy of the Posterior Antebrachium (forearm)",b:"Skeletal muscle system",t:["Cadaver", "Model"],items:["Brachioradialis", "Extensor carpi radialis longus", "Extensor carpi radialis brevis", "Extensor digitorum", "Extensor digiti minimi", "Extensor carpi ulnaris", "Abductor pollicis longus", "Extensor policis brevis", "Extensor pollicis longus", "Extensor indicis"]},
+ {m:3,f:"3.4",ft:"Anatomy of the Posterior Antebrachium (forearm)",b:"Peripheral nerves",t:["Cadaver", "Model"],items:["Radial nerve"]},
+ {m:3,f:"3.5",ft:"Anatomy of the Thorax - The Anatomy of Heart",b:"Gross anatomy of the heart",t:["Cadaver", "Model"],items:["Thoracic cavity", "Mediastinum", "Pericardial cavity", "Fibrous pericardium", "Serous pericardium (parietal and visceral layers)", "Epicardium", "Myocardium", "Endocardium", "Right atrium", "Left atrium", "Right auricle", "Left auricle", "Interatrial septum", "Pectinate muscles", "Right ventricle", "Left ventricle", "Interventricular septum", "Right atrioventricular valve (tricuspid valve)", "Pulmonary semilunar valve", "Left atrioventricular valve (bicuspid/mitral valve)", "Aortic semilunar valve", "Chordae tendineae", "Papillary muscles", "Trabeculae carneae"]},
+ {m:3,f:"3.5",ft:"Anatomy of the Thorax - The Anatomy of Heart",b:"Blood supply to the myocardium",t:["Cadaver", "Model"],items:["Right coronary artery", "Left coronary artery", "Anterior interventricular artery (LAD)", "Circumflex branch of the left coronary artery"]},
+ {m:3,f:"3.5",ft:"Anatomy of the Thorax - The Anatomy of Heart",b:"Major systemic veins",t:["Cadaver", "Model"],items:["Inferior vena cava", "Superior vena cava", "Right brachiocephalic vein", "Left brachiocephalic vein", "Right subclavian vein", "Left subclavian vein", "Right internal jugular vein", "Left internal jugular vein", "Coronary sinus", "Pulmonary trunk", "Right pulmonary artery", "Left pulmonary artery", "Right pulmonary vein", "Left pulmonary vein"]},
+ {m:3,f:"3.5",ft:"Anatomy of the Thorax - The Anatomy of Heart",b:"Major systemic arteries",t:["Cadaver", "Model"],items:["Ascending aorta", "Aortic arch", "Brachiocephalic trunk", "Left common carotid artery", "Left subclavian artery", "Ligamentum arteriosum"]},
+ {m:4,f:"4.1A",ft:"Anterior, Medial, and Lateral Thigh",b:"Iliopsoas",t:["Cadaver", "Model"],items:["Iliacus", "Psoas major"]},
+ {m:4,f:"4.1A",ft:"Anterior, Medial, and Lateral Thigh",b:"Quadriceps femoris",t:["Cadaver", "Model"],items:["Rectus femoris", "Vastus lateralis", "Vastus intermedius", "Vastus medialis"]},
+ {m:4,f:"4.1A",ft:"Anterior, Medial, and Lateral Thigh",b:"Skeletal muscle system",t:["Cadaver", "Model"],items:["Sartorius", "Gracilis", "Adductor magnus", "Adductor longus", "Adductor brevis", "Pectineus", "Tensor fasciae latae"]},
+ {m:4,f:"4.1A",ft:"Anterior, Medial, and Lateral Thigh",b:"Nervous system",t:["Cadaver", "Model"],items:["Femoral nerve"]},
+ {m:4,f:"4.1A",ft:"Anterior, Medial, and Lateral Thigh",b:"Cardiovascular system",t:["Cadaver", "Model"],items:["Femoral artery", "Femoral vein (a deep vein)", "Great saphenous vein (a superficial vein)"]},
+ {m:4,f:"4.1B",ft:"Gluteal Region and Posterior Thigh",b:"Skeletal muscle system",t:["Cadaver", "Model"],items:["Gluteus maximus", "Gluteus medius"]},
+ {m:4,f:"4.1B",ft:"Gluteal Region and Posterior Thigh",b:"Hamstrings",t:["Cadaver", "Model"],items:["Biceps femoris", "Semitendinosus", "Semimembranosus"]},
+ {m:4,f:"4.1B",ft:"Gluteal Region and Posterior Thigh",b:"Nervous system",t:["Cadaver", "Model"],items:["Sciatic nerve (which later branches into the tibial nerve and common fibular nerve)"]},
+ {m:4,f:"4.1B",ft:"Gluteal Region and Posterior Thigh",b:"Cardiovascular system",t:["Cadaver", "Model"],items:["Femoral artery", "Femoral vein (a deep vein)", "Great saphenous vein (a superficial vein)"]},
+ {m:4,f:"4.2",ft:"The Leg",b:"Skeletal muscle system",t:["Cadaver", "Model"],items:["Tibialis anterior", "Extensor hallucis longus", "Extensor digitorum longus", "Fibularis tertius (peroneus tertius)", "Fibularis brevis (peroneus brevis)", "Fibularis longus (peroneus longus)", "Tibialis posterior", "Flexor digitorum longus", "Flexor hallucis longus", "Gastrocnemius", "Soleus", "Plantaris"]},
+ {m:4,f:"4.2",ft:"The Leg",b:"Nervous system",t:["Cadaver", "Model"],items:["Tibial nerve", "Common fibular nerve"]},
+ {m:4,f:"4.2",ft:"The Leg",b:"Cardiovascular system",t:["Cadaver", "Model"],items:["Posterior tibial artery", "Great saphenous vein (a superficial vein)"]},
+ {m:4,f:"4.3",ft:"Thoracic Anatomy - Respiratory System, selected vessels and associated structures",b:"Respiratory system",t:["Cadaver", "Model"],items:["Thoracic cavity", "R and L pleural cavities", "Diaphragm", "External intercostals", "Internal intercostals", "Mediastinum", "Trachea", "Tracheal cartilages", "Carina", "Lobes of the R. lung (sup., mid., inf.)", "Lobes of the L. lung (sup., inf.)", "Hilum of the R and L lung", "L and R pulmonary arteries", "L and R pulmonary veins", "L and R primary (main) bronchi", "Secondary (lobar) bronchi", "Tertiary (segmental) bronchi", "Parietal pleura", "Visceral pleura"]},
+ {m:4,f:"4.3",ft:"Thoracic Anatomy - Respiratory System, selected vessels and associated structures",b:"Additional vessels and structures",t:["Cadaver", "Model"],items:["Brachiocephalic trunk", "R and L subclavian arteries", "R and L common carotid arteries", "R and L phrenic nerves", "R and L brachiocephalic veins", "R and L subclavian veins", "R and L internal jugular veins", "Esophagus"]},
+ {m:4,f:"4.4",ft:"Anterior Cervical (Neck) Region",b:"Skeletal muscle system",t:["Cadaver", "Model"],items:["Platysma", "Sternocleidomastoid", "Omohyoid", "Sternohyoid", "Sternothyroid", "Thyrohyoid"]},
+ {m:4,f:"4.4",ft:"Anterior Cervical (Neck) Region",b:"Nervous system",t:["Cadaver", "Model"],items:["Vagus nerve (cranial nerve X)"]},
+ {m:4,f:"4.4",ft:"Anterior Cervical (Neck) Region",b:"Vascular system",t:["Cadaver", "Model"],items:["Common carotid artery", "Vertebral artery", "Internal jugular vein"]},
+ {m:4,f:"4.4",ft:"Anterior Cervical (Neck) Region",b:"Respiratory system",t:["Cadaver", "Model"],items:["Larynx", "Thyroid cartilage", "Laryngeal prominence", "Cricoid cartilage", "Cricothyroid ligament", "Arytenoid cartilages", "Vocal cords (vocal folds)", "Glottis", "Epiglottis", "Trachea"]},
+ {m:4,f:"4.4",ft:"Anterior Cervical (Neck) Region",b:"Digestive system",t:["Cadaver", "Model"],items:["Esophagus", "Submandibular glands"]},
+ {m:4,f:"4.4",ft:"Anterior Cervical (Neck) Region",b:"Endocrine system",t:["Cadaver", "Model"],items:["Thyroid gland"]},
+ {m:4,f:"4.5",ft:"Abdominal Region I",b:"Muscular system",t:["Cadaver", "Model"],items:["Rectus abdominis", "External abdominal oblique", "Internal abdominal oblique", "Transversus abdominis"]},
+ {m:4,f:"4.5",ft:"Abdominal Region I",b:"Ventral body cavities and serous membranes",t:["Cadaver", "Model"],items:["Abdominal cavity", "Pelvic cavity", "Peritoneal cavity", "Parietal peritoneum", "Visceral peritoneum", "Greater omentum", "Lesser omentum"]},
+ {m:4,f:"4.5",ft:"Abdominal Region I",b:"Digestive system",t:["Cadaver", "Model"],items:["Esophagus", "Large intestine (large bowel)", "Cecum", "Stomach", "Vermiform appendix", "Greater curvature", "Lesser curvature", "Ascending colon", "Gastric rugae", "Hepatic flexure (right colic flexure)", "Cardiac region", "Transverse colon", "Fundus", "Splenic flexure (left colic flexure)", "Body", "Descending colon", "Pyloric region", "Sigmoid colon", "Pyloric sphincter", "Rectum", "Teniae coli", "Small intestine (small bowel)", "Haustra (singular: haustrum)", "Mesentery", "Anal canal", "Duodenum", "Major duodenal papilla", "Jejunum", "Ileum", "Ileocecal valve"]},
+ {m:4,f:"4.6",ft:"Abdominal Region II",b:"Digestive system",t:["Cadaver", "Model"],items:["Pancreas (also an endocrine organ)", "Gall bladder", "Main pancreatic duct", "Accessory pancreatic duct", "Biliary tree", "Hepatopancreatic ampulla", "R and L hepatic ducts", "Major duodenal papilla", "Common hepatic duct", "Cystic duct", "Liver", "Common bile duct", "Right lobe", "Left lobe", "Quadrate lobe", "Caudate lobe", "Falciform ligament", "Ligamentum teres (round ligament)"]},
+ {m:4,f:"4.6",ft:"Abdominal Region II",b:"Lymphatic system",t:["Cadaver", "Model"],items:["Spleen"]},
+ {m:4,f:"4.6",ft:"Abdominal Region II",b:"Arteries",t:["Cadaver", "Model"],items:["Abdominal aorta", "Celiac trunk", "Left gastric artery", "Splenic artery", "Common hepatic artery", "Superior mesenteric artery", "Inferior mesenteric artery", "R and L common iliac arteries"]},
+ {m:4,f:"4.6",ft:"Abdominal Region II",b:"Veins",t:["Cadaver", "Model"],items:["Inferior vena cava", "R and L common iliac veins", "Hepatic portal vein", "Splenic vein", "Inferior mesenteric vein", "Superior mesenteric vein"]},
+ {m:5,f:"5.1",ft:"Pelvic Anatomy I - Urinary System and Selected Skeletal Muscles",b:"Gross anatomy of the urinary organs",t:["Model", "Cadaver"],items:["Renal capsule", "Major calyx", "Renal cortex", "Minor calyx", "Renal medulla", "Renal pelvis", "Renal column", "Ureter", "Renal pyramid", "Urinary bladder", "Urethra"]},
+ {m:5,f:"5.1",ft:"Pelvic Anatomy I - Urinary System and Selected Skeletal Muscles",b:"Vasculature of the kidney",t:["Model", "Cadaver"],items:["Renal artery", "Renal vein", "Arcuate artery", "Arcuate vein", "Cortical radiate artery", "Cortical radiate vein", "Afferent arteriole", "Efferent arteriole"]},
+ {m:5,f:"5.1",ft:"Pelvic Anatomy I - Urinary System and Selected Skeletal Muscles",b:"Renal corpuscle",t:["Model", "Cadaver"],items:["Renal corpuscle", "Glomerulus", "Glomerular capsule (Bowman's capsule)", "Parietal layer of glomerular capsule", "Visceral layer of glomerular capsule"]},
+ {m:5,f:"5.1",ft:"Pelvic Anatomy I - Urinary System and Selected Skeletal Muscles",b:"The renal tubule",t:["Model", "Cadaver"],items:["Proximal convoluted tubule (PCT)", "Collecting duct", "Nephron loop (loop of Henle)", "Papillary duct (distal portion of collecting duct)", "Distal convoluted tubule (DCT)", "Juxtaglomerular apparatus", "Macula densa cells", "Granular cells"]},
+ {m:5,f:"5.2",ft:"Pelvic Anatomy II - Male Reproductive System and Selected Pelvic Structures",b:"Male reproductive system",t:["Model", "Cadaver"],items:["Scrotum", "Seminal vesicles", "Testes (singular is testis)", "Prostate gland", "Epididymis", "Bulbourethral glands", "Spermatic cord", "Penis", "Vas deferens (ductus deferens)", "Corpus spongiosum", "Testicular artery and vein", "Corpora cavernosa (singular is corpus cavernosum)", "Cremaster muscle", "Glans penis", "Pampiniform plexus", "Prepuce", "Inguinal canal", "Urethra", "Ejaculatory duct", "Prostatic urethra", "Membranous urethra", "Spongy urethra (penile urethra)"]},
+ {m:5,f:"5.2",ft:"Pelvic Anatomy II - Male Reproductive System and Selected Pelvic Structures",b:"Blood vessels of the pelvic region",t:["Model", "Cadaver"],items:["Internal iliac arteries", "External iliac arteries", "Medial umbilical ligaments", "Internal iliac veins", "External iliac veins"]},
+ {m:5,f:"5.3",ft:"Pelvic Anatomy III - Female Reproductive System",b:"Female reproductive system",t:["Model", "Cadaver"],items:["Ovary", "Uterus", "Fundus", "Ovarian ligament", "Body", "Ovarian artery & vein", "Cervix", "Endometrium", "Serous membranes", "Myometrium", "Broad ligament (of the uterus)", "Perimetrium", "Suspensory ligament (of the ovary)", "Vagina", "Fallopian tubes (uterine tubes or oviducts)", "Vaginal orifice", "Fimbriae", "Fornix", "Infundibulum", "Ampulla", "Vulva (external genitalia)", "Isthmus", "Mons pubis", "Labia majora", "Round ligament (of the uterus)", "Labia minora", "Clitoris (with corpora cavernosa)", "Urethral orifice"]},
+ {m:5,f:"5.3",ft:"Pelvic Anatomy III - Female Reproductive System",b:"Blood vessels of the pelvic region",t:["Model", "Cadaver"],items:["Internal iliac arteries", "External iliac arteries", "Medial umbilical ligaments", "Internal iliac veins", "External iliac veins"]},
+ {m:5,f:"5.4",ft:"Anatomy of the Nervous System I - The Spinal Cord and Spinal Nerves",b:"Gross anatomy of the spinal cord",t:["Model", "Cadaver", "Slide"],items:["The meninges", "Cervical enlargement", "Dura mater", "Lumbar enlargement", "Arachnoid mater", "Conus medullaris", "Pia mater", "Cauda equina", "Filum terminale"]},
+ {m:5,f:"5.4",ft:"Anatomy of the Nervous System I - The Spinal Cord and Spinal Nerves",b:"Cross-sectional view of the spinal cord",t:["Model", "Cadaver", "Slide"],items:["Ventral horn", "Gray matter", "Lateral horn", "White matter", "Dorsal horn", "Grey commissure", "Central canal"]},
+ {m:5,f:"5.4",ft:"Anatomy of the Nervous System I - The Spinal Cord and Spinal Nerves",b:"Anatomy of spinal nerves",t:["Model", "Cadaver", "Slide"],items:["Ventral root", "Ventral ramus", "Dorsal root", "Dorsal ramus", "Dorsal root ganglion", "Spinal nerve", "Grey ramus communicans", "White ramus communicans", "Sympathetic chain ganglion"]},
+ {m:5,f:"5.4",ft:"Anatomy of the Nervous System I - The Spinal Cord and Spinal Nerves",b:"Nerve plexuses",t:["Model", "Cadaver", "Slide"],items:["Cervical plexus", "Brachial plexus", "Lumbar plexus", "Sacral plexus"]},
+ {m:5,f:"5.5",ft:"Anatomy of the Nervous System II - Brain and Cranial Nerves",b:"Gross anatomy of the brain",t:["Model", "Cadaver"],items:["Cerebrum", "Midbrain", "Frontal lobes", "Corpora quadrigemina", "Parietal lobes", "Superior colliculi", "Occipital lobes", "Inferior colliculi", "Temporal lobes", "Insula", "Pons", "Corpus callosum", "Trigeminal nerve", "Fornix", "Sulci (singular: sulcus)", "Cerebellum", "Gyri (singular: gyrus)", "Arbor vitae (pattern of white matter)", "Central sulcus", "Precentral gyrus (primary motor cortex)", "Medulla oblongata", "Postcentral gyrus (primary somatosensory cortex)", "Medullary pyramids (most corticospinal nerve fibers decussate here)", "Lateral fissure", "Longitudinal fissure", "Transverse fissure", "Olfactory bulbs and olfactory tracts", "Dura mater", "Arachnoid mater", "Diencephalon", "Pia mater", "Thalamus", "Hypothalamus", "Pineal body (pineal gland)", "Choroid plexuses (in each ventricle)", "Optic nerves", "Lateral ventricles", "Optic chiasma", "Third ventricle", "Mammillary bodies", "Cerebral aqueduct", "Fourth ventricle", "Pituitary gland", "Superior sagittal sinus", "Sigmoid sinus"]},
+ {m:5,f:"5.5",ft:"Anatomy of the Nervous System II - Brain and Cranial Nerves",b:"The cranial nerves",t:["Model", "Cadaver"],items:["Olfactory nerve (CN I)", "Optic nerve (CN II)", "Oculomotor nerve (CN III)", "Trochlear nerve (CN IV)", "Trigeminal nerve (CN V)", "Abducens nerve (CN VI)", "Facial nerve (CN VII)", "Vestibulocochlear nerve (CN VIII)", "Glossopharyngeal nerve (CN IX)", "Vagus nerve (CN X)", "Spinal accessory nerve (CN XI)", "Hypoglossal nerve (CN XII)"]},
+ {m:5,f:"5.S",ft:"Anatomy Supplement",b:"Cross-sectional view of the spinal cord",t:["Model", "Cadaver", "Slide"],items:["White matter", "Gray matter", "Spinothalamic tract", "Corticospinal tract", "Ventral horn (anterior horn)", "Lateral horn", "Dorsal horn (posterior gray horn)", "Gray commissure", "Central canal"]},
+ {m:5,f:"5.S",ft:"Anatomy Supplement",b:"Anatomy of spinal nerves",t:["Model", "Cadaver", "Slide"],items:["Dorsal root", "Dorsal root ganglion", "Ventral root", "Spinal nerve", "Dorsal ramus", "Ventral ramus", "Grey ramus communicans", "White ramus communicans", "Sympathetic chain ganglion (sympathetic trunk ganglia or paravertebral ganglia)"]},
+ {m:5,f:"5.S",ft:"Anatomy Supplement",b:"Nerve plexuses",t:["Model", "Cadaver", "Slide"],items:["Cervical plexus", "Phrenic nerve", "Brachial plexus", "Musculocutaneous nerve", "Median nerve", "Ulnar nerve", "Radial nerve", "Axillary nerve", "Lumbar plexus", "Femoral nerve", "Obturator nerve", "Sacral plexus", "Sciatic nerve (tibial and common fibular nerves)", "Cardiac plexus", "Celiac plexus (solar plexus)"]}
+];
+
+/* ------------------------------------------------------------------ *
+ * Small helpers
+ * ------------------------------------------------------------------ */
+function slug(s){
+  return String(s).toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,60);
+}
+function uid(){
+  return Date.now().toString(36) + "-" + Math.random().toString(36).slice(2,8);
+}
+function esc(s){
+  return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+function initials(name){
+  var parts = String(name).trim().split(/[\s._-]+/).filter(Boolean);
+  if(!parts.length) return "?";
+  if(parts.length === 1) return parts[0].slice(0,2).toUpperCase();
+  return (parts[0][0] + parts[parts.length-1][0]).toUpperCase();
+}
+function when(ts){
+  if(!ts) return "";
+  var d = new Date(Number(ts));
+  if(isNaN(d.getTime())) return "";
+  var now = new Date();
+  var sameDay = d.toDateString() === now.toDateString();
+  var t = d.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"});
+  if(sameDay) return "today at " + t;
+  return d.toLocaleDateString([], {month:"short", day:"numeric"}) + " at " + t;
+}
+function whereOptionsFor(st){
+  var keys;
+  if(st.conceptOnly)      keys = [];
+  else if(st.unit === 1)  keys = ["slide","model","radiology","other"];
+  else if(st.unit === 2)  keys = ["bone","model","slide","radiology","other"];
+  else                    keys = ["model","cadaver","slide","radiology","other"];
+  keys.push("skill");
+  keys.push("knowledge");
+  return keys.map(function(k){ return WHERE_MAP[k]; });
+}
+
+/* ================================================================== *
+ * DATA SERVICE
+ *
+ * The only part of this file that talks to storage. Every screen
+ * calls these functions and nothing else. Swapping the backend means
+ * changing this section and nothing above or below it.
+ *
+ * The wire format is an append-only list of operations. Each one is
+ * stamped with who did it and when, so no action can overwrite
+ * another person's action and the change history writes itself.
+ * ================================================================== */
+var DataService = (function(){
+
+  var ops = [];          /* every operation, oldest first */
+  var lastSeq = 0;       /* highest sequence number seen */
+  var seenOids = {};     /* operations already folded into state */
+  var outbox = [];       /* not yet acknowledged by the backend */
+
+  /* --- transport ------------------------------------------------- */
+
+  function mode(){
+    if(typeof google !== "undefined" && google.script && google.script.run) return "apps-script";
+    if(API_URL) return "network";
+    return "local";
+  }
+
+  /* GOOGLE APPS SCRIPT BACKEND: these two functions are the seam.
+   * In Apps Script HTML Service, google.script.run calls the matching
+   * function in Code.gs. Server functions to implement:
+   *
+   *   readOps(since)        -> { ok:true, ops:[{seq, op}], seq:Number }
+   *   appendOps(opsArray)   -> { ok:true, written:Number, seq:Number }
+   *
+   * Both already exist in the Code.gs written for this project, so the
+   * Apps Script side is a matter of serving this page from doGet and
+   * leaving those two functions in place. */
+  function callServer(fnName, arg){
+    var m = mode();
+
+    if(m === "apps-script"){
+      return new Promise(function(resolve, reject){
+        google.script.run
+          .withSuccessHandler(resolve)
+          .withFailureHandler(function(err){ reject(new Error(String(err && err.message || err))); })
+          [fnName](arg);
+      });
+    }
+
+    if(m === "network"){
+      if(fnName === "readOps"){
+        return jsonp({fn:"ops", since:arg || 0});
+      }
+      return postPlain({fn:"append", ops:arg});
+    }
+
+    /* LOCAL TEST MODE. Browser storage stands in for the sheet so the
+     * page can be built and demonstrated with nothing connected. */
+    return localServer(fnName, arg);
+  }
+
+  var jsonpSeq = 0;
+  function jsonp(params){
+    return new Promise(function(resolve, reject){
+      var cb = "malcb" + (++jsonpSeq);
+      var tag = document.createElement("script");
+      var timer = setTimeout(function(){ cleanup(); reject(new Error("timeout")); }, 25000);
+      function cleanup(){
+        clearTimeout(timer);
+        try{ delete window[cb]; }catch(e){ window[cb] = undefined; }
+        if(tag.parentNode) tag.parentNode.removeChild(tag);
+      }
+      window[cb] = function(data){ cleanup(); resolve(data); };
+      tag.onerror = function(){ cleanup(); reject(new Error("network")); };
+      var q = [];
+      for(var k in params){ if(params.hasOwnProperty(k)) q.push(encodeURIComponent(k) + "=" + encodeURIComponent(params[k])); }
+      q.push("callback=" + cb);
+      tag.src = API_URL + (API_URL.indexOf("?") < 0 ? "?" : "&") + q.join("&");
+      document.head.appendChild(tag);
+    });
+  }
+  function postPlain(body){
+    return fetch(API_URL, {
+      method:"POST", mode:"no-cors",
+      body: JSON.stringify(body),
+      headers:{"Content-Type":"text/plain;charset=utf-8"}
+    }).then(function(){ return {ok:true, blind:true}; });
+  }
+
+  /* --- local stand-in for the sheet ------------------------------ */
+  function localRead(){
+    try{
+      var raw = window.localStorage.getItem(LOCAL_KEY);
+      return raw ? JSON.parse(raw) : {ops:[], seq:0};
+    }catch(e){ return localRead._mem || (localRead._mem = {ops:[], seq:0}); }
+  }
+  function localWrite(store){
+    try{ window.localStorage.setItem(LOCAL_KEY, JSON.stringify(store)); }
+    catch(e){ localRead._mem = store; }
+  }
+  function localServer(fnName, arg){
+    var store = localRead();
+    if(fnName === "readOps"){
+      var since = Number(arg || 0);
+      return Promise.resolve({ok:true, ops:store.ops.filter(function(r){ return r.seq > since; }), seq:store.seq});
+    }
+    if(fnName === "appendOps"){
+      var have = {};
+      store.ops.forEach(function(r){ have[r.op.oid] = 1; });
+      (arg || []).forEach(function(o){
+        if(have[o.oid]) return;
+        have[o.oid] = 1;
+        store.seq++;
+        store.ops.push({seq:store.seq, op:o});
+      });
+      localWrite(store);
+      return Promise.resolve({ok:true, written:(arg||[]).length, seq:store.seq});
+    }
+    return Promise.resolve({ok:false, error:"unknown function " + fnName});
+  }
+
+  /* --- public surface -------------------------------------------- */
+
+  function pull(){
+    return callServer("readOps", lastSeq).then(function(res){
+      if(!res || !res.ok) throw new Error(res && res.error ? res.error : "the backend did not answer");
+      var fresh = [];
+      (res.ops || []).forEach(function(row){
+        if(typeof row.seq === "number" && row.seq > lastSeq) lastSeq = row.seq;
+        var o = row.op;
+        if(!o || !o.oid) return;
+        if(seenOids[o.oid]) return;
+        seenOids[o.oid] = 1;
+        ops.push(o);
+        fresh.push(o);
+      });
+      if(typeof res.seq === "number" && res.seq > lastSeq) lastSeq = res.seq;
+      return fresh;
+    });
+  }
+
+  function push(op){
+    op.oid = op.oid || uid();
+    op.at = op.at || Date.now();
+    if(!seenOids[op.oid]){
+      seenOids[op.oid] = 1;
+      ops.push(op);
+    }
+    outbox.push(op);
+    return flush();
+  }
+
+  var flushing = null;
+  function flush(){
+    if(flushing) return flushing;
+    if(!outbox.length) return Promise.resolve();
+    var batch = outbox.slice(0);
+    outbox = [];
+    flushing = callServer("appendOps", batch).then(function(){
+      flushing = null;
+      if(outbox.length) return flush();
+    })["catch"](function(err){
+      flushing = null;
+      outbox = batch.concat(outbox);   /* keep it, try again later */
+      throw err;
+    });
+    return flushing;
+  }
+
+  return {
+    mode: mode,
+    pull: pull,
+    push: push,
+    flush: flush,
+    allOps: function(){ return ops; },
+    pending: function(){ return outbox.length; }
+  };
+})();
+
+/* ------------------------------------------------------------------ *
+ * The named service functions the interface actually calls.
+ * Each one is a thin wrapper over DataService, which is what makes
+ * the backend swap a one-file change.
+ * ------------------------------------------------------------------ */
+
+/* Returns every structure as one merged master record. */
+async function loadMasterList(){
+  await DataService.pull();
+  rebuild();
+  return records.slice(0);
+}
+async function loadStructure(id){
+  return byId[id] || null;
+}
+async function addStructure(data){
+  var st = {
+    id: "new-" + slug(data.structureName) + "-" + uid(),
+    structureName: data.structureName,
+    unit: Number(data.unit) || 1,
+    worksheet: data.worksheet || "",
+    section: data.section || "Faculty additions",
+    indent: Number(data.indent) || 0,
+    status: data.status || "add",
+    notes: data.notes || "",
+    where: data.where || []
+  };
+  await DataService.push({t:"add", st:st, uid:me.id, who:me.name});
+  rebuild();
+  return st.id;
+}
+/* Field-level edit. Only the fields present in `changes` are touched,
+ * so two people editing different fields never collide. */
+async function updateStructure(id, changes){
+  var ops = [];
+  if(changes.status)   ops.push({t:"status", sid:id, s:changes.status, uid:me.id, who:me.name});
+  if("notes" in changes) ops.push({t:"note", sid:id, text:changes.notes, uid:me.id, who:me.name});
+  if(changes.where)    ops.push({t:"where", sid:id, w:changes.where, uid:me.id, who:me.name});
+  if(changes.vote !== undefined) ops.push({t:"vote", sid:id, v:changes.vote, r:changes.reason || "", uid:me.id, who:me.name});
+  for(var i=0;i<ops.length;i++){ await DataService.push(ops[i]); }
+  rebuild();
+}
+async function saveFacultyReview(id, review){
+  await DataService.push({t:"review", sid:id, r:!!review.reviewed, uid:me.id, who:me.name});
+  rebuild();
+}
+async function addFacultyComment(id, comment){
+  await DataService.push({t:"comment", sid:id, cid:uid(), text:comment.text, uid:me.id, who:me.name});
+  rebuild();
+}
+async function loadFacultyMembers(){
+  return Object.keys(people).map(function(k){ return people[k]; });
+}
+async function loadChangeHistory(id){
+  var r = byId[id];
+  return r ? r.changeHistory.slice(0).reverse() : [];
+}
+/* GOOGLE APPS SCRIPT TODO: nothing above this line needs to change
+ * when the sheet is connected. Only DataService.callServer does. */
+
+/* ================================================================== *
+ * State, built by replaying the operation log over the seed list
+ * ================================================================== */
+var records = [], byId = {}, people = {}, me = null, loaded = false;
+var ui = {q:"", unit:"", worksheet:"", where:"", status:"", review:"", view:"sections"};
+var openRows = {}, openCards = {}, openHistory = {};
+
+function blankRecord(src){
+  return {
+    id: src.id,
+    structureName: src.structureName,
+    unit: src.unit,
+    worksheet: src.worksheet,
+    worksheetTitle: src.worksheetTitle,
+    section: src.section,
+    region: src.section,
+    indent: src.indent,
+    conceptOnly: !!src.conceptOnly,
+    proposed: !!src.proposed,
+    createdBy: src.createdBy || "",
+    createdAt: src.createdAt || "",
+    updatedBy: "",
+    updatedAt: "",
+    version: 0,
+    status: src.status || DEFAULT_STATUS,
+    notes: "",
+    notesBy: "",
+    where: {},            /* facultyId -> [resource keys] */
+    votes: {},            /* facultyId -> {v, r, at} */
+    facultyReviews: [],   /* [{facultyId, facultyName, reviewed, reviewedAt}] */
+    comments: [],
+    changeHistory: []
+  };
+}
+
+function seedRecords(){
+  var out = [];
+  var seen = {};
+  SEED.forEach(function(g){
+    g.items.forEach(function(raw){
+      var lvl = 0;
+      while(raw.charAt(0) === ">"){ lvl++; raw = raw.slice(1); }
+      var id = g.f + "-" + slug(raw);
+      if(seen[id]) id = id + "-" + out.length;
+      seen[id] = 1;
+      out.push({
+        id:id, structureName:raw, unit:g.m, worksheet:g.f, worksheetTitle:g.ft,
+        section:g.b, indent:lvl, conceptOnly:!!g.nw, proposed:false
+      });
+    });
+  });
+  return out;
+}
+var SEED_RECORDS = seedRecords();
+
+function note(rec, op, field, oldValue, newValue){
+  rec.changeHistory.push({
+    timestamp: op.at,
+    facultyName: op.who || (people[op.uid] ? people[op.uid].facultyName : op.uid) || "Unknown",
+    facultyId: op.uid,
+    field: field,
+    oldValue: oldValue,
+    newValue: newValue
+  });
+  rec.updatedBy = op.who || rec.updatedBy;
+  rec.updatedAt = op.at;
+  rec.version++;
+}
+
+function rebuild(){
+  records = SEED_RECORDS.map(blankRecord);
+  byId = {};
+  records.forEach(function(r){ byId[r.id] = r; });
+  people = {};
+
+  DataService.allOps().slice().sort(function(a,b){ return (a.at||0) - (b.at||0); }).forEach(function(o){
+    if(o.t === "user"){
+      people[o.uid || o.id] = {facultyId:o.uid || o.id, facultyName:o.name || o.who, color:o.color, initials:o.ini || initials(o.name || o.who || "?")};
+      return;
+    }
+    if(o.t === "add" && o.st){
+      if(byId[o.st.id]) return;
+      var rec = blankRecord({
+        id:o.st.id, structureName:o.st.structureName || o.st.name, unit:o.st.unit || o.st.m,
+        worksheet:o.st.worksheet || o.st.f, worksheetTitle:o.st.worksheetTitle || "Faculty additions",
+        section:o.st.section || o.st.b || "Faculty additions", indent:o.st.indent || 0,
+        conceptOnly:false, proposed:true,
+        createdBy:o.who || o.uid, createdAt:o.at, status:o.st.status || "add"
+      });
+      rec.notes = o.st.notes || "";
+      if(o.st.where && o.st.where.length) rec.where[o.uid] = o.st.where.slice(0);
+      rec.updatedBy = o.who; rec.updatedAt = o.at; rec.version = 1;
+      rec.changeHistory.push({timestamp:o.at, facultyName:o.who, facultyId:o.uid,
+        field:"structure", oldValue:"", newValue:"proposed"});
+      records.push(rec);
+      byId[rec.id] = rec;
+      return;
+    }
+
+    var r = byId[o.sid];
+    if(!r) return;
+
+    if(o.t === "vote"){
+      var prev = r.votes[o.uid] ? r.votes[o.uid].v : "";
+      if(!o.v){ delete r.votes[o.uid]; }
+      else { r.votes[o.uid] = {v:o.v, r:o.r || "", at:o.at}; }
+      note(r, o, "vote", prev || "none", o.v || "none");
+    } else if(o.t === "where"){
+      var was = (r.where[o.uid] || []).join(", ");
+      r.where[o.uid] = (o.w || []).slice(0);
+      note(r, o, "teaching locations", was || "none", (o.w || []).join(", ") || "none");
+    } else if(o.t === "status"){
+      var old = r.status;
+      r.status = o.s;
+      note(r, o, "status", STATUS_LABEL[old] || old, STATUS_LABEL[o.s] || o.s);
+    } else if(o.t === "note"){
+      var oldNote = r.notes;
+      r.notes = o.text || "";
+      r.notesBy = o.who;
+      note(r, o, "shared note", oldNote ? "(previous text)" : "(empty)", r.notes ? "(updated)" : "(cleared)");
+    } else if(o.t === "review"){
+      var found = null;
+      for(var i=0;i<r.facultyReviews.length;i++){ if(r.facultyReviews[i].facultyId === o.uid) found = r.facultyReviews[i]; }
+      if(!found){
+        found = {facultyId:o.uid, facultyName:o.who, reviewed:false, reviewedAt:null};
+        r.facultyReviews.push(found);
+      }
+      var before = found.reviewed;
+      found.reviewed = !!o.r;
+      found.facultyName = o.who || found.facultyName;
+      found.reviewedAt = o.at;
+      note(r, o, "review", before ? "reviewed" : "not reviewed", found.reviewed ? "reviewed" : "not reviewed");
+    } else if(o.t === "comment"){
+      var exists = false;
+      for(var j=0;j<r.comments.length;j++){ if(r.comments[j].id === o.cid){ r.comments[j].text = o.text; exists = true; } }
+      if(!exists){
+        r.comments.push({id:o.cid, facultyId:o.uid, facultyName:o.who, at:o.at, text:o.text});
+        note(r, o, "comment", "", "added");
+      }
+    }
+  });
+
+  records.forEach(function(r){
+    if(!r.updatedAt && r.createdAt) r.updatedAt = r.createdAt;
+  });
+}
+
+/* ------------------------------------------------------------------ *
+ * Identity. No authentication, by design. Point 8 of the brief.
+ * ------------------------------------------------------------------ */
+function pickColor(key){
+  var used = {};
+  Object.keys(people).forEach(function(k){ used[people[k].color] = 1; });
+  var h = 0;
+  for(var i=0;i<key.length;i++){ h = (h*31 + key.charCodeAt(i)) >>> 0; }
+  var start = h % PALETTE.length;
+  for(var j=0;j<PALETTE.length;j++){
+    var c = PALETTE[(start+j) % PALETTE.length];
+    if(!used[c]) return c;
+  }
+  return PALETTE[start];
+}
+function signIn(rawName){
+  var name = String(rawName || "").trim().replace(/\s+/g, " ");
+  if(!name) return false;
+  var key = slug(name);
+  if(!key) return false;
+  var existing = people[key];
+  var color = existing ? existing.color : pickColor(key);
+  me = {id:key, name:name, color:color, initials:initials(name)};
+  try{ window.localStorage.setItem(ME_KEY, JSON.stringify(me)); }catch(e){}
+  if(!existing || existing.facultyName !== name){
+    DataService.push({t:"user", uid:key, id:key, name:name, who:name, color:color, ini:me.initials})
+      .then(render)["catch"](showTrouble);
+  }
+  return true;
+}
+function restoreMe(){
+  try{
+    var raw = window.localStorage.getItem(ME_KEY);
+    if(!raw) return;
+    var m = JSON.parse(raw);
+    if(m && m.id && m.name){
+      var known = people[m.id];
+      me = {id:m.id, name:m.name, color:known ? known.color : m.color, initials:m.initials || initials(m.name)};
+    }
+  }catch(e){}
+}
+
+/* ------------------------------------------------------------------ *
+ * Derived values
+ * ------------------------------------------------------------------ */
+function tallyFor(r){
+  var t = {keep:0, cond:0, undecided:0, cut:0, total:0};
+  Object.keys(r.votes).forEach(function(u){
+    var v = r.votes[u].v;
+    if(t[v] != null){ t[v]++; t.total++; }
+  });
+  return t;
+}
+function whereCounts(r){
+  var out = {};
+  Object.keys(r.where).forEach(function(u){
+    (r.where[u] || []).forEach(function(k){ out[k] = (out[k] || 0) + 1; });
+  });
+  return out;
+}
+function myWhere(r){
+  return (me && r.where[me.id]) ? r.where[me.id].slice(0) : [];
+}
+function reviewedByMe(r){
+  if(!me) return false;
+  for(var i=0;i<r.facultyReviews.length;i++){
+    if(r.facultyReviews[i].facultyId === me.id) return r.facultyReviews[i].reviewed;
+  }
+  return false;
+}
+function reviewCount(r){
+  var n = 0;
+  r.facultyReviews.forEach(function(x){ if(x.reviewed) n++; });
+  return n;
+}
+function facultyCount(){
+  return Math.max(1, Object.keys(people).length);
+}
+function sectionKey(r){ return slug(r.worksheet + "--" + r.section); }
+
+/* ------------------------------------------------------------------ *
+ * Filtering and search
+ * ------------------------------------------------------------------ */
+function passes(r){
+  if(ui.unit && String(r.unit) !== String(ui.unit)) return false;
+  if(ui.worksheet && r.worksheet !== ui.worksheet) return false;
+  if(ui.status && r.status !== ui.status) return false;
+
+  if(ui.where){
+    var wc = whereCounts(r);
+    if(!wc[ui.where]) return false;
+  }
+
+  if(ui.review){
+    var mine = reviewedByMe(r);
+    var n = reviewCount(r);
+    if(ui.review === "mine" && !mine) return false;
+    if(ui.review === "notmine" && mine) return false;
+    if(ui.review === "all" && n < facultyCount()) return false;
+    if(ui.review === "needs" && n >= facultyCount()) return false;
+  }
+
+  if(ui.q){
+    var hay = (r.structureName + " " + r.section + " " + r.worksheetTitle + " " + r.worksheet + " " +
+               (MODULE_NAMES[r.unit] || "") + " " + r.notes + " " +
+               r.comments.map(function(c){ return c.text; }).join(" ")).toLowerCase();
+    if(hay.indexOf(ui.q.toLowerCase()) === -1) return false;
+  }
+  return true;
+}
+function visibleRecords(){
+  return records.filter(passes);
+}
+
+/* ------------------------------------------------------------------ *
+ * Rendering: summary dashboard
+ * ------------------------------------------------------------------ */
+function renderDashboard(){
+  var counts = {active:0, review:0, add:0, revise:0, remove:0, archived:0};
+  var allReviewed = 0, needsReview = 0, total = records.length;
+  var fc = facultyCount();
+  records.forEach(function(r){
+    if(counts[r.status] != null) counts[r.status]++;
+    var n = reviewCount(r);
+    if(n >= fc) allReviewed++; else needsReview++;
+  });
+  var tiles = [
+    {n:counts.active,   l:"Active"},
+    {n:counts.review,   l:"Under review"},
+    {n:counts.add,      l:"Proposed additions"},
+    {n:counts.revise,   l:"Proposed revisions"},
+    {n:counts.remove,   l:"Proposed removals"},
+    {n:allReviewed,     l:"Reviewed by all"},
+    {n:needsReview,     l:"Still needs review"}
+  ];
+  document.getElementById("dash").innerHTML =
+    '<p class="dash-lead">' + total + ' structures on the shared list</p>' +
+    '<div class="dash-grid">' + tiles.map(function(t){
+      return '<div class="dash-tile"><span class="dash-n">' + t.n + '</span><span class="dash-l">' + esc(t.l) + '</span></div>';
+    }).join("") + '</div>';
+}
+
+/* ------------------------------------------------------------------ *
+ * Rendering: the reviewer strip
+ * ------------------------------------------------------------------ */
+function avatar(p, cls){
+  return '<span class="avatar ' + (cls || "") + '" style="background:' + esc(p.color || "#37474F") + '" aria-hidden="true">' +
+    esc(p.initials || initials(p.facultyName || "?")) + '</span>';
+}
+function renderWho(){
+  var who = document.getElementById("who");
+  var field = document.getElementById("signinField");
+  var signBtn = document.getElementById("signinBtn");
+  var switchBtn = document.getElementById("switchBtn");
+  var addBtn = document.getElementById("addBtn");
+
+  if(me){
+    who.innerHTML = avatar({color:me.color, initials:me.initials}) +
+      '<span><span class="who-name">Working as ' + esc(me.name) + '</span><br>' +
+      '<span class="who-sub">Everything you mark is filed under this name</span></span>';
+    field.hidden = true; signBtn.hidden = true;
+    switchBtn.hidden = false; addBtn.hidden = false;
+  }else{
+    who.innerHTML = '<span class="who-sub"><strong style="color:var(--ink)">Start here.</strong> Put your name in so every mark, comment and review you leave is attributed to you.</span>';
+    field.hidden = false; signBtn.hidden = false;
+    switchBtn.hidden = true; addBtn.hidden = true;
+  }
+
+  var list = Object.keys(people).map(function(k){ return people[k]; });
+  var roster = document.getElementById("roster");
+  if(!list.length){ roster.innerHTML = ""; roster.hidden = true; return; }
+  roster.hidden = false;
+  roster.innerHTML = '<span class="roster-label">Faculty on this list</span>' +
+    list.map(function(p){
+      return '<span class="roster-person">' + avatar(p) + '<span>' + esc(p.facultyName) + '</span></span>';
+    }).join("");
+}
+
+/* ------------------------------------------------------------------ *
+ * Rendering: one structure row, shared by both views
+ * ------------------------------------------------------------------ */
+function statusChip(r){
+  return '<span class="chip chip-' + r.status + '">' + esc(STATUS_LABEL[r.status] || r.status) + '</span>';
+}
+function reviewChip(r){
+  var n = reviewCount(r), fc = facultyCount();
+  var cls = n === 0 ? "chip-none" : (n >= fc ? "chip-all" : "chip-some");
+  return '<span class="chip ' + cls + '">' + n + ' of ' + fc + '</span>';
+}
+function resourceSummary(r){
+  var wc = whereCounts(r);
+  var bits = [];
+  WHERE.forEach(function(w){
+    if(w.k === "skill" || w.k === "knowledge") return;
+    if(wc[w.k]) bits.push(esc(w.label));
+  });
+  if(wc.skill) bits.push("Skill");
+  if(wc.knowledge) bits.push("Asked");
+  return bits.length ? bits.join(", ") : '<span class="muted">not marked</span>';
+}
+
+function voteCellsHtml(r){
+  var mine = me && r.votes[me.id] ? r.votes[me.id].v : "";
+  var t = tallyFor(r);
+  return VOTES.map(function(v){
+    var id = "v-" + r.id + "-" + v.k;
+    var n = t[v.k];
+    return '<span class="votecell">' +
+      '<input type="radio" id="' + esc(id) + '" name="vote-' + esc(r.id) + '" value="' + v.k + '"' +
+      (mine === v.k ? " checked" : "") + ' data-vote="' + esc(r.id) + '">' +
+      '<label for="' + esc(id) + '"><span class="sr-only">' + esc(v.label) + ", " + esc(r.structureName) + '</span>' +
+      (n ? '<span class="count" aria-hidden="true">' + n + '</span>' : '') + '</label></span>';
+  }).join("");
+}
+function whereCellsHtml(r){
+  var opts = whereOptionsFor(r);
+  var mine = myWhere(r);
+  var wc = whereCounts(r);
+  return opts.map(function(w){
+    var id = "w-" + r.id + "-" + w.k;
+    var n = wc[w.k] || 0;
+    return '<span class="wherecell">' +
+      '<input type="checkbox" id="' + esc(id) + '" value="' + w.k + '"' +
+      (mine.indexOf(w.k) > -1 ? " checked" : "") + ' data-where="' + esc(r.id) + '">' +
+      '<label for="' + esc(id) + '"><span class="sr-only">' + esc(w.full) + ", " + esc(r.structureName) + '</span>' +
+      (n ? '<span class="count" aria-hidden="true">' + n + '</span>' : '') + '</label></span>';
+  }).join("");
+}
+
+/* ------------------------------------------------------------------ *
+ * Rendering: the detail panel. One implementation, mounted inline in
+ * whichever view is open, so there is no popup to break in an iframe.
+ * ------------------------------------------------------------------ */
+function detailHtml(r){
+  var h = [];
+
+  h.push('<div class="detail" id="detail-' + esc(r.id) + '">');
+
+  /* classification */
+  h.push('<div class="dsec"><h4>Anatomy structure</h4>' +
+    '<p class="dclass"><strong>' + esc(r.structureName) + '</strong><br>' +
+    esc(MODULE_NAMES[r.unit] || ("Unit " + r.unit)) + ' &middot; Worksheet ' + esc(r.worksheet) +
+    ' &middot; ' + esc(r.section) + '</p></div>');
+
+  /* teaching and assessment locations */
+  if(!r.conceptOnly){
+    var opts = whereOptionsFor(r);
+    var mine = myWhere(r);
+    h.push('<div class="dsec"><h4>Teaching and assessment locations</h4>' +
+      '<p class="dhint">Tick where you test this. Everyone\'s marks are kept separately, so nothing you tick removes anyone else\'s.</p>' +
+      '<div class="dwhere">' + opts.map(function(w){
+        var id = "dw-" + r.id + "-" + w.k;
+        return '<label class="pill" for="' + esc(id) + '">' +
+          '<input type="checkbox" id="' + esc(id) + '" value="' + w.k + '"' +
+          (mine.indexOf(w.k) > -1 ? " checked" : "") + ' data-where="' + esc(r.id) + '"> ' + esc(w.label) + '</label>';
+      }).join("") + '</div></div>');
+  }
+
+  /* status */
+  h.push('<div class="dsec"><h4>Status</h4>' +
+    '<label class="sr-only" for="st-' + esc(r.id) + '">Status for ' + esc(r.structureName) + '</label>' +
+    '<select class="select" id="st-' + esc(r.id) + '" data-status="' + esc(r.id) + '">' +
+    STATUSES.map(function(s){
+      return '<option value="' + s.k + '"' + (r.status === s.k ? " selected" : "") + '>' + esc(s.label) + '</option>';
+    }).join("") + '</select>' +
+    '<p class="dhint">' + esc((function(){ for(var i=0;i<STATUSES.length;i++){ if(STATUSES[i].k === r.status) return STATUSES[i].hint; } return ""; })()) + '</p>' +
+    '<p class="dhint">Nothing is deleted here. If a structure should come off, mark it Recommend Remove and say why below.</p></div>');
+
+  /* my vote and reason */
+  var myVote = me && r.votes[me.id] ? r.votes[me.id] : null;
+  h.push('<div class="dsec"><h4>Your position</h4>' +
+    '<div class="dvotes">' + VOTES.map(function(v){
+      var id = "dv-" + r.id + "-" + v.k;
+      return '<label class="pill" for="' + esc(id) + '">' +
+        '<input type="radio" id="' + esc(id) + '" name="dvote-' + esc(r.id) + '" value="' + v.k + '"' +
+        (myVote && myVote.v === v.k ? " checked" : "") + ' data-vote="' + esc(r.id) + '"> ' + esc(v.short) + '</label>';
+    }).join("") + '</div>' +
+    '<label class="sr-only" for="rs-' + esc(r.id) + '">Your reason for ' + esc(r.structureName) + '</label>' +
+    '<textarea class="ta" id="rs-' + esc(r.id) + '" rows="2" placeholder="Reason, only if it needs one">' + esc(myVote ? myVote.r : "") + '</textarea>' +
+    '<button class="btn small" type="button" data-savereason="' + esc(r.id) + '">Save reason</button></div>');
+
+  /* how the vote stands */
+  var voters = Object.keys(r.votes);
+  h.push('<div class="dsec"><h4>How the vote stands</h4>');
+  if(!voters.length){
+    h.push('<p class="dhint">Nobody has marked this one. Left alone, it stays on the list.</p>');
+  }else{
+    h.push('<ul class="dlist">' + voters.map(function(u){
+      var p = people[u] || {facultyName:u, color:"#37474F", initials:initials(u)};
+      var v = r.votes[u];
+      return '<li>' + avatar(p) + '<span><strong>' + esc(p.facultyName) + '</strong> ' + esc(VOTE_LABEL[v.v] || v.v) +
+        (v.r ? '<br><span class="dquote">' + esc(v.r) + '</span>' : '') + '</span></li>';
+    }).join("") + '</ul>');
+  }
+  h.push('</div>');
+
+  /* shared note */
+  h.push('<div class="dsec"><h4>Shared note</h4>' +
+    '<p class="dhint">One agreed note on the structure itself. Use your own comment below if you are adding a view rather than recording a consensus.</p>' +
+    '<label class="sr-only" for="nt-' + esc(r.id) + '">Shared note for ' + esc(r.structureName) + '</label>' +
+    '<textarea class="ta" id="nt-' + esc(r.id) + '" rows="2" placeholder="Agreed note on this structure">' + esc(r.notes) + '</textarea>' +
+    '<button class="btn small" type="button" data-savenote="' + esc(r.id) + '">Save shared note</button>' +
+    (r.notesBy ? '<p class="dhint">Last set by ' + esc(r.notesBy) + '</p>' : '') + '</div>');
+
+  /* faculty review */
+  h.push('<div class="dsec"><h4>Faculty review</h4>');
+  var roster = Object.keys(people).map(function(k){ return people[k]; });
+  if(!roster.length){
+    h.push('<p class="dhint">Nobody has signed in yet.</p>');
+  }else{
+    h.push('<ul class="dlist">' + roster.map(function(p){
+      var done = false, at = null;
+      r.facultyReviews.forEach(function(x){ if(x.facultyId === p.facultyId && x.reviewed){ done = true; at = x.reviewedAt; } });
+      return '<li>' + avatar(p) + '<span><strong>' + esc(p.facultyName) + '</strong> ' +
+        (done ? '<span class="ok">reviewed' + (at ? " " + esc(when(at)) : "") + '</span>' : '<span class="muted">not yet reviewed</span>') +
+        '</span></li>';
+    }).join("") + '</ul>');
+  }
+  h.push('<label class="pill" for="rv-' + esc(r.id) + '">' +
+    '<input type="checkbox" id="rv-' + esc(r.id) + '"' + (reviewedByMe(r) ? " checked" : "") +
+    ' data-review="' + esc(r.id) + '"> I have reviewed this structure</label></div>');
+
+  /* comments */
+  h.push('<div class="dsec"><h4>Faculty comments</h4>');
+  if(!r.comments.length){
+    h.push('<p class="dhint">No comments on this one yet.</p>');
+  }else{
+    h.push('<ul class="dlist">' + r.comments.slice(0).sort(function(a,b){ return a.at - b.at; }).map(function(c){
+      var p = people[c.facultyId] || {facultyName:c.facultyName || "Unknown", color:"#37474F", initials:initials(c.facultyName || "?")};
+      return '<li>' + avatar(p) + '<span><strong>' + esc(p.facultyName) + '</strong> <span class="muted">' + esc(when(c.at)) + '</span>' +
+        '<br>' + esc(c.text) + '</span></li>';
+    }).join("") + '</ul>');
+  }
+  h.push('<label class="sr-only" for="cm-' + esc(r.id) + '">Add a comment on ' + esc(r.structureName) + '</label>' +
+    '<textarea class="ta" id="cm-' + esc(r.id) + '" rows="2" placeholder="Add your comment"></textarea>' +
+    '<button class="btn small" type="button" data-comment="' + esc(r.id) + '">Post comment</button></div>');
+
+  /* provenance */
+  h.push('<div class="dsec"><h4>Last updated</h4><p class="dhint">' +
+    (r.updatedAt ? esc(r.updatedBy || "Someone") + ', ' + esc(when(r.updatedAt)) : "No changes recorded yet") +
+    (r.createdBy ? '<br>Proposed by ' + esc(r.createdBy) + (r.createdAt ? ", " + esc(when(r.createdAt)) : "") : "") +
+    '</p></div>');
+
+  /* change history */
+  var histOpen = !!openHistory[r.id];
+  h.push('<div class="dsec"><button class="linkbtn" type="button" data-history="' + esc(r.id) + '" aria-expanded="' +
+    (histOpen ? "true" : "false") + '" aria-controls="hist-' + esc(r.id) + '">' +
+    (histOpen ? "Hide" : "Show") + ' change history (' + r.changeHistory.length + ')</button>' +
+    '<div id="hist-' + esc(r.id) + '"' + (histOpen ? "" : " hidden") + '>' +
+    (r.changeHistory.length
+      ? '<div class="histwrap"><table class="histtable"><caption class="sr-only">Change history for ' + esc(r.structureName) + '</caption>' +
+        '<thead><tr><th scope="col">When</th><th scope="col">Who</th><th scope="col">Field</th><th scope="col">From</th><th scope="col">To</th></tr></thead><tbody>' +
+        r.changeHistory.slice(0).reverse().map(function(c){
+          return '<tr><td>' + esc(when(c.timestamp)) + '</td><td>' + esc(c.facultyName) + '</td><td>' + esc(c.field) +
+            '</td><td>' + esc(String(c.oldValue)) + '</td><td>' + esc(String(c.newValue)) + '</td></tr>';
+        }).join("") + '</tbody></table></div>'
+      : '<p class="dhint">Nothing recorded yet.</p>') +
+    '</div></div>');
+
+  h.push('</div>');
+  return h.join("");
+}
+
+/* ------------------------------------------------------------------ *
+ * Rendering: section card view
+ * ------------------------------------------------------------------ */
+function rowHtml(r){
+  var open = !!openRows[r.id];
+  var cols = whereOptionsFor(r).length;
+  return '<div class="gridrow' + (r.proposed ? " proposed" : "") + '" style="--wcols:' + cols + '">' +
+    '<div class="cell name' + (r.indent ? " lvl" + r.indent : "") + '">' + esc(r.structureName) +
+      (r.proposed ? ' <span class="tag">Proposed</span>' : '') + '</div>' +
+    '<div class="cell votes">' + voteCellsHtml(r) + '</div>' +
+    '<div class="cell wheres">' + whereCellsHtml(r) + '</div>' +
+    '<div class="cell stat">' + statusChip(r) + '</div>' +
+    '<div class="cell rev">' + reviewChip(r) + '</div>' +
+    '<div class="cell act"><button class="linkbtn" type="button" data-toggle="' + esc(r.id) + '" aria-expanded="' +
+      (open ? "true" : "false") + '" aria-controls="detail-wrap-' + esc(r.id) + '">' + (open ? "Close" : "Open") + '</button></div>' +
+    '</div>' +
+    '<div class="detailwrap" id="detail-wrap-' + esc(r.id) + '"' + (open ? "" : " hidden") + '>' +
+      (open ? detailHtml(r) : "") + '</div>';
+}
+
+function renderSections(list){
+  var byWorksheet = [];
+  var seenW = {};
+  list.forEach(function(r){
+    var wk = r.worksheet;
+    if(!seenW[wk]){ seenW[wk] = {f:wk, ft:r.worksheetTitle, unit:r.unit, secs:{}, order:[]}; byWorksheet.push(seenW[wk]); }
+    var sk = r.section;
+    if(!seenW[wk].secs[sk]){ seenW[wk].secs[sk] = []; seenW[wk].order.push(sk); }
+    seenW[wk].secs[sk].push(r);
+  });
+
+  if(!byWorksheet.length){
+    return '<p class="empty">Nothing matches those filters. Clear one and try again.</p>';
+  }
+
+  var html = [];
+  var lastUnit = null;
+  byWorksheet.forEach(function(w){
+    if(w.unit !== lastUnit){
+      lastUnit = w.unit;
+      html.push('<h2 class="unithead">' + esc(MODULE_NAMES[w.unit] || ("Unit " + w.unit)) + '</h2>');
+    }
+    html.push('<h3 class="wshead">Worksheet ' + esc(w.f) + ': ' + esc(w.ft) + '</h3>');
+    w.order.forEach(function(sk){
+      var rows = w.secs[sk];
+      var key = sectionKey(rows[0]);
+      var isOpen = !!openCards[key];
+      var cols = whereOptionsFor(rows[0]).length;
+      html.push('<div class="groupcard" style="--wcols:' + cols + '">' +
+        '<button class="gctoggle" type="button" data-card="' + esc(key) + '" aria-expanded="' + (isOpen ? "true" : "false") +
+          '" aria-controls="card-' + esc(key) + '">' +
+          '<span class="gcname">' + esc(sk) + '</span>' +
+          '<span class="gccount">' + rows.length + '</span></button>' +
+        '<div id="card-' + esc(key) + '"' + (isOpen ? "" : " hidden") + '>' +
+          (isOpen
+            ? '<div class="gridhead" aria-hidden="true">' +
+                '<div class="cell name">Structure</div>' +
+                '<div class="cell votes">' + VOTES.map(function(v){ return '<span class="hcol">' + esc(v.short) + '</span>'; }).join("") + '</div>' +
+                '<div class="cell wheres">' + whereOptionsFor(rows[0]).map(function(w2){ return '<span class="hcol">' + esc(w2.label) + '</span>'; }).join("") + '</div>' +
+                '<div class="cell stat">Status</div>' +
+                '<div class="cell rev">Reviewed</div>' +
+                '<div class="cell act"></div>' +
+              '</div>' + rows.map(rowHtml).join("")
+            : '') +
+        '</div></div>');
+    });
+  });
+  return html.join("");
+}
+
+/* ------------------------------------------------------------------ *
+ * Rendering: table view
+ * ------------------------------------------------------------------ */
+function renderTable(list){
+  if(!list.length) return '<p class="empty">Nothing matches those filters. Clear one and try again.</p>';
+  var capped = list.slice(0, 400);
+  var rows = capped.map(function(r){
+    var open = !!openRows[r.id];
+    return '<tr class="trow' + (r.proposed ? " proposed" : "") + '">' +
+      '<th scope="row" class="tname">' + esc(r.structureName) + (r.proposed ? ' <span class="tag">Proposed</span>' : '') + '</th>' +
+      '<td>' + esc("Unit " + r.unit) + '<br><span class="muted">' + esc(r.section) + '</span></td>' +
+      '<td>' + resourceSummary(r) + '</td>' +
+      '<td>' + statusChip(r) + '</td>' +
+      '<td>' + reviewChip(r) + '</td>' +
+      '<td>' + (r.updatedAt ? esc(when(r.updatedAt)) + '<br><span class="muted">' + esc(r.updatedBy || "") + '</span>' : '<span class="muted">not yet</span>') + '</td>' +
+      '<td><button class="linkbtn" type="button" data-toggle="' + esc(r.id) + '" aria-expanded="' + (open ? "true" : "false") +
+        '" aria-controls="trow-detail-' + esc(r.id) + '">' + (open ? "Close" : "Open") + '</button></td>' +
+      '</tr>' +
+      '<tr class="tdetail" id="trow-detail-' + esc(r.id) + '"' + (open ? "" : " hidden") + '><td colspan="7">' +
+        (open ? detailHtml(r) : "") + '</td></tr>';
+  }).join("");
+
+  return (list.length > capped.length
+      ? '<p class="empty">Showing the first 400 of ' + list.length + ' matches. Narrow the filters to see the rest.</p>' : '') +
+    '<div class="tablewrap"><table class="maintable">' +
+    '<caption class="sr-only">Master anatomy list</caption>' +
+    '<thead><tr>' +
+      '<th scope="col">Structure</th><th scope="col">Unit and region</th><th scope="col">Resources</th>' +
+      '<th scope="col">Status</th><th scope="col">Reviewed</th><th scope="col">Last updated</th><th scope="col"></th>' +
+    '</tr></thead><tbody>' + rows + '</tbody></table></div>';
+}
+
+/* ------------------------------------------------------------------ *
+ * Render everything
+ * ------------------------------------------------------------------ */
+function render(){
+  renderDashboard();
+  renderWho();
+  var list = visibleRecords();
+  document.getElementById("count").textContent =
+    list.length === records.length
+      ? (records.length + " structures")
+      : (list.length + " of " + records.length + " structures");
+  document.getElementById("list").innerHTML =
+    ui.view === "table" ? renderTable(list) : renderSections(list);
+  document.getElementById("viewSections").setAttribute("aria-pressed", ui.view === "sections" ? "true" : "false");
+  document.getElementById("viewTable").setAttribute("aria-pressed", ui.view === "table" ? "true" : "false");
+}
+
+function status(msg, sticky){
+  var el = document.getElementById("status");
+  if(!msg){ el.hidden = true; el.textContent = ""; return; }
+  el.hidden = false;
+  el.textContent = msg;
+  if(!sticky){
+    clearTimeout(status._t);
+    status._t = setTimeout(function(){ el.hidden = true; }, 2600);
+  }
+}
+function showTrouble(err){
+  status("Could not save that. It is still here and will be sent again. " + (err && err.message ? err.message : ""), true);
+}
+function requireName(){
+  if(me) return true;
+  status("Put your name in first so your work is attributed.", true);
+  var f = document.getElementById("nameInput");
+  if(f){ f.focus(); }
+  return false;
+}
+function saved(){ status("Saved for everyone"); }
+
+/* ------------------------------------------------------------------ *
+ * Export
+ * ------------------------------------------------------------------ */
+function csvCell(s){
+  s = String(s == null ? "" : s);
+  return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+}
+function buildCsv(){
+  var head = ["structure","unit","worksheet","region","teaching locations","status",
+              "shared note","keep","conditional","unsure","remove","reviewed by","last updated by","last updated"];
+  var lines = [head.join(",")];
+  visibleRecords().forEach(function(r){
+    var t = tallyFor(r);
+    var wc = whereCounts(r);
+    var places = WHERE.filter(function(w){ return wc[w.k]; }).map(function(w){ return w.label; }).join("; ");
+    var reviewers = r.facultyReviews.filter(function(x){ return x.reviewed; }).map(function(x){ return x.facultyName; }).join("; ");
+    lines.push([
+      r.structureName, "Unit " + r.unit, r.worksheet, r.section, places,
+      STATUS_LABEL[r.status] || r.status, r.notes,
+      t.keep, t.cond, t.undecided, t.cut,
+      reviewers, r.updatedBy, r.updatedAt ? new Date(r.updatedAt).toISOString() : ""
+    ].map(csvCell).join(","));
+  });
+  return lines.join("\n");
+}
+
+/* ------------------------------------------------------------------ *
+ * Events
+ * ------------------------------------------------------------------ */
+function bind(){
+  var list = document.getElementById("list");
+
+  list.addEventListener("change", function(e){
+    var t = e.target;
+
+    if(t.matches("[data-vote]")){
+      if(!requireName()){ t.checked = false; render(); return; }
+      var id = t.getAttribute("data-vote");
+      var r = byId[id];
+      var currently = me && r.votes[me.id] ? r.votes[me.id].v : "";
+      var next = (currently === t.value) ? "" : t.value;   /* clicking your own mark clears it */
+      updateStructure(id, {vote:next, reason: r.votes[me.id] ? r.votes[me.id].r : ""}).then(function(){ render(); saved(); })["catch"](showTrouble);
+      return;
+    }
+
+    if(t.matches("[data-where]")){
+      if(!requireName()){ t.checked = false; return; }
+      var wid = t.getAttribute("data-where");
+      var rec = byId[wid];
+      var picks = myWhere(rec);
+      var k = t.value;
+      var at = picks.indexOf(k);
+      if(t.checked && at === -1) picks.push(k);
+      if(!t.checked && at > -1) picks.splice(at, 1);
+      updateStructure(wid, {where:picks}).then(function(){ render(); saved(); })["catch"](showTrouble);
+      return;
+    }
+
+    if(t.matches("[data-status]")){
+      if(!requireName()){ render(); return; }
+      var sid = t.getAttribute("data-status");
+      updateStructure(sid, {status:t.value}).then(function(){ render(); saved(); })["catch"](showTrouble);
+      return;
+    }
+
+    if(t.matches("[data-review]")){
+      if(!requireName()){ t.checked = false; return; }
+      var rid = t.getAttribute("data-review");
+      saveFacultyReview(rid, {reviewed:t.checked}).then(function(){ render(); saved(); })["catch"](showTrouble);
+      return;
+    }
+  });
+
+  list.addEventListener("click", function(e){
+    var t = e.target.closest("button");
+    if(!t) return;
+
+    if(t.hasAttribute("data-card")){
+      var key = t.getAttribute("data-card");
+      openCards[key] = !openCards[key];
+      render();
+      var again = document.querySelector('[data-card="' + CSS.escape(key) + '"]');
+      if(again) again.focus();
+      return;
+    }
+
+    if(t.hasAttribute("data-toggle")){
+      var id = t.getAttribute("data-toggle");
+      openRows[id] = !openRows[id];
+      render();
+      var back = document.querySelector('[data-toggle="' + CSS.escape(id) + '"]');
+      if(back) back.focus();
+      return;
+    }
+
+    if(t.hasAttribute("data-history")){
+      var hid = t.getAttribute("data-history");
+      openHistory[hid] = !openHistory[hid];
+      render();
+      var hb = document.querySelector('[data-history="' + CSS.escape(hid) + '"]');
+      if(hb) hb.focus();
+      return;
+    }
+
+    if(t.hasAttribute("data-savereason")){
+      if(!requireName()) return;
+      var vid = t.getAttribute("data-savereason");
+      var rec = byId[vid];
+      var txt = document.getElementById("rs-" + vid).value.trim();
+      var v = rec.votes[me.id] ? rec.votes[me.id].v : "";
+      if(!v){ status("Mark your position first, then the reason has something to attach to.", true); return; }
+      updateStructure(vid, {vote:v, reason:txt}).then(function(){ render(); saved(); })["catch"](showTrouble);
+      return;
+    }
+
+    if(t.hasAttribute("data-savenote")){
+      if(!requireName()) return;
+      var nid = t.getAttribute("data-savenote");
+      updateStructure(nid, {notes: document.getElementById("nt-" + nid).value.trim()})
+        .then(function(){ render(); saved(); })["catch"](showTrouble);
+      return;
+    }
+
+    if(t.hasAttribute("data-comment")){
+      if(!requireName()) return;
+      var cid = t.getAttribute("data-comment");
+      var box = document.getElementById("cm-" + cid);
+      var text = box.value.trim();
+      if(!text){ box.focus(); return; }
+      addFacultyComment(cid, {text:text}).then(function(){
+        render(); saved();
+        var again2 = document.getElementById("cm-" + cid);
+        if(again2) again2.focus();
+      })["catch"](showTrouble);
+      return;
+    }
+  });
+
+  /* identity */
+  document.getElementById("signinBtn").addEventListener("click", function(){
+    if(signIn(document.getElementById("nameInput").value)){ render(); }
+    else{ document.getElementById("nameInput").focus(); }
+  });
+  document.getElementById("nameInput").addEventListener("keydown", function(e){
+    if(e.key === "Enter"){ e.preventDefault(); document.getElementById("signinBtn").click(); }
+  });
+  document.getElementById("switchBtn").addEventListener("click", function(){
+    me = null;
+    try{ window.localStorage.removeItem(ME_KEY); }catch(e){}
+    render();
+    document.getElementById("nameInput").focus();
+  });
+
+  /* filters */
+  function wire(id, key){
+    document.getElementById(id).addEventListener("change", function(){
+      ui[key] = this.value;
+      render();
+    });
+  }
+  wire("fUnit", "unit");
+  wire("fWorksheet", "worksheet");
+  wire("fWhere", "where");
+  wire("fStatus", "status");
+  wire("fReview", "review");
+  document.getElementById("q").addEventListener("input", function(){
+    clearTimeout(bind._q);
+    var v = this.value;
+    bind._q = setTimeout(function(){ ui.q = v; render(); }, 180);
+  });
+  document.getElementById("clearBtn").addEventListener("click", function(){
+    ui.q = ""; ui.unit = ""; ui.worksheet = ""; ui.where = ""; ui.status = ""; ui.review = "";
+    document.getElementById("q").value = "";
+    ["fUnit","fWorksheet","fWhere","fStatus","fReview"].forEach(function(i){ document.getElementById(i).value = ""; });
+    render();
+  });
+
+  /* views */
+  document.getElementById("viewSections").addEventListener("click", function(){ ui.view = "sections"; render(); });
+  document.getElementById("viewTable").addEventListener("click", function(){ ui.view = "table"; render(); });
+
+  /* refresh */
+  document.getElementById("refreshBtn").addEventListener("click", function(){
+    status("Checking for new work…", true);
+    poll().then(function(){ status("Up to date"); })["catch"](function(){ status("Could not reach the shared record.", true); });
+  });
+
+  /* export */
+  document.getElementById("exportBtn").addEventListener("click", function(){
+    var area = document.getElementById("exportText");
+    area.value = buildCsv();
+    document.getElementById("exportPanel").hidden = false;
+    area.focus();
+    area.select();
+  });
+  document.getElementById("exportClose").addEventListener("click", function(){
+    document.getElementById("exportPanel").hidden = true;
+    document.getElementById("exportBtn").focus();
+  });
+
+  /* propose a structure */
+  var form = document.getElementById("addForm");
+  document.getElementById("addBtn").addEventListener("click", function(){
+    if(!requireName()) return;
+    var panel = document.getElementById("addPanel");
+    panel.hidden = !panel.hidden;
+    this.setAttribute("aria-expanded", panel.hidden ? "false" : "true");
+    if(!panel.hidden) document.getElementById("newName").focus();
+  });
+  document.getElementById("addCancel").addEventListener("click", function(){
+    document.getElementById("addPanel").hidden = true;
+    document.getElementById("addBtn").setAttribute("aria-expanded", "false");
+    document.getElementById("addBtn").focus();
+  });
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    if(!requireName()) return;
+    var name = document.getElementById("newName").value.trim();
+    var err = document.getElementById("addError");
+    if(!name){
+      err.textContent = "Give the structure a name before proposing it.";
+      err.hidden = false;
+      document.getElementById("newName").focus();
+      return;
+    }
+    err.hidden = true;
+    addStructure({
+      structureName: name,
+      unit: document.getElementById("newUnit").value,
+      worksheet: document.getElementById("newWorksheet").value,
+      section: document.getElementById("newSection").value.trim() || "Faculty additions",
+      notes: document.getElementById("newWhy").value.trim(),
+      status: "add"
+    }).then(function(){
+      form.reset();
+      document.getElementById("addPanel").hidden = true;
+      document.getElementById("addBtn").setAttribute("aria-expanded", "false");
+      render();
+      status("Proposed. It is on the list marked Recommend Add.");
+    })["catch"](showTrouble);
+  });
+}
+
+/* ------------------------------------------------------------------ *
+ * Filter option lists
+ * ------------------------------------------------------------------ */
+function fillFilters(){
+  var units = [];
+  SEED_RECORDS.forEach(function(r){ if(units.indexOf(r.unit) === -1) units.push(r.unit); });
+  units.sort();
+  var u = document.getElementById("fUnit");
+  u.innerHTML = '<option value="">Every unit</option>' + units.map(function(n){
+    return '<option value="' + n + '">' + esc(MODULE_NAMES[n] || ("Unit " + n)) + '</option>';
+  }).join("");
+
+  var seen = {}, ws = [];
+  SEED_RECORDS.forEach(function(r){ if(!seen[r.worksheet]){ seen[r.worksheet] = 1; ws.push(r); } });
+  document.getElementById("fWorksheet").innerHTML = '<option value="">Every worksheet</option>' +
+    ws.map(function(r){ return '<option value="' + esc(r.worksheet) + '">Worksheet ' + esc(r.worksheet) + ': ' + esc(r.worksheetTitle) + '</option>'; }).join("");
+
+  document.getElementById("fWhere").innerHTML = '<option value="">Any resource</option>' +
+    WHERE.map(function(w){ return '<option value="' + w.k + '">' + esc(w.label) + '</option>'; }).join("");
+
+  document.getElementById("fStatus").innerHTML = '<option value="">Any status</option>' +
+    STATUSES.map(function(s){ return '<option value="' + s.k + '">' + esc(s.label) + '</option>'; }).join("");
+
+  document.getElementById("fReview").innerHTML =
+    '<option value="">Any review state</option>' +
+    '<option value="mine">Reviewed by me</option>' +
+    '<option value="notmine">Not reviewed by me</option>' +
+    '<option value="all">Reviewed by everyone</option>' +
+    '<option value="needs">Still needs review</option>';
+
+  document.getElementById("newUnit").innerHTML = units.map(function(n){
+    return '<option value="' + n + '">' + esc(MODULE_NAMES[n] || ("Unit " + n)) + '</option>';
+  }).join("");
+  document.getElementById("newWorksheet").innerHTML = ws.map(function(r){
+    return '<option value="' + esc(r.worksheet) + '">Worksheet ' + esc(r.worksheet) + ': ' + esc(r.worksheetTitle) + '</option>';
+  }).join("");
+}
+
+/* ------------------------------------------------------------------ *
+ * Polling, so one person's work reaches the others
+ * ------------------------------------------------------------------ */
+function poll(){
+  return DataService.pull().then(function(fresh){
+    if(fresh.length){ rebuild(); render(); }
+  });
+}
+function startPolling(){
+  setInterval(function(){
+    if(document.hidden) return;
+    poll()["catch"](function(){});
+  }, POLL_MS);
+  document.addEventListener("visibilitychange", function(){
+    if(!document.hidden) poll()["catch"](function(){});
+  });
+}
+
+/* ------------------------------------------------------------------ *
+ * Boot
+ * ------------------------------------------------------------------ */
+function boot(){
+  fillFilters();
+  bind();
+  rebuild();
+  render();
+  status("Loading the shared list…", true);
+
+  loadMasterList().then(function(){
+    loaded = true;
+    restoreMe();
+    render();
+    status(null);
+    startPolling();
+    var m = DataService.mode();
+    if(m === "local"){
+      var n = document.getElementById("modeNotice");
+      n.hidden = false;
+      n.innerHTML = "<strong>Local test mode.</strong> This copy is not connected to the shared sheet, so everything you do stays in this browser. " +
+        "Connect it by serving this page from Apps Script, or by setting API_URL near the top of the file.";
+    }
+  })["catch"](function(err){
+    var n = document.getElementById("modeNotice");
+    n.hidden = false;
+    n.innerHTML = "<strong>Could not reach the shared record.</strong> " + esc(err && err.message ? err.message : "") +
+      " Reload once. Nothing you mark now would be saved, so do not start marking until this clears.";
+    status(null);
+  });
+}
+
+if(document.readyState === "loading"){
+  document.addEventListener("DOMContentLoaded", boot);
+}else{
+  boot();
+}
+
+})();
+</script>
+<script>
+/* Height sender, so the page sits correctly inside a Kajabi or Canvas iframe. */
+(function(){
+  var FRAME_ID = "master-anatomy-list";
+  function sendHeight(){
+    var h = Math.max(
+      document.body.scrollHeight, document.body.offsetHeight,
+      document.documentElement.scrollHeight, document.documentElement.offsetHeight
+    );
+    try{ parent.postMessage({ id: FRAME_ID, frameId: FRAME_ID, height: h }, "*"); }catch(e){}
+  }
+  window.addEventListener("load", sendHeight);
+  window.addEventListener("resize", sendHeight);
+  if(window.ResizeObserver){
+    try{ new ResizeObserver(sendHeight).observe(document.body); }catch(e){}
+  }
+  sendHeight();
+})();
+</script>
+</body>
+</html>
