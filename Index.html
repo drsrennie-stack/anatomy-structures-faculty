@@ -62,14 +62,27 @@ a{color:var(--terra-dark)}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
 
 /* ---------- masthead ---------- */
-.masthead{padding-block:44px 20px}
+.masthead{padding-block:26px 14px}
 .eyebrow{font-size:11px;font-weight:700;letter-spacing:3.3px;text-transform:uppercase;color:var(--terra);margin-bottom:8px}
 .course{font-size:9.5px;font-weight:700;letter-spacing:2.09px;text-transform:uppercase;color:var(--ink-mute);margin-bottom:14px}
 h1{font-family:"Open Sans",Georgia,serif;font-weight:800;letter-spacing:-0.6px;font-size:clamp(28px,4.6vw,40px)}
 .kicker{font-size:9.5px;font-weight:700;letter-spacing:2.09px;text-transform:uppercase;color:var(--terra-dark);margin-top:12px}
-.lede{margin-top:14px;font-size:16.5px;color:var(--ink-soft);max-width:70ch}
+.lede{margin-top:12px;font-size:15.5px;color:var(--ink-soft);max-width:72ch}
 
-.floor{border:1px solid var(--hair);border-radius:var(--r);padding:20px 22px;margin-top:22px;max-width:74ch}
+/* The framing matters but should not own half the screen. It collapses. */
+.intro{border:1px solid var(--hair);border-radius:var(--r);margin-top:16px;max-width:80ch}
+.intro > summary{
+  list-style:none;cursor:pointer;padding:12px 16px;
+  font-size:9.5px;font-weight:700;letter-spacing:2.09px;text-transform:uppercase;color:var(--terra-dark);
+  display:flex;justify-content:space-between;gap:12px;align-items:center;
+}
+.intro > summary::-webkit-details-marker{display:none}
+.intro > summary::after{content:"Show";font-size:11px;letter-spacing:1px;color:var(--ink-mute)}
+.intro[open] > summary::after{content:"Hide"}
+.intro > summary:hover{color:var(--terra)}
+.introbody{padding:0 16px 16px;border-top:1px solid var(--hair)}
+.introbody p{font-size:14.5px;color:var(--ink-soft);margin-top:10px}
+.floor{padding:0;margin:0;border:0;max-width:74ch}
 .floor h2{font-size:9.5px;font-weight:700;letter-spacing:2.09px;text-transform:uppercase;color:var(--terra-dark);margin-bottom:10px}
 .floor p{font-size:14.5px;color:var(--ink-soft);margin-bottom:8px}
 .floor p:last-child{margin-bottom:0}
@@ -129,20 +142,34 @@ h1{font-family:"Open Sans",Georgia,serif;font-weight:800;letter-spacing:-0.6px;f
 .notice[hidden]{display:none}
 
 /* ---------- dashboard ---------- */
-.dash{margin-top:26px}
-.dash-lead{font-size:9.5px;font-weight:700;letter-spacing:2.09px;text-transform:uppercase;color:var(--ink-mute);margin-bottom:10px}
-.dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:10px}
-.dash-tile{
-  border:1px solid var(--hair);border-radius:var(--r);padding:14px 16px;
-  display:flex;flex-direction:column;gap:2px;
+.dashwrap{border:1px solid var(--hair);border-radius:var(--r);margin-top:16px}
+.dashwrap > summary{
+  list-style:none;cursor:pointer;padding:11px 16px;
+  font-size:13px;color:var(--ink-soft);
+  display:flex;justify-content:space-between;gap:12px;align-items:center;
 }
-.dash-n{font-size:23px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.1}
-.dash-l{font-size:12px;color:var(--ink-mute)}
+.dashwrap > summary::-webkit-details-marker{display:none}
+.dashwrap > summary::after{content:"Show";font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:700;color:var(--ink-mute)}
+.dashwrap[open] > summary::after{content:"Hide"}
+.dashwrap > summary strong{color:var(--ink);font-variant-numeric:tabular-nums}
+.dashwrap > summary:hover{color:var(--ink)}
+.dash{padding:0 16px 16px;border-top:1px solid var(--hair)}
+.dash-lead{padding-top:12px}
+.dash-lead{font-size:9.5px;font-weight:700;letter-spacing:2.09px;text-transform:uppercase;color:var(--ink-mute);margin-bottom:10px}
+.dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(108px,1fr));gap:8px}
+.dash-tile{
+  border:1px solid var(--hair);border-radius:var(--r);padding:9px 11px;
+  display:flex;flex-direction:column;gap:1px;
+}
+.dash-n{font-size:18px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.15}
+.dash-l{font-size:11px;color:var(--ink-mute);line-height:1.3}
 
 /* ---------- toolbar ---------- */
+/* Sticky, so it stays reachable, and deliberately short so it does not
+   eat the screen while somebody scrolls a thousand rows. */
 .toolbar{
   position:sticky;top:0;z-index:20;background:var(--ground);
-  border-bottom:1px solid var(--hair);padding-block:12px;margin-top:26px;
+  border-bottom:1px solid var(--hair);padding-block:10px;margin-top:16px;
 }
 .toolrow{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;min-width:0}
 /* A select sizes itself to its longest option, which for the worksheet
@@ -171,7 +198,22 @@ h1{font-family:"Open Sans",Georgia,serif;font-weight:800;letter-spacing:-0.6px;f
   width:100%;display:flex;justify-content:space-between;align-items:center;gap:14px;
   background:var(--card);border:0;padding:14px 16px;cursor:pointer;text-align:left;
 }
-.gcname{font-weight:700;font-size:15px}
+.gcname{font-weight:700;font-size:15px;min-width:0}
+.gcstate{display:flex;align-items:center;gap:8px;flex:none;flex-wrap:wrap;justify-content:flex-end}
+
+/* ---------- section bar ---------- */
+.secbar{
+  border-top:2px solid var(--hair-strong);background:var(--wash);padding:16px;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;align-items:start;
+}
+.secbar-lead{
+  grid-column:1/-1;font-size:9.5px;font-weight:700;letter-spacing:2.09px;
+  text-transform:uppercase;color:var(--ink-mute);margin:0;
+}
+.secbar-main{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.secbar-note{font-size:12.5px;color:var(--ink-mute)}
+.secbar-who{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.secbar-notes h4{font-size:9.5px;font-weight:700;letter-spacing:2.09px;text-transform:uppercase;color:var(--terra-dark);margin-bottom:8px}
 .gccount{
   font-size:11px;font-weight:700;color:var(--ink-mute);border:1px solid var(--hair);
   border-radius:3px;padding:2px 8px;font-variant-numeric:tabular-nums;flex:none;
@@ -206,6 +248,29 @@ h1{font-family:"Open Sans",Georgia,serif;font-weight:800;letter-spacing:-0.6px;f
 .votecell input[value="cond"]:checked + label,
 .wherecell input:checked + label{background:var(--gold-dark);border-color:var(--gold-dark)}
 .votecell input:focus-visible + label,.wherecell input:focus-visible + label{outline:2px solid var(--terra-dark);outline-offset:2px}
+/* Keep is the standing position on any row nobody has marked. Dotted, not
+   filled, so it reads as "already true" rather than "you clicked this". */
+.votecell label.standing{border-style:dashed;border-color:var(--ink);background:var(--wash)}
+.votecell input:checked + label.standing{border-style:solid;background:var(--ink)}
+.pill.standingpill{border-style:dashed;border-color:var(--ink);background:var(--wash);font-weight:600}
+.keeprule{font-size:14px;color:var(--ink-soft);margin-top:10px}
+.keeprule strong{color:var(--ink)}
+
+/* The one rule everybody has to understand, in the one place nobody
+   can miss. Navy on white text is 18:1, so it carries at a glance. */
+.keepbar{
+  background:var(--ink);color:#fff;border-radius:var(--r);
+  padding:12px 16px;margin-top:14px;font-size:14.5px;line-height:1.5;
+  display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;
+}
+.keepbar strong{font-weight:700}
+.keepbar-more{
+  margin-left:auto;background:transparent;border:1px solid rgba(255,255,255,0.55);
+  color:#fff;border-radius:4px;padding:6px 12px;cursor:pointer;
+  font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+}
+.keepbar-more:hover{background:rgba(255,255,255,0.12);border-color:#fff}
+.keepbar-more:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .count{color:inherit}
 .votecell input:not(:checked) + label .count,
 .wherecell input:not(:checked) + label .count{color:var(--ink-mute)}
@@ -321,14 +386,21 @@ footer{border-top:1px solid var(--hair);margin-top:54px;padding-block:22px 60px;
     <p class="course">BIOL 004 &middot; Human Anatomy</p>
     <h1>Master Anatomy List</h1>
     <p class="kicker">Faculty collaboration workspace</p>
-    <p class="lede">One shared list of every structure we currently test in lab, worked on by the whole anatomy faculty. Everything you mark is filed under your name and sits alongside everyone else's, so nothing you do replaces anybody else's work.</p>
+    <p class="lede">One shared list of every structure we currently test in lab, worked on by the whole anatomy faculty. <strong>Everything on here stays unless somebody marks it</strong>, so you only click the rows you want to change. Everything you do mark is filed under your name and sits alongside everyone else's, so nothing you do replaces anybody else's work.</p>
 
-    <section class="floor" aria-labelledby="floorTitle">
-      <h2 id="floorTitle">What this list is</h2>
-      <p><strong>This is the minimum, not the maximum.</strong> It is the shared floor the department writes exams from, so any exam in any section can draw on anything that ends up here.</p>
-      <p>It is not a ceiling on your teaching. Every one of us keeps the freedom to go further. If a structure does not make the minimum list, you can still put it on your own list and test your own students on it.</p>
-      <p>So marking something Recommend Remove is about what all of us must cover. It is not a vote to stop anyone covering it.</p>
-    </section>
+    <details class="intro">
+      <summary>What this list is, and how marking works</summary>
+      <div class="introbody">
+        <section class="floor" aria-labelledby="floorTitle">
+          <h2 class="sr-only" id="floorTitle">What this list is</h2>
+          <p><strong>This is the minimum, not the maximum.</strong> It is the shared floor the department writes exams from, so any exam in any section can draw on anything that ends up here.</p>
+          <p>It is not a ceiling on your teaching. Every one of us keeps the freedom to go further. If a structure does not make the minimum list, you can still put it on your own list and test your own students on it.</p>
+          <p>So marking something Recommend Remove is about what all of us must cover. It is not a vote to stop anyone covering it.</p>
+        </section>
+        <p class="keeprule">The dashed Keep circle on a row means that is where the row currently stands. Mark Cut if it should come off, Cond. if it stays only under certain circumstances, Unsure if you want to think about it, and Keep only when you want to push back on somebody else who flagged it.</p>
+        <p class="keeprule">At the end of every section there is a box to record that you have been through that block. It is how you keep track of what you have already covered, and how everyone else sees who has read what.</p>
+      </div>
+    </details>
 
     <div class="identity" id="identity">
       <div class="who" id="who"></div>
@@ -392,10 +464,10 @@ footer{border-top:1px solid var(--hair);margin-top:54px;padding-block:22px 60px;
       </div>
     </section>
 
-    <section class="dash" id="dashWrap" aria-labelledby="dashTitle">
-      <h2 class="sr-only" id="dashTitle">Where the review stands</h2>
+    <details class="dashwrap" id="dashWrap">
+      <summary><span id="dashSummary">Where the review stands</span></summary>
       <div id="dash"></div>
-    </section>
+    </details>
   </div>
 </header>
 
@@ -444,6 +516,11 @@ footer{border-top:1px solid var(--hair);margin-top:54px;padding-block:22px 60px;
 
 <main>
   <div class="wrap">
+    <p class="keepbar">
+      <strong>Keep is the default.</strong>
+      Nothing to click to keep a structure. Only mark the rows you want changed.
+      <button type="button" class="keepbar-more" id="howBtn">How marking works</button>
+    </p>
     <div id="list"></div>
   </div>
 </main>
@@ -482,7 +559,7 @@ footer{border-top:1px solid var(--hair);margin-top:54px;padding-block:22px 60px;
 
 /* Only used in mode 2. Leave empty when the page is served by Apps
  * Script itself, which is the intended production setup. */
-var API_URL = "";
+var API_URL = "https://script.google.com/macros/s/AKfycbzuXqoZz6S3kyEm9c2019t6TSnBT8EOr6ko-7k668HglgWOg42t9oOtnrrxWgFLOWiJVQ/exec";
 
 var POLL_MS = 20000;         /* how often to pick up other people's work */
 var LOCAL_KEY = "mal-local-state-v1";
@@ -943,6 +1020,17 @@ async function addFacultyComment(id, comment){
   await DataService.push({t:"comment", sid:id, cid:uid(), text:comment.text, uid:me.id, who:me.name});
   rebuild();
 }
+/* Section-level: one person reads a whole block and records that they
+ * are through it, with or without changes. Additive, like everything
+ * else, so one person clearing a section never clears anyone else's. */
+async function saveSectionReview(key, review){
+  await DataService.push({t:"screview", key:key, r:!!review.reviewed, uid:me.id, who:me.name});
+  rebuild();
+}
+async function addSectionComment(key, comment){
+  await DataService.push({t:"sccomment", key:key, cid:uid(), text:comment.text, uid:me.id, who:me.name});
+  rebuild();
+}
 async function loadFacultyMembers(){
   return Object.keys(people).map(function(k){ return people[k]; });
 }
@@ -956,7 +1044,7 @@ async function loadChangeHistory(id){
 /* ================================================================== *
  * State, built by replaying the operation log over the seed list
  * ================================================================== */
-var records = [], byId = {}, people = {}, me = null, loaded = false;
+var records = [], byId = {}, people = {}, sections = {}, me = null, loaded = false;
 var ui = {q:"", unit:"", worksheet:"", where:"", status:"", review:"", view:"sections"};
 var openRows = {}, openCards = {}, openHistory = {};
 
@@ -1027,10 +1115,27 @@ function rebuild(){
   byId = {};
   records.forEach(function(r){ byId[r.id] = r; });
   people = {};
+  sections = {};
 
   DataService.allOps().slice().sort(function(a,b){ return (a.at||0) - (b.at||0); }).forEach(function(o){
     if(o.t === "user"){
       people[o.uid || o.id] = {facultyId:o.uid || o.id, facultyName:o.name || o.who, color:o.color, initials:o.ini || initials(o.name || o.who || "?")};
+      return;
+    }
+    if(o.t === "screview" || o.t === "sccomment"){
+      var sec = sections[o.key] || (sections[o.key] = {reviews:[], comments:[]});
+      if(o.t === "screview"){
+        var found = null;
+        for(var q=0;q<sec.reviews.length;q++){ if(sec.reviews[q].facultyId === o.uid) found = sec.reviews[q]; }
+        if(!found){ found = {facultyId:o.uid, facultyName:o.who, reviewed:false, at:null}; sec.reviews.push(found); }
+        found.reviewed = !!o.r;
+        found.facultyName = o.who || found.facultyName;
+        found.at = o.at;
+      }else{
+        var dup = false;
+        for(var z=0;z<sec.comments.length;z++){ if(sec.comments[z].id === o.cid){ sec.comments[z].text = o.text; dup = true; } }
+        if(!dup) sec.comments.push({id:o.cid, facultyId:o.uid, facultyName:o.who, at:o.at, text:o.text});
+      }
       return;
     }
     if(o.t === "add" && o.st){
@@ -1179,6 +1284,27 @@ function facultyCount(){
   return Math.max(1, Object.keys(people).length);
 }
 function sectionKey(r){ return slug(r.worksheet + "--" + r.section); }
+function sectionState(key){ return sections[key] || {reviews:[], comments:[]}; }
+function sectionClearedByMe(key){
+  if(!me) return false;
+  var rv = sectionState(key).reviews;
+  for(var i=0;i<rv.length;i++){ if(rv[i].facultyId === me.id) return rv[i].reviewed; }
+  return false;
+}
+function sectionClearedCount(key){
+  var n = 0;
+  sectionState(key).reviews.forEach(function(x){ if(x.reviewed) n++; });
+  return n;
+}
+function myMarksInSection(rows){
+  if(!me) return 0;
+  var n = 0;
+  rows.forEach(function(r){
+    if(r.votes[me.id]) n++;
+    else if(r.where[me.id] && r.where[me.id].length) n++;
+  });
+  return n;
+}
 
 /* ------------------------------------------------------------------ *
  * Filtering and search
@@ -1226,7 +1352,14 @@ function renderDashboard(){
     var n = reviewCount(r);
     if(n >= fc) allReviewed++; else needsReview++;
   });
+  var secKeys = {};
+  records.forEach(function(r){ secKeys[sectionKey(r)] = 1; });
+  var totalSections = Object.keys(secKeys).length;
+  var mineDone = 0;
+  Object.keys(secKeys).forEach(function(k){ if(sectionClearedByMe(k)) mineDone++; });
+
   var tiles = [
+    {n:mineDone + " of " + totalSections, l:"Sections you are through"},
     {n:counts.active,   l:"Active"},
     {n:counts.review,   l:"Under review"},
     {n:counts.add,      l:"Proposed additions"},
@@ -1240,6 +1373,11 @@ function renderDashboard(){
     '<div class="dash-grid">' + tiles.map(function(t){
       return '<div class="dash-tile"><span class="dash-n">' + t.n + '</span><span class="dash-l">' + esc(t.l) + '</span></div>';
     }).join("") + '</div>';
+
+  var flagged = counts.review + counts.add + counts.revise + counts.remove;
+  document.getElementById("dashSummary").innerHTML =
+    'Where the review stands: <strong>' + total + '</strong> structures, <strong>' + flagged +
+    '</strong> flagged for discussion, you are through <strong>' + mineDone + ' of ' + totalSections + '</strong> sections';
 }
 
 /* ------------------------------------------------------------------ *
@@ -1307,10 +1445,19 @@ function voteCellsHtml(r){
   return VOTES.map(function(v){
     var id = "v-" + r.id + "-" + v.k;
     var n = t[v.k];
+    /* Keep is the default. If this person has not marked the row, the Keep
+     * control shows as the standing position so nobody thinks they have to
+     * click a thousand rows to keep a thousand structures. */
+    var standing = (v.k === "keep" && !mine);
+    var name = standing
+      ? "Keep it. This already applies by default, " + r.structureName
+      : v.label + ", " + r.structureName;
     return '<span class="votecell">' +
       '<input type="radio" id="' + esc(id) + '" name="vote-' + esc(r.id) + '" value="' + v.k + '"' +
       (mine === v.k ? " checked" : "") + ' data-vote="' + esc(r.id) + '">' +
-      '<label for="' + esc(id) + '"><span class="sr-only">' + esc(v.label) + ", " + esc(r.structureName) + '</span>' +
+      '<label class="' + (standing ? "standing" : "") + '" for="' + esc(id) + '"' +
+        (standing ? ' title="Keep is the default. Nothing to click."' : '') + '>' +
+      '<span class="sr-only">' + esc(name) + '</span>' +
       (n ? '<span class="count" aria-hidden="true">' + n + '</span>' : '') + '</label></span>';
   }).join("");
 }
@@ -1371,11 +1518,13 @@ function detailHtml(r){
   /* my vote and reason */
   var myVote = me && r.votes[me.id] ? r.votes[me.id] : null;
   h.push('<div class="dsec"><h4>Your position</h4>' +
+    '<p class="dhint">Leaving this row alone counts as keeping it. You only need to click if you want something other than Keep. Clicking your own mark again clears it.</p>' +
     '<div class="dvotes">' + VOTES.map(function(v){
       var id = "dv-" + r.id + "-" + v.k;
-      return '<label class="pill" for="' + esc(id) + '">' +
+      var lbl = (v.k === "keep" && !myVote) ? "Keep (default)" : v.short;
+      return '<label class="pill' + ((v.k === "keep" && !myVote) ? " standingpill" : "") + '" for="' + esc(id) + '">' +
         '<input type="radio" id="' + esc(id) + '" name="dvote-' + esc(r.id) + '" value="' + v.k + '"' +
-        (myVote && myVote.v === v.k ? " checked" : "") + ' data-vote="' + esc(r.id) + '"> ' + esc(v.short) + '</label>';
+        (myVote && myVote.v === v.k ? " checked" : "") + ' data-vote="' + esc(r.id) + '"> ' + esc(lbl) + '</label>';
     }).join("") + '</div>' +
     '<label class="sr-only" for="rs-' + esc(r.id) + '">Your reason for ' + esc(r.structureName) + '</label>' +
     '<textarea class="ta" id="rs-' + esc(r.id) + '" rows="2" placeholder="Reason, only if it needs one">' + esc(myVote ? myVote.r : "") + '</textarea>' +
@@ -1464,6 +1613,54 @@ function detailHtml(r){
 }
 
 /* ------------------------------------------------------------------ *
+ * Rendering: the section bar, where somebody records that they have
+ * been through a whole block
+ * ------------------------------------------------------------------ */
+function sectionBarHtml(key, rows, title){
+  var st = sectionState(key);
+  var cleared = st.reviews.filter(function(x){ return x.reviewed; });
+  var mineCount = myMarksInSection(rows);
+
+  var h = [];
+  h.push('<div class="secbar"><p class="secbar-lead">You have reached the end of this section</p>');
+
+  h.push('<div class="secbar-main">' +
+    '<label class="pill' + (sectionClearedByMe(key) ? "" : " standingpill") + '" for="sr-' + esc(key) + '">' +
+    '<input type="checkbox" id="sr-' + esc(key) + '"' + (sectionClearedByMe(key) ? " checked" : "") +
+    ' data-screview="' + esc(key) + '"> I have been through this section</label>' +
+    (mineCount
+      ? '<span class="secbar-note">You have marked ' + mineCount + (mineCount === 1 ? ' structure' : ' structures') + ' above. Tick the box once you are finished with this block.</span>'
+      : '<span class="secbar-note">Read the block above, then tick this to record that you went through it and had no changes.</span>') +
+    '</div>');
+
+  h.push('<div class="secbar-who">' +
+    (cleared.length
+      ? '<span class="roster-label">Been through it</span>' + cleared.map(function(x){
+          var pp = people[x.facultyId] || {facultyName:x.facultyName, color:"#37474F", initials:initials(x.facultyName || "?")};
+          return '<span class="roster-person">' + avatar(pp) + '<span>' + esc(pp.facultyName) + '</span></span>';
+        }).join("")
+      : '<span class="secbar-note">Nobody has been through this section yet.</span>') +
+    '</div>');
+
+  h.push('<div class="secbar-notes"><h4>Comments on this section</h4>');
+  if(!st.comments.length){
+    h.push('<p class="dhint">No comments on this block yet.</p>');
+  }else{
+    h.push('<ul class="dlist">' + st.comments.slice(0).sort(function(a,b){ return a.at - b.at; }).map(function(c){
+      var pp = people[c.facultyId] || {facultyName:c.facultyName || "Unknown", color:"#37474F", initials:initials(c.facultyName || "?")};
+      return '<li>' + avatar(pp) + '<span><strong>' + esc(pp.facultyName) + '</strong> <span class="muted">' + esc(when(c.at)) +
+        '</span><br>' + esc(c.text) + '</span></li>';
+    }).join("") + '</ul>');
+  }
+  h.push('<label class="sr-only" for="sc-' + esc(key) + '">Comment on ' + esc(title) + '</label>' +
+    '<textarea class="ta" id="sc-' + esc(key) + '" rows="2" placeholder="A comment about this block as a whole"></textarea>' +
+    '<button class="btn small" type="button" data-sccomment="' + esc(key) + '">Post section comment</button></div>');
+
+  h.push('</div>');
+  return h.join("");
+}
+
+/* ------------------------------------------------------------------ *
  * Rendering: section card view
  * ------------------------------------------------------------------ */
 function rowHtml(r){
@@ -1515,17 +1712,22 @@ function renderSections(list){
         '<button class="gctoggle" type="button" data-card="' + esc(key) + '" aria-expanded="' + (isOpen ? "true" : "false") +
           '" aria-controls="card-' + esc(key) + '">' +
           '<span class="gcname">' + esc(sk) + '</span>' +
-          '<span class="gccount">' + rows.length + '</span></button>' +
+          '<span class="gcstate">' +
+            (sectionClearedByMe(key) ? '<span class="chip chip-all">You are through it</span>' : '') +
+            (sectionClearedCount(key) ? '<span class="chip chip-some">' + sectionClearedCount(key) + ' of ' + facultyCount() + ' read</span>' : '') +
+            '<span class="gccount">' + rows.length + '</span>' +
+          '</span></button>' +
         '<div id="card-' + esc(key) + '"' + (isOpen ? "" : " hidden") + '>' +
           (isOpen
             ? '<div class="gridhead" aria-hidden="true">' +
                 '<div class="cell name">Structure</div>' +
-                '<div class="cell votes">' + VOTES.map(function(v){ return '<span class="hcol">' + esc(v.short) + '</span>'; }).join("") + '</div>' +
+                '<div class="cell votes">' + VOTES.map(function(v){
+                    return '<span class="hcol">' + esc(v.k === "keep" ? "Keep*" : v.short) + '</span>'; }).join("") + '</div>' +
                 '<div class="cell wheres">' + whereOptionsFor(rows[0]).map(function(w2){ return '<span class="hcol">' + esc(w2.label) + '</span>'; }).join("") + '</div>' +
                 '<div class="cell stat">Status</div>' +
                 '<div class="cell rev">Reviewed</div>' +
                 '<div class="cell act"></div>' +
-              '</div>' + rows.map(rowHtml).join("")
+              '</div>' + rows.map(rowHtml).join("") + sectionBarHtml(key, rows, sk)
             : '') +
         '</div></div>');
     });
@@ -1669,6 +1871,13 @@ function bind(){
       return;
     }
 
+    if(t.matches("[data-screview]")){
+      if(!requireName()){ t.checked = false; return; }
+      var sk2 = t.getAttribute("data-screview");
+      saveSectionReview(sk2, {reviewed:t.checked}).then(function(){ render(); saved(); })["catch"](showTrouble);
+      return;
+    }
+
     if(t.matches("[data-review]")){
       if(!requireName()){ t.checked = false; return; }
       var rid = t.getAttribute("data-review");
@@ -1727,6 +1936,20 @@ function bind(){
       return;
     }
 
+    if(t.hasAttribute("data-sccomment")){
+      if(!requireName()) return;
+      var sck = t.getAttribute("data-sccomment");
+      var scbox = document.getElementById("sc-" + sck);
+      var sctext = scbox.value.trim();
+      if(!sctext){ scbox.focus(); return; }
+      addSectionComment(sck, {text:sctext}).then(function(){
+        render(); saved();
+        var back2 = document.getElementById("sc-" + sck);
+        if(back2) back2.focus();
+      })["catch"](showTrouble);
+      return;
+    }
+
     if(t.hasAttribute("data-comment")){
       if(!requireName()) return;
       var cid = t.getAttribute("data-comment");
@@ -1779,6 +2002,16 @@ function bind(){
     document.getElementById("q").value = "";
     ["fUnit","fWorksheet","fWhere","fStatus","fReview"].forEach(function(i){ document.getElementById(i).value = ""; });
     render();
+  });
+
+  /* the navy bar opens the framing panel rather than repeating it */
+  document.getElementById("howBtn").addEventListener("click", function(){
+    var d = document.querySelector("details.intro");
+    if(!d) return;
+    d.open = true;
+    d.scrollIntoView({block:"start", behavior:"smooth"});
+    var s = d.querySelector("summary");
+    if(s) s.focus();
   });
 
   /* views */
