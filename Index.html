@@ -213,7 +213,9 @@ h1{font-family:"Open Sans",Georgia,serif;font-weight:800;letter-spacing:-0.6px;f
 .secbar-main{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
 .secbar-note{font-size:12.5px;color:var(--ink-mute)}
 .secbar-who{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-.secbar-notes h4{font-size:9.5px;font-weight:700;letter-spacing:2.09px;text-transform:uppercase;color:var(--terra-dark);margin-bottom:8px}
+.secbar-notes h4,.secbar-add h4{font-size:9.5px;font-weight:700;letter-spacing:2.09px;text-transform:uppercase;color:var(--terra-dark);margin-bottom:8px}
+.secbar-add .btn{margin-top:0}
+.secbar-add input.ta{margin-top:10px}
 .gccount{
   font-size:11px;font-weight:700;color:var(--ink-mute);border:1px solid var(--hair);
   border-radius:3px;padding:2px 8px;font-variant-numeric:tabular-nums;flex:none;
@@ -1046,7 +1048,7 @@ async function loadChangeHistory(id){
  * ================================================================== */
 var records = [], byId = {}, people = {}, sections = {}, me = null, loaded = false;
 var ui = {q:"", unit:"", worksheet:"", where:"", status:"", review:"", view:"sections"};
-var openRows = {}, openCards = {}, openHistory = {};
+var openRows = {}, openCards = {}, openHistory = {}, openPropose = {};
 
 function blankRecord(src){
   return {
@@ -1642,6 +1644,26 @@ function sectionBarHtml(key, rows, title){
       : '<span class="secbar-note">Nobody has been through this section yet.</span>') +
     '</div>');
 
+  var first = rows[0] || {};
+  var proposeOpen = !!openPropose[key];
+  h.push('<div class="secbar-add">' +
+    '<h4>Missing something from this section?</h4>' +
+    '<button class="btn ' + (proposeOpen ? "ghost" : "terra") + ' small" type="button" data-proposehere="' + esc(key) + '" aria-expanded="' +
+      (proposeOpen ? "true" : "false") + '" aria-controls="pz-' + esc(key) + '">' +
+      (proposeOpen ? "Cancel" : "Propose a structure here") + '</button>' +
+    '<div id="pz-' + esc(key) + '"' + (proposeOpen ? "" : " hidden") + '>' +
+      '<p class="dhint">It goes into <strong>' + esc(first.section || "this section") +
+        '</strong> on worksheet ' + esc(first.worksheet || "") + ', marked Recommend Add so the department can talk about it.</p>' +
+      '<label class="sr-only" for="pn-' + esc(key) + '">Structure name</label>' +
+      '<input class="ta" type="text" id="pn-' + esc(key) + '" maxlength="120" autocomplete="off" placeholder="Structure name">' +
+      '<label class="sr-only" for="pw-' + esc(key) + '">Why it belongs on the minimum list</label>' +
+      '<textarea class="ta" id="pw-' + esc(key) + '" rows="2" placeholder="Why it belongs on the minimum list"></textarea>' +
+      '<p class="err" id="pe-' + esc(key) + '" role="alert" hidden></p>' +
+      '<button class="btn terra small" type="button" data-proposesubmit="' + esc(key) + '"' +
+        ' data-unit="' + esc(first.unit || 1) + '" data-ws="' + esc(first.worksheet || "") +
+        '" data-sec="' + esc(first.section || "Faculty additions") + '">Add it to this section</button>' +
+    '</div></div>');
+
   h.push('<div class="secbar-notes"><h4>Comments on this section</h4>');
   if(!st.comments.length){
     h.push('<p class="dhint">No comments on this block yet.</p>');
@@ -1936,6 +1958,51 @@ function bind(){
       return;
     }
 
+    if(t.hasAttribute("data-proposehere")){
+      if(!requireName()) return;
+      var pk = t.getAttribute("data-proposehere");
+      openPropose[pk] = !openPropose[pk];
+      render();
+      var again3 = document.querySelector('[data-proposehere="' + CSS.escape(pk) + '"]');
+      if(openPropose[pk]){
+        var box = document.getElementById("pn-" + pk);
+        if(box) box.focus();
+      }else if(again3){ again3.focus(); }
+      return;
+    }
+
+    if(t.hasAttribute("data-proposesubmit")){
+      if(!requireName()) return;
+      var sk3 = t.getAttribute("data-proposesubmit");
+      var nameBox = document.getElementById("pn-" + sk3);
+      var whyBox = document.getElementById("pw-" + sk3);
+      var errBox = document.getElementById("pe-" + sk3);
+      var nm = nameBox.value.trim();
+      if(!nm){
+        errBox.textContent = "Give the structure a name before adding it.";
+        errBox.hidden = false;
+        nameBox.focus();
+        return;
+      }
+      errBox.hidden = true;
+      addStructure({
+        structureName: nm,
+        unit: t.getAttribute("data-unit"),
+        worksheet: t.getAttribute("data-ws"),
+        section: t.getAttribute("data-sec"),
+        notes: whyBox.value.trim(),
+        status: "add"
+      }).then(function(){
+        openPropose[sk3] = false;
+        var cleared = filtersAreOn();
+        if(cleared) clearAllFilters();
+        render();
+        status("Added to " + t.getAttribute("data-sec") + ", marked Recommend Add." +
+          (cleared ? " Filters cleared so you can see it." : ""));
+      })["catch"](showTrouble);
+      return;
+    }
+
     if(t.hasAttribute("data-sccomment")){
       if(!requireName()) return;
       var sck = t.getAttribute("data-sccomment");
@@ -1998,9 +2065,7 @@ function bind(){
     bind._q = setTimeout(function(){ ui.q = v; render(); }, 180);
   });
   document.getElementById("clearBtn").addEventListener("click", function(){
-    ui.q = ""; ui.unit = ""; ui.worksheet = ""; ui.where = ""; ui.status = ""; ui.review = "";
-    document.getElementById("q").value = "";
-    ["fUnit","fWorksheet","fWhere","fStatus","fReview"].forEach(function(i){ document.getElementById(i).value = ""; });
+    clearAllFilters();
     render();
   });
 
@@ -2039,6 +2104,19 @@ function bind(){
 
   /* propose a structure */
   var form = document.getElementById("addForm");
+  /* a proposal you cannot see looks like a proposal that did not save */
+  function filtersAreOn(){
+    return !!(ui.q || ui.unit || ui.worksheet || ui.where || ui.status || ui.review);
+  }
+  function clearAllFilters(){
+    ui.q = ""; ui.unit = ""; ui.worksheet = ""; ui.where = ""; ui.status = ""; ui.review = "";
+    var q = document.getElementById("q");
+    if(q) q.value = "";
+    ["fUnit","fWorksheet","fWhere","fStatus","fReview"].forEach(function(i){
+      var el = document.getElementById(i);
+      if(el) el.value = "";
+    });
+  }
   document.getElementById("addBtn").addEventListener("click", function(){
     if(!requireName()) return;
     var panel = document.getElementById("addPanel");
@@ -2074,8 +2152,11 @@ function bind(){
       form.reset();
       document.getElementById("addPanel").hidden = true;
       document.getElementById("addBtn").setAttribute("aria-expanded", "false");
+      var wasFiltered = filtersAreOn();
+      if(wasFiltered) clearAllFilters();
       render();
-      status("Proposed. It is on the list marked Recommend Add.");
+      status("Proposed. It is on the list marked Recommend Add." +
+        (wasFiltered ? " Filters cleared so you can see it." : ""));
     })["catch"](showTrouble);
   });
 }
