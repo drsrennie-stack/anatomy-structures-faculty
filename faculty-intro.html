@@ -215,6 +215,17 @@ section > .lede{color:var(--ink-soft);margin:0 0 20px;max-width:70ch}
   background:var(--maroon)}
 .pcard .mini{margin-bottom:4px}
 
+/* A dark band behind the options, so the section reads as its own
+   thing. White cards, gold rules, gold tabs on the border. */
+.onnavy{background:var(--navy);color:#fff;padding:52px 0 56px;margin-top:52px}
+.onnavy .inner{max-width:1180px;margin:0 auto;padding:0 24px}
+.onnavy .eyebrow-s{color:var(--gold)}
+.onnavy h2{color:#fff;font-size:28px;font-weight:800}
+.onnavy h2 span{color:var(--maroon-on-dark)}
+.onnavy .lede{color:#C8CCD6;margin:0 0 4px}
+.onnavy .pcard{border-color:var(--gold)}
+.onnavy .pcard .pill{background:var(--gold);color:var(--navy);box-shadow:0 0 0 4px var(--navy)}
+
 /* ---------- output snapshot ---------- */
 .snap{display:none}
 .paper{background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow-rest);
@@ -438,13 +449,15 @@ footer{max-width:1180px;margin:0 auto;padding:28px 24px 44px;color:var(--ink-sof
   </div>
 </section>
 
-<section aria-labelledby="doTitle">
+<section class="onnavy" aria-labelledby="doTitle">
+  <div class="inner">
   <p class="eyebrow-s">Your options</p>
   <h2 id="doTitle">What you can <span>do</span>.</h2>
   <p class="lede">None of it is required.</p>
 
   <div class="cards">
     <div class="pcard">
+      <span class="pill">If you disagree</span>
       <div class="num">01</div>
       <h3>Say what you think</h3>
       <p class="sub">One click per row, only where you disagree</p>
@@ -460,6 +473,7 @@ footer{max-width:1180px;margin:0 auto;padding:28px 24px 44px;color:var(--ink-sof
     </div>
 
     <div class="pcard">
+      <span class="pill">If something is missing</span>
       <div class="num">02</div>
       <h3>Add what is missing</h3>
       <p class="sub">Straight into the section it belongs in</p>
@@ -475,6 +489,7 @@ footer{max-width:1180px;margin:0 auto;padding:28px 24px 44px;color:var(--ink-sof
     </div>
 
     <div class="pcard">
+      <span class="pill">For your own section</span>
       <div class="num">03</div>
       <h3>Keep your own version</h3>
       <p class="sub">Yours alone, nobody else sees it</p>
@@ -488,6 +503,7 @@ footer{max-width:1180px;margin:0 auto;padding:28px 24px 44px;color:var(--ink-sof
         </ul>
       </div>
     </div>
+  </div>
   </div>
 </section>
 
