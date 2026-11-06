@@ -9,25 +9,29 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
 <style>
 :root{
-  /* MedMasters card system tokens, unchanged */
-  --navy:#0B1530;
-  --navy-55:rgba(11,21,48,0.55);
-  --navy-15:rgba(11,21,48,0.15);
-  --terra:#8B3A2E;
+  /* Primary teaching palette */
+  --navy:#1E3D4C;
+  --navy-deep:#142a36;
+  --navy-tint:#EDF1F3;
+  --gold:#B8924A;
+  --terra:#C2734D;
   --white:#FFFFFF;
 
-  --ground:#FFFFFF;
+  --ground:#FAFAF9;
   --card:#FFFFFF;
-  --ink:#0B1530;
-  --ink-soft:#545B6E;
-  --ink-mute:#606778;
-  --control:#6D7383;
-  --hair:rgba(11,21,48,0.15);
-  --hair-strong:rgba(11,21,48,0.28);
-  --tint:#F5EDEB;
+  --ink:#1E3D4C;
+  --ink-soft:#43616F;
+  --ink-mute:#54707D;
+  --control:#5E7885;
+  --hair:rgba(30,61,76,0.18);
+  --hair-strong:rgba(30,61,76,0.34);
+  --tint:#F6EDE7;
   --gold-dark:#7A5C1E;
-  --terra-dark:#8B3A2E;
-  --wash:#F7F7F8;
+  --terra-dark:#A0522D;
+  --wash:#F2F5F6;
+  --lift:0 1px 3px rgba(0,0,0,0.08);
+  --toolh:120px;                 /* measured from the real toolbar at runtime */
+  --lift-hover:0 8px 16px rgba(0,0,0,0.10);
   --r:8px;
   --maxw:1180px;
   --wcols:4;
@@ -63,7 +67,7 @@ a{color:var(--terra-dark)}
 
 /* ---------- masthead ---------- */
 .masthead{padding-block:26px 14px}
-.eyebrow{font-size:11px;font-weight:700;letter-spacing:3.3px;text-transform:uppercase;color:var(--terra);margin-bottom:8px}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:3.3px;text-transform:uppercase;color:var(--terra-dark);margin-bottom:8px}
 .course{font-size:9.5px;font-weight:700;letter-spacing:2.09px;text-transform:uppercase;color:var(--ink-mute);margin-bottom:14px}
 h1{font-family:"Open Sans",Georgia,serif;font-weight:800;letter-spacing:-0.6px;font-size:clamp(28px,4.6vw,40px)}
 .kicker{font-size:9.5px;font-weight:700;letter-spacing:2.09px;text-transform:uppercase;color:var(--terra-dark);margin-top:12px}
@@ -117,20 +121,24 @@ h1{font-family:"Open Sans",Georgia,serif;font-weight:800;letter-spacing:-0.6px;f
   padding:9px 16px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;
 }
 .btn:hover{opacity:.86}
-.btn.ghost{background:transparent;color:var(--ink);border-color:var(--hair-strong)}
+/* --control, not --hair-strong: a hairline at 1.92:1 is under the 3:1
+   floor for a control boundary, and on a ghost button the border is the
+   only boundary there is. */
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--control)}
 .btn.ghost:hover{background:var(--wash);border-color:var(--ink-soft)}
-.btn.terra{background:var(--terra);border-color:var(--terra);color:#fff}
+/* terra-dark, not terra: white on #C2734D is 3.59:1 and fails AA. */
+.btn.terra{background:var(--terra-dark);border-color:var(--terra-dark);color:#fff}
 .btn.small{padding:7px 12px;margin-top:8px}
 .linkbtn{
   background:none;border:0;padding:4px 2px;color:var(--terra-dark);
   font-size:13px;font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:3px;
 }
-.toggleset{display:inline-flex;border:1px solid var(--hair-strong);border-radius:4px;overflow:hidden}
+.toggleset{display:inline-flex;border:1px solid var(--control);border-radius:4px;overflow:hidden}
 .toggleset button{
   background:var(--card);border:0;padding:8px 14px;cursor:pointer;
   font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--ink-soft);
 }
-.toggleset button + button{border-left:1px solid var(--hair)}
+.toggleset button + button{border-left:1px solid var(--control)}
 .toggleset button[aria-pressed="true"]{background:var(--ink);color:#fff}
 
 /* ---------- notices ---------- */
@@ -246,7 +254,7 @@ h1{font-family:"Open Sans",Georgia,serif;font-weight:800;letter-spacing:-0.6px;f
 .votecell label{border-radius:999px}
 .wherecell label{border-radius:3px}
 .votecell input:checked + label{background:var(--ink);border-color:var(--ink)}
-.votecell input[value="cut"]:checked + label{background:var(--terra);border-color:var(--terra)}
+.votecell input[value="cut"]:checked + label{background:var(--terra-dark);border-color:var(--terra-dark)}
 .votecell input[value="cond"]:checked + label,
 .wherecell input:checked + label{background:var(--gold-dark);border-color:var(--gold-dark)}
 .votecell input:focus-visible + label,.wherecell input:focus-visible + label{outline:2px solid var(--terra-dark);outline-offset:2px}
@@ -359,9 +367,160 @@ h1{font-family:"Open Sans",Georgia,serif;font-weight:800;letter-spacing:-0.6px;f
 
 footer{border-top:1px solid var(--hair);margin-top:54px;padding-block:22px 60px;font-size:13.5px;color:var(--ink-mute)}
 
+/* ================================================================
+   White cards lifted off the off-white page. Shadow only, no bars.
+   ================================================================ */
+.intro,.identity,.dashwrap,.panel,.groupcard,.keyside,.tablewrap,.resultwrap{
+  background:var(--card);border-color:var(--hair);box-shadow:var(--lift);
+}
+.groupcard{transition:transform 200ms ease, box-shadow 200ms ease}
+.groupcard:hover{transform:translateY(-2px);box-shadow:var(--lift-hover)}
+.toolbar{background:var(--ground)}
+/* Four views need more room than a filter dropdown, and they must never
+   clip: a view nobody can see is a view nobody uses. */
+.tool.viewtool{flex:0 0 auto;max-width:100%}
+.toolrow .toggleset{flex-wrap:wrap}
+.toolrow .toggleset button{padding:8px 12px}
+
+/* ================================================================
+   The key, as a panel beside the work rather than a slab on top of it.
+
+   Wide screens: it opens as a column to the right and the list narrows
+   to make room, so it never covers a row somebody is reading. It sticks
+   to the top of the window as they scroll.
+
+   Narrow screens: there is no room to put anything beside anything, so
+   the same button opens it directly above the list instead. Nothing
+   here uses fixed positioning, because inside an auto-height iframe on
+   Kajabi or Canvas the frame never scrolls, and a docked panel would
+   pin itself to the top of a very tall page and never be seen again.
+   ================================================================ */
+.worksplit{display:grid;grid-template-columns:minmax(0,1fr);gap:22px;align-items:start}
+.worksplit.withkey{grid-template-columns:minmax(0,1fr) 330px}
+.worklist{min-width:0}
+.keyside{
+  display:none;background:var(--card);border:1px solid var(--hair);border-radius:var(--r);
+  box-shadow:var(--lift);position:sticky;top:calc(var(--toolh) + 12px);
+  max-height:calc(100vh - var(--toolh) - 28px);overflow:auto;
+}
+.worksplit.withkey .keyside{display:block}
+.keyside-head{
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  padding:12px 16px;border-bottom:1px solid var(--hair);
+  position:sticky;top:0;background:var(--card);z-index:2;
+}
+.keyside-head h2{font-size:10px;font-weight:700;letter-spacing:2.09px;text-transform:uppercase;color:var(--terra-dark)}
+.keybody{padding:4px 16px 18px}
+.keyside .keyrows{grid-template-columns:1fr;gap:9px}
+.keyside .keyrows li{font-size:13px}
+.keyside .keyq{font-size:13.5px}
+.keyside .keywhy{font-size:12.5px}
+.keygroup{margin-top:16px}
+.keygroup:first-child{margin-top:8px}
+.keyq{font-size:14.5px;font-weight:700;color:var(--ink);margin-bottom:2px}
+.keywhy{font-size:13px;color:var(--ink-mute);margin-bottom:10px}
+.keyrows{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:8px 22px}
+.keyrows li{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.45}
+.keymark{
+  flex:none;min-width:38px;text-align:center;font-size:10px;font-weight:700;letter-spacing:.6px;
+  text-transform:uppercase;color:var(--ink);border:1px solid var(--hair-strong);border-radius:3px;padding:2px 6px;
+  white-space:nowrap;
+}
+.keymark.round{border-radius:999px}
+.keymark.filled{background:var(--navy);border-color:var(--navy);color:#fff}
+.keymark.gold{background:var(--gold);border-color:var(--gold-dark);color:var(--navy-deep)}
+.keymark.terra{background:var(--terra-dark);border-color:var(--terra-dark);color:#fff}
+.keymark.dashed{border-style:dashed;background:var(--wash)}
+.keyname{font-weight:700;color:var(--ink)}
+.keyrows .chip{flex:none;margin-top:2px}
+
+/* The question that sits above each block of columns in the grid head */
+.gridq{
+  display:grid;
+  grid-template-columns:minmax(170px,1fr) calc(4 * 40px) calc(var(--wcols) * 40px) 132px 74px 62px;
+  gap:8px;padding:9px 16px 3px;border-top:1px solid var(--hair);background:var(--wash);
+}
+.gridq span{font-size:11px;font-weight:700;color:var(--ink);line-height:1.25}
+.gridq .qmuted{font-weight:600;color:var(--ink-mute)}
+
+/* Hover and focus explanation on an abbreviated header */
+.hcol{position:relative}
+.hasmore{cursor:help;border-bottom:1px dotted var(--control);text-decoration:none}
+.tip{
+  position:absolute;left:50%;bottom:calc(100% + 6px);transform:translateX(-50%);
+  background:var(--navy-deep);color:#fff;padding:7px 10px;border-radius:4px;
+  font-size:12px;font-weight:500;letter-spacing:0;text-transform:none;line-height:1.35;
+  width:max-content;max-width:210px;text-align:left;z-index:40;pointer-events:none;opacity:0;visibility:hidden;
+}
+.hcol:hover .tip,.hcol:focus-within .tip,.tipholder:hover .tip,.tipholder:focus-within .tip{opacity:1;visibility:visible}
+.tipholder{position:relative;display:inline-block}
+
+/* ================================================================
+   Results view
+   ================================================================ */
+.resultwrap{border:1px solid var(--hair);border-radius:var(--r);margin-top:14px;padding:18px 16px}
+.resultwrap h3{font-size:15px;font-weight:700;margin-bottom:4px}
+.resultlead{font-size:13.5px;color:var(--ink-mute);margin-bottom:14px;max-width:80ch}
+.rulebox{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;margin-bottom:16px}
+.rulebox .tool{flex:0 1 210px}
+.outcome{
+  display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;
+  border:1px solid var(--hair-strong);border-radius:3px;padding:2px 7px;white-space:nowrap;
+}
+.outcome-keep{border-color:var(--navy);color:var(--navy);background:var(--navy-tint)}
+.outcome-remove{border-color:var(--terra-dark);color:var(--terra-dark)}
+.outcome-discuss{border-color:var(--gold-dark);color:var(--gold-dark)}
+.outcome-condition{border-color:var(--gold-dark);color:var(--gold-dark)}
+.bar{display:block;height:8px;border-radius:999px;background:var(--wash);overflow:hidden;min-width:88px}
+.bar i{display:block;height:100%;background:var(--navy)}
+.bar i.warn{background:var(--gold)}
+.bar i.cut{background:var(--terra-dark)}
+.numcell{font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* ================================================================
+   My course list
+   ================================================================ */
+.mineswitch{position:relative;display:inline-flex;border:1px solid var(--control);border-radius:999px;overflow:hidden;flex:none}
+.mineswitch input{position:absolute;opacity:0;width:1px;height:1px}
+.mineswitch label{
+  padding:4px 11px;font-size:11px;font-weight:700;cursor:pointer;color:var(--ink-mute);background:var(--card);
+}
+.mineswitch label + label{border-left:1px solid var(--control)}
+.mineswitch input:checked + label{background:var(--navy);color:#fff}
+.mineswitch input[value="out"]:checked + label{background:var(--terra-dark);color:#fff}
+.mineswitch input:focus-visible + label{outline:2px solid var(--terra-dark);outline-offset:2px}
+.gridrow.notmine .cell.name{color:var(--ink-mute);text-decoration:line-through}
+
+/* ================================================================
+   Printable list
+   ================================================================ */
+#printArea{margin-top:18px}
+#printArea h1{font-size:24px;font-weight:800;text-transform:none;letter-spacing:-0.3px;color:var(--ink);margin-bottom:6px}
+#printArea h2{font-size:18px;font-weight:800;text-transform:none;letter-spacing:0;color:var(--ink);
+  margin-top:22px;padding-bottom:6px;border-bottom:1px solid var(--hair)}
+#printArea h3{font-size:13px;margin-top:16px;color:var(--terra-dark);text-transform:uppercase;letter-spacing:2px}
+#printArea ul{margin:8px 0 0;padding-left:22px}
+#printArea li{font-size:14px;line-height:1.55}
+#printArea li.sub{margin-left:18px;list-style-type:circle}
+.printhead p{font-size:13.5px;color:var(--ink-mute);margin-top:4px}
+
+@media print{
+  body{background:#fff}
+  header,.toolbar,footer,.status,.worksplit,.panel:not(#printPanel),.notice{display:none!important}
+  #printPanel{display:block!important;border:0;box-shadow:none;padding:0;margin:0}
+  #printPanel .formfoot,#printPanel .dhint,#printPanel .rulebox{display:none!important}
+  #printArea li{break-inside:avoid}
+  #printArea h2,#printArea h3{break-after:avoid}
+}
+
 /* ---------- narrow screens and iframes ---------- */
 @media (max-width:1040px){
-  .gridhead{display:none}
+  .gridhead,.gridq{display:none}
+  /* No room for a side column. The key opens above the list instead. */
+  .worksplit.withkey{grid-template-columns:minmax(0,1fr)}
+  .worksplit.withkey .keyside{position:static;max-height:none;order:-1}
+  .worksplit.withkey .worklist{order:1}
+  .keyside .keyrows{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
   .gridrow{
     grid-template-columns:1fr;gap:10px;padding:14px 16px;
   }
@@ -400,7 +559,8 @@ footer{border-top:1px solid var(--hair);margin-top:54px;padding-block:22px 60px;
           <p>So marking something Recommend Remove is about what all of us must cover. It is not a vote to stop anyone covering it.</p>
         </section>
         <p class="keeprule">The dashed Keep circle on a row means that is where the row currently stands. Mark Cut if it should come off, Cond. if it stays only under certain circumstances, Unsure if you want to think about it, and Keep only when you want to push back on somebody else who flagged it.</p>
-        <p class="keeprule">At the end of every section there is a box to record that you have been through that block. It is how you keep track of what you have already covered, and how everyone else sees who has read what.</p>
+        <p class="keeprule">At the end of every section there is one box to record that you have been through that block. That box is the only place reading is recorded. Tick it and every structure in the block counts as read by you, which is what the Read column on each row is counting.</p>
+        <p class="keeprule">There are two places to write on a structure, and the heading on each one tells you which. If the faculty has decided something about the structure, that goes in the decision box, one line per structure, for example model only, we have no clear cadaver view. That line prints next to the structure on the handout. If you want to say what you think, that goes in the comment box underneath, kept under your name, never overwritten, and it stays on this page. Everyone sees both.</p>
       </div>
     </details>
 
@@ -415,7 +575,7 @@ footer{border-top:1px solid var(--hair);margin-top:54px;padding-block:22px 60px;
         <button class="btn ghost" id="switchBtn" type="button" hidden>Not you?</button>
         <button class="btn terra" id="addBtn" type="button" aria-expanded="false" aria-controls="addPanel" hidden>Propose a structure</button>
         <button class="btn ghost" id="refreshBtn" type="button">Check for new work</button>
-        <button class="btn ghost" id="exportBtn" type="button">Export</button>
+        <button class="btn ghost" id="exportBtn" type="button" aria-expanded="false" aria-controls="printPanel">Build the final list</button>
       </div>
     </div>
 
@@ -456,14 +616,54 @@ footer{border-top:1px solid var(--hair);margin-top:54px;padding-block:22px 60px;
       </form>
     </section>
 
-    <section class="panel" id="exportPanel" hidden aria-labelledby="exportTitle">
-      <h2 id="exportTitle">Export the current list</h2>
-      <p class="dhint">Everything matching your filters, as CSV. Select it all and paste it wherever you need it.</p>
-      <label class="sr-only" for="exportText">Exported CSV</label>
-      <textarea id="exportText" readonly></textarea>
+    <section class="panel" id="printPanel" hidden aria-labelledby="exportTitle">
+      <h2 id="exportTitle">Build the final list</h2>
+      <p class="dhint">Turn the marking into something you can hand out. Choose whose list you want and what the list should contain, then take it as a web page, a printable document or a spreadsheet.</p>
+
+      <div class="rulebox">
+        <div class="tool">
+          <label for="pubWhose">Whose list</label>
+          <select id="pubWhose">
+            <option value="dept">The department list</option>
+            <option value="mine">My course list</option>
+          </select>
+        </div>
+        <div class="tool">
+          <label for="pubWhat">What to include</label>
+          <select id="pubWhat">
+            <option value="agreed">Structures the group agreed to keep</option>
+            <option value="keepplus">Agreed to keep, plus the ones still being discussed</option>
+            <option value="all">Everything currently on the list</option>
+          </select>
+        </div>
+        <div class="tool">
+          <label for="pubTitle">Title on the handout</label>
+          <input id="pubTitle" type="text" maxlength="90" value="BIOL 004 Human Anatomy, Structure List">
+        </div>
+        <div class="tool">
+          <label for="pubShowWhere">Show where it is tested</label>
+          <select id="pubShowWhere">
+            <option value="yes">Yes, after each structure</option>
+            <option value="no">No, names only</option>
+          </select>
+        </div>
+      </div>
+
       <div class="formfoot">
+        <button class="btn" type="button" id="pubBuild">Build it</button>
+        <button class="btn ghost" type="button" id="pubPrint">Print or save as PDF</button>
+        <button class="btn ghost" type="button" id="pubHtml">Download the web page</button>
+        <button class="btn ghost" type="button" id="pubCsv">Download the spreadsheet</button>
+        <button class="btn ghost" type="button" id="pubCopy">Show the code to copy</button>
         <button class="btn ghost" type="button" id="exportClose">Done</button>
       </div>
+
+      <div id="pubCopyWrap" hidden>
+        <label class="sr-only" for="exportText">Generated file, ready to copy</label>
+        <textarea id="exportText" readonly></textarea>
+      </div>
+
+      <div id="printArea" aria-live="polite"></div>
     </section>
 
     <details class="dashwrap" id="dashWrap">
@@ -505,10 +705,16 @@ footer{border-top:1px solid var(--hair);margin-top:54px;padding-block:22px 60px;
         <button class="btn ghost" type="button" id="clearBtn">Clear all</button>
       </div>
       <div class="tool">
+        <label for="keyBtn">Key</label>
+        <button class="btn ghost" type="button" id="keyBtn" aria-expanded="false" aria-controls="keySide">Show the key</button>
+      </div>
+      <div class="tool viewtool">
         <span class="tool-label" id="viewLabel" style="font-size:9.5px;font-weight:700;letter-spacing:2.09px;text-transform:uppercase;color:var(--ink-mute)">View</span>
         <div class="toggleset" role="group" aria-labelledby="viewLabel">
-          <button type="button" id="viewSections" aria-pressed="true">Sections</button>
-          <button type="button" id="viewTable" aria-pressed="false">Table</button>
+          <button type="button" id="viewSections" aria-pressed="true" title="Work through the list section by section and mark structures">Sections</button>
+          <button type="button" id="viewTable" aria-pressed="false" title="One flat table, one row per structure">Table</button>
+          <button type="button" id="viewResults" aria-pressed="false" title="What the group has decided so far, with agreement percentages">Results</button>
+          <button type="button" id="viewMine" aria-pressed="false" title="Switch structures on or off for your own course only">My list</button>
         </div>
       </div>
     </div>
@@ -523,7 +729,17 @@ footer{border-top:1px solid var(--hair);margin-top:54px;padding-block:22px 60px;
       Nothing to click to keep a structure. Only mark the rows you want changed.
       <button type="button" class="keepbar-more" id="howBtn">How marking works</button>
     </p>
-    <div id="list"></div>
+
+    <div class="worksplit" id="workSplit">
+      <div class="worklist"><div id="list"></div></div>
+      <aside class="keyside" id="keySide" tabindex="0" aria-labelledby="keySideTitle">
+        <div class="keyside-head">
+          <h2 id="keySideTitle">Key</h2>
+          <button class="linkbtn" type="button" id="keyClose">Hide</button>
+        </div>
+        <div class="keybody" id="keyBody"></div>
+      </aside>
+    </div>
   </div>
 </main>
 
@@ -612,6 +828,37 @@ var WHERE_MAP = {};
 WHERE.forEach(function(w){ WHERE_MAP[w.k] = w; });
 
 var PALETTE = ["#B3261E","#1B5E20","#0B4F6C","#6A1B9A","#8D4E00","#00695C","#AD1457","#37474F","#4527A0","#5D4037"];
+
+/* ------------------------------------------------------------------ *
+ * The key. Every column on the page is described here once, and both
+ * the key panel and the hover text on the headers are built from it,
+ * so the two can never drift apart.
+ * ------------------------------------------------------------------ */
+var COLUMN_QUESTIONS = {
+  name:    {q:"Which structure?",            why:"The structure as it is worded on the worksheet. An indented name is a part of the structure above it."},
+  votes:   {q:"Should it stay on the list?", why:"Your answer only. Leave a row alone and it stays. The number inside a mark is how many people have chosen it."},
+  wheres:  {q:"Where would a student encounter it?", why:"Tick every place you test it. Everyone's ticks are kept separately, so yours never replace anyone else's."},
+  stat:    {q:"What is happening with it?",  why:"Whether this structure is settled, still being discussed, or somebody has proposed a change to it. Anyone can change this."},
+  rev:     {q:"Who has read this block?",    why:"How many of us have been through the section this structure sits in. You set it once at the end of the section."},
+  act:     {q:"More",                        why:"Opens everything about this one structure: locations, your reason, the shared note and the comments."}
+};
+
+var VOTE_HELP = {
+  keep:      "It belongs on the shared minimum list. You only need this if you are pushing back on somebody who flagged the row.",
+  cond:      "It stays, but only under a condition you should write in the reason box, for example only on the model, or only named not identified.",
+  undecided: "You want to come back to it. It counts as unresolved rather than as agreement.",
+  cut:       "It should come off the shared minimum list. You can still teach and test it in your own section."
+};
+
+var STATUS_HELP = "Active means it is on the minimum list as things stand. Under Review means we are still talking about it. Recommend Add, Revise and Remove are proposals waiting on the group. Archived means it is off the working list but kept on the record.";
+
+/* Outcomes the results view can reach. */
+var OUTCOMES = {
+  keep:      {label:"Keep",        cls:"outcome-keep"},
+  condition: {label:"Keep with a condition", cls:"outcome-condition"},
+  discuss:   {label:"Needs a decision", cls:"outcome-discuss"},
+  remove:    {label:"Remove",      cls:"outcome-remove"}
+};
 
 /* ------------------------------------------------------------------ *
  * The seed list: every structure from the Fall 2024 Anatomy Worksheets,
@@ -707,7 +954,8 @@ var SEED = [
  {m:3,f:"3.4",ft:"Anatomy of the Posterior Antebrachium (forearm)",b:"Peripheral nerves",t:["Cadaver", "Model"],items:["Radial nerve"]},
  {m:3,f:"3.5",ft:"Anatomy of the Thorax - The Anatomy of Heart",b:"Gross anatomy of the heart",t:["Cadaver", "Model"],items:["Thoracic cavity", "Mediastinum", "Pericardial cavity", "Fibrous pericardium", "Serous pericardium (parietal and visceral layers)", "Epicardium", "Myocardium", "Endocardium", "Right atrium", "Left atrium", "Right auricle", "Left auricle", "Interatrial septum", "Pectinate muscles", "Right ventricle", "Left ventricle", "Interventricular septum", "Right atrioventricular valve (tricuspid valve)", "Pulmonary semilunar valve", "Left atrioventricular valve (bicuspid/mitral valve)", "Aortic semilunar valve", "Chordae tendineae", "Papillary muscles", "Trabeculae carneae"]},
  {m:3,f:"3.5",ft:"Anatomy of the Thorax - The Anatomy of Heart",b:"Blood supply to the myocardium",t:["Cadaver", "Model"],items:["Right coronary artery", "Left coronary artery", "Anterior interventricular artery (LAD)", "Circumflex branch of the left coronary artery"]},
- {m:3,f:"3.5",ft:"Anatomy of the Thorax - The Anatomy of Heart",b:"Major systemic veins",t:["Cadaver", "Model"],items:["Inferior vena cava", "Superior vena cava", "Right brachiocephalic vein", "Left brachiocephalic vein", "Right subclavian vein", "Left subclavian vein", "Right internal jugular vein", "Left internal jugular vein", "Coronary sinus", "Pulmonary trunk", "Right pulmonary artery", "Left pulmonary artery", "Right pulmonary vein", "Left pulmonary vein"]},
+ {m:3,f:"3.5",ft:"Anatomy of the Thorax - The Anatomy of Heart",b:"Major systemic veins",t:["Cadaver", "Model"],items:["Inferior vena cava", "Superior vena cava", "Right brachiocephalic vein", "Left brachiocephalic vein", "Right subclavian vein", "Left subclavian vein", "Right internal jugular vein", "Left internal jugular vein", "Coronary sinus"]},
+ {m:3,f:"3.5",ft:"Anatomy of the Thorax - The Anatomy of Heart",b:"Pulmonary circulation",t:["Cadaver", "Model"],items:["Pulmonary trunk", "Right pulmonary artery", "Left pulmonary artery", "Right pulmonary vein", "Left pulmonary vein"]},
  {m:3,f:"3.5",ft:"Anatomy of the Thorax - The Anatomy of Heart",b:"Major systemic arteries",t:["Cadaver", "Model"],items:["Ascending aorta", "Aortic arch", "Brachiocephalic trunk", "Left common carotid artery", "Left subclavian artery", "Ligamentum arteriosum"]},
  {m:4,f:"4.1A",ft:"Anterior, Medial, and Lateral Thigh",b:"Iliopsoas",t:["Cadaver", "Model"],items:["Iliacus", "Psoas major"]},
  {m:4,f:"4.1A",ft:"Anterior, Medial, and Lateral Thigh",b:"Quadriceps femoris",t:["Cadaver", "Model"],items:["Rectus femoris", "Vastus lateralis", "Vastus intermedius", "Vastus medialis"]},
@@ -1018,6 +1266,13 @@ async function saveFacultyReview(id, review){
   await DataService.push({t:"review", sid:id, r:!!review.reviewed, uid:me.id, who:me.name});
   rebuild();
 }
+/* One person's own course list. "in" and "out" are both recorded, so a
+ * professor can drop something the department kept and keep something
+ * the department dropped, without touching anybody else's list. */
+async function setMine(id, state){
+  await DataService.push({t:"mine", sid:id, m:state, uid:me.id, who:me.name});
+  rebuild();
+}
 async function addFacultyComment(id, comment){
   await DataService.push({t:"comment", sid:id, cid:uid(), text:comment.text, uid:me.id, who:me.name});
   rebuild();
@@ -1047,7 +1302,8 @@ async function loadChangeHistory(id){
  * State, built by replaying the operation log over the seed list
  * ================================================================== */
 var records = [], byId = {}, people = {}, sections = {}, me = null, loaded = false;
-var ui = {q:"", unit:"", worksheet:"", where:"", status:"", review:"", view:"sections"};
+var ui = {q:"", unit:"", worksheet:"", where:"", status:"", review:"", view:"sections",
+          threshold:70, outcome:""};
 var openRows = {}, openCards = {}, openHistory = {}, openPropose = {};
 
 function blankRecord(src){
@@ -1073,6 +1329,7 @@ function blankRecord(src){
     where: {},            /* facultyId -> [resource keys] */
     votes: {},            /* facultyId -> {v, r, at} */
     facultyReviews: [],   /* [{facultyId, facultyName, reviewed, reviewedAt}] */
+    mine: {},             /* facultyId -> "in" | "out", personal course lists */
     comments: [],
     changeHistory: []
   };
@@ -1192,6 +1449,9 @@ function rebuild(){
       found.facultyName = o.who || found.facultyName;
       found.reviewedAt = o.at;
       note(r, o, "review", before ? "reviewed" : "not reviewed", found.reviewed ? "reviewed" : "not reviewed");
+    } else if(o.t === "mine"){
+      if(o.m === "in" || o.m === "out") r.mine[o.uid] = o.m;
+      else delete r.mine[o.uid];
     } else if(o.t === "comment"){
       var exists = false;
       for(var j=0;j<r.comments.length;j++){ if(r.comments[j].id === o.cid){ r.comments[j].text = o.text; exists = true; } }
@@ -1232,8 +1492,11 @@ function signIn(rawName){
   me = {id:key, name:name, color:color, initials:initials(name)};
   try{ window.localStorage.setItem(ME_KEY, JSON.stringify(me)); }catch(e){}
   if(!existing || existing.facultyName !== name){
+    /* rebuild, not just render: the roster everything counts against is
+     * derived from the operation log, so a new person has to be replayed
+     * into it before any "2 of 3" on the page can be right. */
     DataService.push({t:"user", uid:key, id:key, name:name, who:name, color:color, ini:me.initials})
-      .then(render)["catch"](showTrouble);
+      .then(function(){ rebuild(); render(); })["catch"](showTrouble);
   }
   return true;
 }
@@ -1270,16 +1533,45 @@ function whereCounts(r){
 function myWhere(r){
   return (me && r.where[me.id]) ? r.where[me.id].slice(0) : [];
 }
+/* Who has read this structure.
+ *
+ * There used to be two separate records here, a tick on the structure and
+ * a tick at the end of the section, and only the first one fed the count
+ * on the row. That is why two people could both tick the box at the
+ * bottom of a section and still see "1 of 2" on every row. There is one
+ * concept now: reading the section you are in counts as reading every
+ * structure in it. The old per-structure ticks still count, so nothing
+ * anybody already recorded is lost. */
+function readersOf(r){
+  var out = {};
+  r.facultyReviews.forEach(function(x){ if(x.reviewed) out[x.facultyId] = 1; });
+  sectionState(sectionKey(r)).reviews.forEach(function(x){ if(x.reviewed) out[x.facultyId] = 1; });
+  return out;
+}
+function readerNames(r){
+  var ids = Object.keys(readersOf(r));
+  return ids.map(function(id){ return (people[id] && people[id].facultyName) || id; });
+}
 function reviewedByMe(r){
-  if(!me) return false;
-  for(var i=0;i<r.facultyReviews.length;i++){
-    if(r.facultyReviews[i].facultyId === me.id) return r.facultyReviews[i].reviewed;
-  }
-  return false;
+  return !!(me && readersOf(r)[me.id]);
 }
 function reviewCount(r){
+  return Object.keys(readersOf(r)).length;
+}
+/* Personal course lists. Unmarked means you follow the department. */
+function mineState(r){
+  if(!me) return "";
+  return r.mine[me.id] || "";
+}
+function onMyList(r){
+  var s = mineState(r);
+  if(s === "in")  return true;
+  if(s === "out") return false;
+  return r.status !== "archived" && r.status !== "remove";
+}
+function myListCount(){
   var n = 0;
-  r.facultyReviews.forEach(function(x){ if(x.reviewed) n++; });
+  records.forEach(function(r){ if(onMyList(r)) n++; });
   return n;
 }
 function facultyCount(){
@@ -1306,6 +1598,91 @@ function myMarksInSection(rows){
     else if(r.where[me.id] && r.where[me.id].length) n++;
   });
   return n;
+}
+
+/* ------------------------------------------------------------------ *
+ * Consensus
+ *
+ * The rule is written out here rather than buried, and the threshold is
+ * a control on the results screen, so the group can see exactly what
+ * produced a recommendation and argue with the rule rather than with
+ * the number.
+ * ------------------------------------------------------------------ */
+function consensus(r, thr){
+  var t = tallyFor(r);
+  var voters = t.total;
+  var out = {
+    t:t, voters:voters,
+    pct:{keep:0, cond:0, undecided:0, cut:0},
+    outcome:"keep", reason:"", agreement:100, contested:false
+  };
+
+  if(!voters){
+    out.reason = "Nobody marked this one, so it stays by default.";
+    return out;
+  }
+
+  ["keep","cond","undecided","cut"].forEach(function(k){
+    out.pct[k] = Math.round(t[k] / voters * 100);
+  });
+  var stay = t.keep + t.cond;
+  var top = Math.max(t.keep, t.cond, t.undecided, t.cut);
+  out.agreement = Math.round(top / voters * 100);
+
+  if(t.cut / voters * 100 >= thr){
+    out.outcome = "remove";
+    out.reason = out.pct.cut + " percent of the " + voters + " who marked it want it off the shared list.";
+  }else if(t.keep / voters * 100 >= thr){
+    out.outcome = "keep";
+    out.reason = out.pct.keep + " percent of the " + voters + " who marked it want it kept as it stands.";
+  }else if(stay / voters * 100 >= thr && t.cond > 0){
+    out.outcome = "condition";
+    out.reason = "Keep and keep-with-conditions together reach " + Math.round(stay / voters * 100) +
+                 " percent, and " + t.cond + (t.cond === 1 ? " person asked" : " people asked") + " for a condition.";
+  }else{
+    out.outcome = "discuss";
+    out.reason = "No single answer reaches " + thr + " percent, so this one needs talking through.";
+    out.contested = true;
+  }
+
+  if(t.undecided && (t.undecided / voters * 100) > 33 && out.outcome !== "remove"){
+    out.outcome = "discuss";
+    out.reason = out.pct.undecided + " percent are still undecided, so this one needs talking through.";
+    out.contested = true;
+  }
+  return out;
+}
+
+/* Where each structure would land if the group stopped marking today. */
+function outcomeTotals(thr){
+  var o = {keep:0, condition:0, discuss:0, remove:0, unmarked:0, marked:0};
+  records.forEach(function(r){
+    var c = consensus(r, thr);
+    o[c.outcome]++;
+    if(c.voters) o.marked++; else o.unmarked++;
+  });
+  return o;
+}
+
+/* How much of the list each person has actually been through. */
+function participation(){
+  var secKeys = {};
+  records.forEach(function(r){ secKeys[sectionKey(r)] = 1; });
+  var totalSections = Object.keys(secKeys).length;
+  return Object.keys(people).map(function(k){
+    var p = people[k];
+    var read = 0, marks = 0, comments = 0;
+    Object.keys(secKeys).forEach(function(sk){
+      sectionState(sk).reviews.forEach(function(x){ if(x.facultyId === k && x.reviewed) read++; });
+    });
+    records.forEach(function(r){
+      if(r.votes[k]) marks++;
+      if((r.where[k] || []).length) marks++;
+      r.comments.forEach(function(c){ if(c.facultyId === k) comments++; });
+    });
+    return {id:k, name:p.facultyName, color:p.color, initials:p.initials,
+            read:read, ofSections:totalSections, marks:marks, comments:comments};
+  });
 }
 
 /* ------------------------------------------------------------------ *
@@ -1383,6 +1760,103 @@ function renderDashboard(){
 }
 
 /* ------------------------------------------------------------------ *
+ * Rendering: the key
+ *
+ * Built from the same vocabulary the columns are built from, so the
+ * explanation and the thing it explains cannot drift apart.
+ * ------------------------------------------------------------------ */
+function keyRow(markHtml, name, text){
+  return '<li>' + markHtml + '<span><span class="keyname">' + esc(name) + '.</span> ' + esc(text) + '</span></li>';
+}
+function renderKey(){
+  var h = [];
+
+  h.push('<div class="keygroup">' +
+    '<p class="keyq">' + esc(COLUMN_QUESTIONS.votes.q) + '</p>' +
+    '<p class="keywhy">' + esc(COLUMN_QUESTIONS.votes.why) + '</p>' +
+    '<ul class="keyrows">' +
+    VOTES.map(function(v){
+      var cls = v.k === "keep" ? "round dashed" : (v.k === "cut" ? "round terra" : (v.k === "cond" ? "round gold" : "round filled"));
+      return keyRow('<span class="keymark ' + cls + '" aria-hidden="true">' + esc(v.short) + '</span>', v.label, VOTE_HELP[v.k]);
+    }).join("") +
+    '</ul></div>');
+
+  h.push('<div class="keygroup">' +
+    '<p class="keyq">' + esc(COLUMN_QUESTIONS.wheres.q) + '</p>' +
+    '<p class="keywhy">' + esc(COLUMN_QUESTIONS.wheres.why) + '</p>' +
+    '<ul class="keyrows">' +
+    WHERE.map(function(w){
+      return keyRow('<span class="keymark" aria-hidden="true">' + esc(w.label) + '</span>', w.label, w.full);
+    }).join("") +
+    '</ul></div>');
+
+  h.push('<div class="keygroup">' +
+    '<p class="keyq">' + esc(COLUMN_QUESTIONS.stat.q) + '</p>' +
+    '<p class="keywhy">' + esc(STATUS_HELP) + '</p>' +
+    '<ul class="keyrows">' +
+    STATUSES.map(function(s){
+      return keyRow('<span class="chip chip-' + s.k + '" aria-hidden="true">' + esc(s.label) + '</span>', s.label, s.hint);
+    }).join("") +
+    '</ul></div>');
+
+  h.push('<div class="keygroup">' +
+    '<p class="keyq">' + esc(COLUMN_QUESTIONS.rev.q) + '</p>' +
+    '<p class="keywhy">There is one place to record this, the box at the end of each section. Ticking it says you went through that whole block, and every structure in the block then counts as read by you. You do not tick anything on the individual rows.</p>' +
+    '<ul class="keyrows">' +
+    keyRow('<span class="keymark" aria-hidden="true">0/3</span>', "Nobody yet", "No one has been through the section this structure sits in.") +
+    keyRow('<span class="keymark gold" aria-hidden="true">2/3</span>', "Some of us", "Two of the three people signed in have been through it.") +
+    keyRow('<span class="keymark filled" aria-hidden="true">3/3</span>', "All of us", "Everyone signed in has been through it.") +
+    '</ul></div>');
+
+  h.push('<div class="keygroup">' +
+    '<p class="keyq">There are two boxes to write in. Which one?</p>' +
+    '<p class="keywhy">Everyone sees both. Has the faculty decided something, or are you saying what you think?</p>' +
+    '<ul class="keyrows">' +
+    keyRow('<span class="keymark" aria-hidden="true">Note</span>', "If the faculty has decided something, write it there",
+      "One line per structure, for example model only, we have no clear cadaver view. Anyone can change it, and it is the line that prints next to the structure on the handout.") +
+    keyRow('<span class="keymark" aria-hidden="true">Say</span>', "If you want to say something, write it there",
+      "Your own view, for the discussion, for example I have never had time to get to this in lab. Kept under your name, never overwritten, and it stays on the page rather than going onto the handout.") +
+    '</ul></div>');
+
+  document.getElementById("keyBody").innerHTML = h.join("");
+}
+
+/* Open or closed is a per-person preference, so it is remembered in this
+ * browser and nowhere else. Storage can be unavailable or empty, so every
+ * read and write is wrapped and the page renders correctly either way. */
+/* The toolbar wraps onto two or three rows depending on how wide the
+ * window is, so its height is not something that can be written into the
+ * stylesheet. Measure it and let the key panel park just underneath. */
+function measureToolbar(){
+  var bar = document.querySelector(".toolbar");
+  if(!bar) return;
+  var h = Math.round(bar.getBoundingClientRect().height);
+  document.documentElement.style.setProperty("--toolh", h + "px");
+}
+
+var KEY_OPEN_KEY = "mal-key-open";
+function keyOpenDefault(){
+  try{
+    var saved = window.localStorage.getItem(KEY_OPEN_KEY);
+    if(saved === "1") return true;
+    if(saved === "0") return false;
+  }catch(e){}
+  return window.innerWidth >= 1040;   /* room to show it without crowding the list */
+}
+function setKeyOpen(open, moveFocus){
+  var split = document.getElementById("workSplit");
+  var btn = document.getElementById("keyBtn");
+  split.classList.toggle("withkey", !!open);
+  btn.setAttribute("aria-expanded", open ? "true" : "false");
+  btn.textContent = open ? "Hide the key" : "Show the key";
+  try{ window.localStorage.setItem(KEY_OPEN_KEY, open ? "1" : "0"); }catch(e){}
+  if(moveFocus){
+    if(open){ document.getElementById("keyClose").focus(); }
+    else{ btn.focus(); }
+  }
+}
+
+/* ------------------------------------------------------------------ *
  * Rendering: the reviewer strip
  * ------------------------------------------------------------------ */
 function avatar(p, cls){
@@ -1427,7 +1901,22 @@ function statusChip(r){
 function reviewChip(r){
   var n = reviewCount(r), fc = facultyCount();
   var cls = n === 0 ? "chip-none" : (n >= fc ? "chip-all" : "chip-some");
-  return '<span class="chip ' + cls + '">' + n + ' of ' + fc + '</span>';
+  var names = readerNames(r);
+  var tip = n
+    ? "Been through this section: " + names.join(", ")
+    : "Nobody has been through this section yet";
+  return '<span class="chip ' + cls + '" title="' + esc(tip) + '">' + n + ' of ' + fc +
+    '<span class="sr-only">. ' + esc(tip) + '</span></span>';
+}
+/* A header cell that explains itself on hover, reads out in full to a
+ * screen reader, and does not add a tab stop. With a thousand rows on
+ * the page, fourteen extra tab stops per section would cost a keyboard
+ * user far more than the tooltip gives them, and the key panel at the
+ * top carries the same text for everybody. */
+function headCol(short, full){
+  return '<span class="hcol"><abbr class="hasmore" title="' + esc(full) + '">' + esc(short) + '</abbr>' +
+    '<span class="sr-only">' + esc(full) + '</span>' +
+    '<span class="tip" aria-hidden="true">' + esc(full) + '</span></span>';
 }
 function resourceSummary(r){
   var wc = whereCounts(r);
@@ -1458,7 +1947,7 @@ function voteCellsHtml(r){
       '<input type="radio" id="' + esc(id) + '" name="vote-' + esc(r.id) + '" value="' + v.k + '"' +
       (mine === v.k ? " checked" : "") + ' data-vote="' + esc(r.id) + '">' +
       '<label class="' + (standing ? "standing" : "") + '" for="' + esc(id) + '"' +
-        (standing ? ' title="Keep is the default. Nothing to click."' : '') + '>' +
+        ' title="' + esc(standing ? "Keep is where this row already stands. Nothing to click." : v.label + ". " + VOTE_HELP[v.k]) + '">' +
       '<span class="sr-only">' + esc(name) + '</span>' +
       (n ? '<span class="count" aria-hidden="true">' + n + '</span>' : '') + '</label></span>';
   }).join("");
@@ -1473,7 +1962,8 @@ function whereCellsHtml(r){
     return '<span class="wherecell">' +
       '<input type="checkbox" id="' + esc(id) + '" value="' + w.k + '"' +
       (mine.indexOf(w.k) > -1 ? " checked" : "") + ' data-where="' + esc(r.id) + '">' +
-      '<label for="' + esc(id) + '"><span class="sr-only">' + esc(w.full) + ", " + esc(r.structureName) + '</span>' +
+      '<label for="' + esc(id) + '" title="' + esc(w.full + (n ? ". " + n + (n === 1 ? " person has" : " people have") + " ticked this." : "")) + '">' +
+      '<span class="sr-only">' + esc(w.full) + ", " + esc(r.structureName) + '</span>' +
       (n ? '<span class="count" aria-hidden="true">' + n + '</span>' : '') + '</label></span>';
   }).join("");
 }
@@ -1547,34 +2037,61 @@ function detailHtml(r){
   }
   h.push('</div>');
 
-  /* shared note */
-  h.push('<div class="dsec"><h4>Shared note</h4>' +
-    '<p class="dhint">One agreed note on the structure itself. Use your own comment below if you are adding a view rather than recording a consensus.</p>' +
-    '<label class="sr-only" for="nt-' + esc(r.id) + '">Shared note for ' + esc(r.structureName) + '</label>' +
-    '<textarea class="ta" id="nt-' + esc(r.id) + '" rows="2" placeholder="Agreed note on this structure">' + esc(r.notes) + '</textarea>' +
-    '<button class="btn small" type="button" data-savenote="' + esc(r.id) + '">Save shared note</button>' +
-    (r.notesBy ? '<p class="dhint">Last set by ' + esc(r.notesBy) + '</p>' : '') + '</div>');
+  /* where the group has landed */
+  var cx = consensus(r, ui.threshold);
+  h.push('<div class="dsec"><h4>Where the group has landed</h4>' +
+    '<p><span class="outcome ' + OUTCOMES[cx.outcome].cls + '">' + esc(OUTCOMES[cx.outcome].label) + '</span></p>' +
+    '<p class="dhint">' + esc(cx.reason) + '</p>' +
+    (cx.voters
+      ? '<p class="dhint">' + cx.voters + (cx.voters === 1 ? " person has" : " people have") + ' marked this one. Keep ' + cx.pct.keep +
+        ' percent, with a condition ' + cx.pct.cond + ' percent, undecided ' + cx.pct.undecided + ' percent, remove ' + cx.pct.cut + ' percent.</p>'
+      : '') +
+    '</div>');
 
-  /* faculty review */
-  h.push('<div class="dsec"><h4>Faculty review</h4>');
+  /* my own course list */
+  var ms = mineState(r);
+  h.push('<div class="dsec"><h4>Your own course</h4>' +
+    '<p class="dhint">This is yours alone. It does not change the department list and nobody else sees it on their handout.</p>' +
+    '<div class="dvotes">' +
+      '<label class="pill" for="mi-' + esc(r.id) + '"><input type="radio" id="mi-' + esc(r.id) + '" name="mine-' + esc(r.id) +
+        '" value="in"' + (ms === "in" ? " checked" : "") + ' data-mine="' + esc(r.id) + '"> On my list</label>' +
+      '<label class="pill" for="mo-' + esc(r.id) + '"><input type="radio" id="mo-' + esc(r.id) + '" name="mine-' + esc(r.id) +
+        '" value="out"' + (ms === "out" ? " checked" : "") + ' data-mine="' + esc(r.id) + '"> Not on my list</label>' +
+      '<label class="pill' + (ms ? "" : " standingpill") + '" for="mf-' + esc(r.id) + '"><input type="radio" id="mf-' + esc(r.id) +
+        '" name="mine-' + esc(r.id) + '" value=""' + (ms ? "" : " checked") + ' data-mine="' + esc(r.id) +
+        '"> Follow the department</label>' +
+    '</div></div>');
+
+  /* shared note */
+  h.push('<div class="dsec"><h4>If the faculty has decided something about this structure, write it here</h4>' +
+    '<p class="dhint">One line, one per structure. Anyone can change it and everyone sees it. This is the line that prints next to the structure on the handout.</p>' +
+    '<p class="dhint">For example: model only, we have no clear cadaver view. Or: students name it, they do not have to identify it on the specimen.</p>' +
+    '<label class="sr-only" for="nt-' + esc(r.id) + '">What the faculty decided about ' + esc(r.structureName) + '</label>' +
+    '<textarea class="ta" id="nt-' + esc(r.id) + '" rows="2" placeholder="Model only, we have no clear cadaver view">' + esc(r.notes) + '</textarea>' +
+    '<button class="btn small" type="button" data-savenote="' + esc(r.id) + '">Save the decision</button>' +
+    (r.notesBy ? '<p class="dhint">Last changed by ' + esc(r.notesBy) + '</p>' : '') + '</div>');
+
+  /* who has been through the block this structure sits in */
+  h.push('<div class="dsec"><h4>Who has read this block</h4>' +
+    '<p class="dhint">Set once, at the end of the section, not here. Ticking the box at the bottom of a section records that you went through every structure in it.</p>');
   var roster = Object.keys(people).map(function(k){ return people[k]; });
+  var rdrs = readersOf(r);
   if(!roster.length){
     h.push('<p class="dhint">Nobody has signed in yet.</p>');
   }else{
     h.push('<ul class="dlist">' + roster.map(function(p){
-      var done = false, at = null;
-      r.facultyReviews.forEach(function(x){ if(x.facultyId === p.facultyId && x.reviewed){ done = true; at = x.reviewedAt; } });
+      var done = !!rdrs[p.facultyId];
       return '<li>' + avatar(p) + '<span><strong>' + esc(p.facultyName) + '</strong> ' +
-        (done ? '<span class="ok">reviewed' + (at ? " " + esc(when(at)) : "") + '</span>' : '<span class="muted">not yet reviewed</span>') +
+        (done ? '<span class="ok">has been through it</span>' : '<span class="muted">not yet</span>') +
         '</span></li>';
     }).join("") + '</ul>');
   }
-  h.push('<label class="pill" for="rv-' + esc(r.id) + '">' +
-    '<input type="checkbox" id="rv-' + esc(r.id) + '"' + (reviewedByMe(r) ? " checked" : "") +
-    ' data-review="' + esc(r.id) + '"> I have reviewed this structure</label></div>');
+  h.push('</div>');
 
   /* comments */
-  h.push('<div class="dsec"><h4>Faculty comments</h4>');
+  h.push('<div class="dsec"><h4>If you want to say something about this structure, write it here</h4>' +
+    '<p class="dhint">Your own view, for the discussion. It is kept under your name, nobody can overwrite it, and it stays on this page rather than going onto the handout.</p>' +
+    '<p class="dhint">For example: I have never had time to get to this in lab. Or: our cadaver has this one damaged, so I test it on the model.</p>');
   if(!r.comments.length){
     h.push('<p class="dhint">No comments on this one yet.</p>');
   }else{
@@ -1585,7 +2102,7 @@ function detailHtml(r){
     }).join("") + '</ul>');
   }
   h.push('<label class="sr-only" for="cm-' + esc(r.id) + '">Add a comment on ' + esc(r.structureName) + '</label>' +
-    '<textarea class="ta" id="cm-' + esc(r.id) + '" rows="2" placeholder="Add your comment"></textarea>' +
+    '<textarea class="ta" id="cm-' + esc(r.id) + '" rows="2" placeholder="I have never had time to get to this in lab"></textarea>' +
     '<button class="btn small" type="button" data-comment="' + esc(r.id) + '">Post comment</button></div>');
 
   /* provenance */
@@ -1631,8 +2148,11 @@ function sectionBarHtml(key, rows, title){
     '<input type="checkbox" id="sr-' + esc(key) + '"' + (sectionClearedByMe(key) ? " checked" : "") +
     ' data-screview="' + esc(key) + '"> I have been through this section</label>' +
     (mineCount
-      ? '<span class="secbar-note">You have marked ' + mineCount + (mineCount === 1 ? ' structure' : ' structures') + ' above. Tick the box once you are finished with this block.</span>'
-      : '<span class="secbar-note">Read the block above, then tick this to record that you went through it and had no changes.</span>') +
+      ? '<span class="secbar-note">You have marked ' + mineCount + (mineCount === 1 ? ' structure' : ' structures') +
+        ' above. Tick this once you are finished with the block, and all ' + rows.length +
+        ' structures in it count as read by you.</span>'
+      : '<span class="secbar-note">Read the block above, then tick this to record that you went through it and had no changes. All ' +
+        rows.length + ' structures in the block then count as read by you, which is what the Read column on each row is counting.</span>') +
     '</div>');
 
   h.push('<div class="secbar-who">' +
@@ -1664,7 +2184,8 @@ function sectionBarHtml(key, rows, title){
         '" data-sec="' + esc(first.section || "Faculty additions") + '">Add it to this section</button>' +
     '</div></div>');
 
-  h.push('<div class="secbar-notes"><h4>Comments on this section</h4>');
+  h.push('<div class="secbar-notes"><h4>If you want to say something about this whole block, write it here</h4>' +
+    '<p class="dhint">For something that applies to the section rather than to one structure. Kept under your name, and everyone sees it.</p>');
   if(!st.comments.length){
     h.push('<p class="dhint">No comments on this block yet.</p>');
   }else{
@@ -1675,7 +2196,7 @@ function sectionBarHtml(key, rows, title){
     }).join("") + '</ul>');
   }
   h.push('<label class="sr-only" for="sc-' + esc(key) + '">Comment on ' + esc(title) + '</label>' +
-    '<textarea class="ta" id="sc-' + esc(key) + '" rows="2" placeholder="A comment about this block as a whole"></textarea>' +
+    '<textarea class="ta" id="sc-' + esc(key) + '" rows="2" placeholder="This whole block is more than we can get through in one lab"></textarea>' +
     '<button class="btn small" type="button" data-sccomment="' + esc(key) + '">Post section comment</button></div>');
 
   h.push('</div>');
@@ -1741,13 +2262,22 @@ function renderSections(list){
           '</span></button>' +
         '<div id="card-' + esc(key) + '"' + (isOpen ? "" : " hidden") + '>' +
           (isOpen
-            ? '<div class="gridhead" aria-hidden="true">' +
+            ? '<div class="gridq">' +
+                '<span>' + esc(COLUMN_QUESTIONS.name.q) + '</span>' +
+                '<span>' + esc(COLUMN_QUESTIONS.votes.q) + '</span>' +
+                '<span>' + esc(COLUMN_QUESTIONS.wheres.q) + '</span>' +
+                '<span class="qmuted">' + esc(COLUMN_QUESTIONS.stat.q) + '</span>' +
+                '<span class="qmuted">' + esc(COLUMN_QUESTIONS.rev.q) + '</span>' +
+                '<span></span>' +
+              '</div>' +
+              '<div class="gridhead">' +
                 '<div class="cell name">Structure</div>' +
                 '<div class="cell votes">' + VOTES.map(function(v){
-                    return '<span class="hcol">' + esc(v.k === "keep" ? "Keep*" : v.short) + '</span>'; }).join("") + '</div>' +
-                '<div class="cell wheres">' + whereOptionsFor(rows[0]).map(function(w2){ return '<span class="hcol">' + esc(w2.label) + '</span>'; }).join("") + '</div>' +
-                '<div class="cell stat">Status</div>' +
-                '<div class="cell rev">Reviewed</div>' +
+                    return headCol(v.k === "keep" ? "Keep*" : v.short, v.label + ". " + VOTE_HELP[v.k]); }).join("") + '</div>' +
+                '<div class="cell wheres">' + whereOptionsFor(rows[0]).map(function(w2){
+                    return headCol(w2.label, w2.full); }).join("") + '</div>' +
+                '<div class="cell stat">' + headCol("Status", STATUS_HELP) + '</div>' +
+                '<div class="cell rev">' + headCol("Read", COLUMN_QUESTIONS.rev.why) + '</div>' +
                 '<div class="cell act"></div>' +
               '</div>' + rows.map(rowHtml).join("") + sectionBarHtml(key, rows, sk)
             : '') +
@@ -1790,6 +2320,167 @@ function renderTable(list){
 }
 
 /* ------------------------------------------------------------------ *
+ * Rendering: results
+ *
+ * The numbers the group needs to make a decision, in one place, with
+ * the rule that produced each recommendation written next to it.
+ * ------------------------------------------------------------------ */
+function pctBar(c){
+  if(!c.voters) return '<span class="bar" aria-hidden="true"></span>';
+  return '<span class="bar" aria-hidden="true">' +
+    '<i style="width:' + c.pct.keep + '%"></i>' +
+    '</span>';
+}
+function renderResults(list){
+  var thr = ui.threshold;
+  var tot = outcomeTotals(thr);
+  var part = participation();
+  var h = [];
+
+  h.push('<div class="resultwrap">' +
+    '<h3>What the marking adds up to</h3>' +
+    '<p class="resultlead">Every structure gets a recommendation from one rule, written out below. Change the agreement bar and every recommendation on the page moves with it, so you can see how sensitive a decision is before you make it.</p>' +
+    '<div class="rulebox">' +
+      '<div class="tool"><label for="thr">Agreement needed to call it</label>' +
+      '<select id="thr">' + [50,60,66,70,75,80,90].map(function(n){
+        return '<option value="' + n + '"' + (n === thr ? " selected" : "") + '>' + n + ' percent</option>';
+      }).join("") + '</select></div>' +
+      '<div class="tool"><label for="fOutcome">Show</label>' +
+      '<select id="fOutcome">' +
+        '<option value="">Every recommendation</option>' +
+        '<option value="discuss"' + (ui.outcome === "discuss" ? " selected" : "") + '>Only the ones needing a decision</option>' +
+        '<option value="remove"' + (ui.outcome === "remove" ? " selected" : "") + '>Only the ones heading off the list</option>' +
+        '<option value="condition"' + (ui.outcome === "condition" ? " selected" : "") + '>Only the ones with a condition</option>' +
+        '<option value="keep"' + (ui.outcome === "keep" ? " selected" : "") + '>Only the ones being kept</option>' +
+      '</select></div>' +
+    '</div>' +
+    '<p class="resultlead">The rule: a structure is recommended for removal when at least ' + thr +
+      ' percent of the people who marked it chose Remove, kept when at least ' + thr +
+      ' percent chose Keep, and kept with a condition when Keep and Keep-with-conditions together reach ' + thr +
+      ' percent and somebody asked for a condition. Anything else, or anything where more than a third are still undecided, comes back as needing a decision. A structure nobody has marked stays, because leaving a row alone counts as keeping it.</p>' +
+    '<div class="dash-grid">' +
+      [{n:tot.keep, l:"Recommended keep"},
+       {n:tot.condition, l:"Keep with a condition"},
+       {n:tot.discuss, l:"Need a decision"},
+       {n:tot.remove, l:"Recommended remove"},
+       {n:tot.marked, l:"Structures somebody has marked"},
+       {n:tot.unmarked, l:"Nobody has marked yet"}].map(function(t){
+        return '<div class="dash-tile"><span class="dash-n">' + t.n + '</span><span class="dash-l">' + esc(t.l) + '</span></div>';
+      }).join("") +
+    '</div>' +
+  '</div>');
+
+  /* who has done what */
+  if(part.length){
+    h.push('<div class="resultwrap"><h3>Who has been through what</h3>' +
+      '<p class="resultlead">Sections read, structures marked and comments left, per person. Useful when you are deciding whether the list is ready to close.</p>' +
+      '<div class="tablewrap"><table class="maintable">' +
+      '<caption class="sr-only">Participation by faculty member</caption>' +
+      '<thead><tr><th scope="col">Faculty</th><th scope="col">Sections read</th>' +
+      '<th scope="col">Structures marked</th><th scope="col">Comments</th></tr></thead><tbody>' +
+      part.map(function(p){
+        return '<tr><th scope="row">' + avatar(p) + ' ' + esc(p.name) + '</th>' +
+          '<td class="numcell">' + p.read + ' of ' + p.ofSections + '</td>' +
+          '<td class="numcell">' + p.marks + '</td>' +
+          '<td class="numcell">' + p.comments + '</td></tr>';
+      }).join("") + '</tbody></table></div></div>');
+  }
+
+  /* the structures themselves */
+  var scored = list.map(function(r){ return {r:r, c:consensus(r, thr)}; });
+  if(ui.outcome) scored = scored.filter(function(x){ return x.c.outcome === ui.outcome; });
+  scored.sort(function(a, b){
+    if(a.c.contested !== b.c.contested) return a.c.contested ? -1 : 1;
+    if(a.c.voters !== b.c.voters) return b.c.voters - a.c.voters;
+    return a.c.agreement - b.c.agreement;
+  });
+
+  if(!scored.length){
+    h.push('<p class="empty">Nothing matches that. Clear a filter and try again.</p>');
+    return h.join("");
+  }
+
+  var capped = scored.slice(0, 400);
+  h.push((scored.length > capped.length
+      ? '<p class="empty">Showing the first 400 of ' + scored.length + '. Narrow the filters to see the rest.</p>' : '') +
+    '<div class="tablewrap"><table class="maintable">' +
+    '<caption class="sr-only">Recommendation for each structure, most contested first</caption>' +
+    '<thead><tr>' +
+      '<th scope="col">Structure</th><th scope="col">Unit and region</th>' +
+      '<th scope="col">Recommendation</th><th scope="col">Agreement</th>' +
+      '<th scope="col">Keep / condition / unsure / remove</th><th scope="col">Marked by</th><th scope="col"></th>' +
+    '</tr></thead><tbody>' +
+    capped.map(function(x){
+      var r = x.r, c = x.c;
+      var open = !!openRows[r.id];
+      return '<tr class="trow">' +
+        '<th scope="row" class="tname">' + esc(r.structureName) + '</th>' +
+        '<td>' + esc("Unit " + r.unit) + '<br><span class="muted">' + esc(r.section) + '</span></td>' +
+        '<td><span class="outcome ' + OUTCOMES[c.outcome].cls + '">' + esc(OUTCOMES[c.outcome].label) + '</span>' +
+          '<br><span class="muted">' + esc(c.reason) + '</span></td>' +
+        '<td class="numcell">' + (c.voters ? c.agreement + '%' : '<span class="muted">no marks</span>') + '<br>' + pctBar(c) + '</td>' +
+        '<td class="numcell">' + c.t.keep + ' / ' + c.t.cond + ' / ' + c.t.undecided + ' / ' + c.t.cut + '</td>' +
+        '<td class="numcell">' + c.voters + ' of ' + facultyCount() + '</td>' +
+        '<td><button class="linkbtn" type="button" data-toggle="' + esc(r.id) + '" aria-expanded="' + (open ? "true" : "false") +
+          '" aria-controls="rrow-detail-' + esc(r.id) + '">' + (open ? "Close" : "Open") + '</button></td>' +
+        '</tr>' +
+        '<tr class="tdetail" id="rrow-detail-' + esc(r.id) + '"' + (open ? "" : " hidden") + '><td colspan="7">' +
+          (open ? detailHtml(r) : "") + '</td></tr>';
+    }).join("") + '</tbody></table></div>');
+
+  return h.join("");
+}
+
+/* ------------------------------------------------------------------ *
+ * Rendering: my own course list
+ * ------------------------------------------------------------------ */
+function renderMine(list){
+  if(!me) return '<p class="empty">Put your name in at the top first. Your course list is kept under your name.</p>';
+
+  var h = [];
+  h.push('<div class="resultwrap"><h3>Your course list</h3>' +
+    '<p class="resultlead">You start from whatever the department list says. Switch a structure off and it drops out of your handout without changing anyone else’s. Switch one on and it comes back even if the group voted it off. You are on <strong>' +
+    myListCount() + '</strong> of ' + records.length + ' structures. Build the handout from the Build the final list button at the top, with Whose list set to My course list.</p></div>');
+
+  var capped = list.slice(0, 500);
+  if(!capped.length) return h.join("") + '<p class="empty">Nothing matches those filters.</p>';
+
+  var lastW = null;
+  h.push('<div class="tablewrap"><table class="maintable">' +
+    '<caption class="sr-only">Your own course list</caption>' +
+    '<thead><tr><th scope="col">Structure</th><th scope="col">Where it sits</th>' +
+    '<th scope="col">Department</th><th scope="col">On your list</th></tr></thead><tbody>');
+  capped.forEach(function(r){
+    if(r.worksheet !== lastW){
+      lastW = r.worksheet;
+      h.push('<tr><th scope="row" colspan="4" style="background:var(--wash)">Worksheet ' + esc(r.worksheet) + ': ' + esc(r.worksheetTitle) + '</th></tr>');
+    }
+    var ms = mineState(r);
+    var c = consensus(r, ui.threshold);
+    h.push('<tr class="trow">' +
+      '<th scope="row" class="tname">' + esc(r.structureName) + '</th>' +
+      '<td><span class="muted">' + esc(r.section) + '</span></td>' +
+      '<td><span class="outcome ' + OUTCOMES[c.outcome].cls + '">' + esc(OUTCOMES[c.outcome].label) + '</span></td>' +
+      '<td><span class="mineswitch" role="group" aria-label="Your course list setting for ' + esc(r.structureName) + '">' +
+        '<input type="radio" id="ms-in-' + esc(r.id) + '" name="ml-' + esc(r.id) + '" value="in"' +
+          (ms === "in" ? " checked" : "") + ' data-mine="' + esc(r.id) + '">' +
+        '<label for="ms-in-' + esc(r.id) + '" title="Always on your list">On</label>' +
+        '<input type="radio" id="ms-out-' + esc(r.id) + '" name="ml-' + esc(r.id) + '" value="out"' +
+          (ms === "out" ? " checked" : "") + ' data-mine="' + esc(r.id) + '">' +
+        '<label for="ms-out-' + esc(r.id) + '" title="Never on your list">Off</label>' +
+        '<input type="radio" id="ms-def-' + esc(r.id) + '" name="ml-' + esc(r.id) + '" value=""' +
+          (ms ? "" : " checked") + ' data-mine="' + esc(r.id) + '">' +
+        '<label for="ms-def-' + esc(r.id) + '" title="Whatever the department decides">Follow</label>' +
+      '</span></td></tr>');
+  });
+  h.push('</tbody></table></div>');
+  if(list.length > capped.length){
+    h.push('<p class="empty">Showing the first 500 of ' + list.length + '. Narrow the filters to see the rest.</p>');
+  }
+  return h.join("");
+}
+
+/* ------------------------------------------------------------------ *
  * Render everything
  * ------------------------------------------------------------------ */
 function render(){
@@ -1800,10 +2491,37 @@ function render(){
     list.length === records.length
       ? (records.length + " structures")
       : (list.length + " of " + records.length + " structures");
-  document.getElementById("list").innerHTML =
-    ui.view === "table" ? renderTable(list) : renderSections(list);
-  document.getElementById("viewSections").setAttribute("aria-pressed", ui.view === "sections" ? "true" : "false");
-  document.getElementById("viewTable").setAttribute("aria-pressed", ui.view === "table" ? "true" : "false");
+
+  var html;
+  if(ui.view === "table")        html = renderTable(list);
+  else if(ui.view === "results") html = renderResults(list);
+  else if(ui.view === "mine")    html = renderMine(list);
+  else                           html = renderSections(list);
+  document.getElementById("list").innerHTML = html;
+
+  [["viewSections","sections"],["viewTable","table"],["viewResults","results"],["viewMine","mine"]].forEach(function(p){
+    document.getElementById(p[0]).setAttribute("aria-pressed", ui.view === p[1] ? "true" : "false");
+  });
+
+  /* A box that scrolls sideways has to be reachable from the keyboard, or
+   * somebody who cannot use a mouse can never see the right hand columns.
+   * Done here rather than in each renderer so no new table can forget. */
+  Array.prototype.forEach.call(document.querySelectorAll(".tablewrap, .histwrap"), function(el){
+    var cap = el.querySelector("caption");
+    el.setAttribute("tabindex", "0");
+    el.setAttribute("role", "region");
+    el.setAttribute("aria-label", (cap ? cap.textContent : "Table") + ", scrolls sideways");
+  });
+
+  /* the results screen owns two controls that only exist while it is up */
+  var thrSel = document.getElementById("thr");
+  if(thrSel){
+    thrSel.addEventListener("change", function(){ ui.threshold = Number(this.value); render(); });
+  }
+  var outSel = document.getElementById("fOutcome");
+  if(outSel){
+    outSel.addEventListener("change", function(){ ui.outcome = this.value; render(); });
+  }
 }
 
 function status(msg, sticky){
@@ -1827,6 +2545,186 @@ function requireName(){
   return false;
 }
 function saved(){ status("Saved for everyone"); }
+
+/* ================================================================== *
+ * Publishing
+ *
+ * The end of the job. Once the marking settles, the same records turn
+ * into the three things the department actually needs: a web page that
+ * can be dropped into Kajabi or Canvas, a printable handout, and a
+ * spreadsheet. Nothing here recalculates anything; it reads the same
+ * consensus function the results screen reads.
+ * ================================================================== */
+function pubOpts(){
+  return {
+    whose: (document.getElementById("pubWhose") || {}).value || "dept",
+    what:  (document.getElementById("pubWhat")  || {}).value || "agreed",
+    title: ((document.getElementById("pubTitle") || {}).value || "Structure List").trim(),
+    showWhere: ((document.getElementById("pubShowWhere") || {}).value || "yes") === "yes"
+  };
+}
+function deptIncludes(r, what, thr){
+  if(r.status === "archived") return false;
+  if(what === "all") return true;
+  var o = consensus(r, thr).outcome;
+  if(what === "keepplus") return o !== "remove";
+  return o === "keep" || o === "condition";
+}
+function finalList(opts){
+  var thr = ui.threshold;
+  return records.filter(function(r){
+    var dept = deptIncludes(r, opts.what, thr);
+    if(opts.whose !== "mine") return dept;
+    var ms = mineState(r);
+    if(ms === "in")  return true;
+    if(ms === "out") return false;
+    return dept;
+  });
+}
+function whereTextFor(r){
+  var wc = whereCounts(r);
+  var bits = [];
+  WHERE.forEach(function(w){ if(wc[w.k]) bits.push(w.label); });
+  return bits.join(", ");
+}
+/* Grouped the way the worksheets are grouped, because that is how
+ * everybody already reads the list. */
+function groupForPublish(list){
+  var units = [], seenU = {};
+  list.forEach(function(r){
+    if(!seenU[r.unit]){ seenU[r.unit] = {unit:r.unit, ws:[], seenW:{}}; units.push(seenU[r.unit]); }
+    var u = seenU[r.unit];
+    if(!u.seenW[r.worksheet]){
+      u.seenW[r.worksheet] = {f:r.worksheet, ft:r.worksheetTitle, secs:[], seenS:{}};
+      u.ws.push(u.seenW[r.worksheet]);
+    }
+    var w = u.seenW[r.worksheet];
+    if(!w.seenS[r.section]){ w.seenS[r.section] = {name:r.section, rows:[]}; w.secs.push(w.seenS[r.section]); }
+    w.seenS[r.section].rows.push(r);
+  });
+  units.sort(function(a,b){ return a.unit - b.unit; });
+  return units;
+}
+function publishBodyHtml(opts, list){
+  var units = groupForPublish(list);
+  if(!units.length) return '<p class="empty">Nothing is on this list yet. Try a different setting above.</p>';
+  var h = [];
+  units.forEach(function(u){
+    h.push('<h2>' + esc(MODULE_NAMES[u.unit] || ("Unit " + u.unit)) + '</h2>');
+    u.ws.forEach(function(w){
+      h.push('<h3>Worksheet ' + esc(w.f) + ': ' + esc(w.ft) + '</h3>');
+      w.secs.forEach(function(s){
+        h.push('<p class="secname"><strong>' + esc(s.name) + '</strong></p><ul>');
+        s.rows.forEach(function(r){
+          var wt = opts.showWhere ? whereTextFor(r) : "";
+          h.push('<li' + (r.indent ? ' class="sub"' : '') + '>' + esc(r.structureName) +
+            (wt ? ' <span class="where">(' + esc(wt) + ')</span>' : '') +
+            (r.notes ? ' <span class="where">' + esc(r.notes) + '</span>' : '') + '</li>');
+        });
+        h.push('</ul>');
+      });
+    });
+  });
+  return h.join("");
+}
+function publishHeaderHtml(opts, list){
+  var whose = opts.whose === "mine" ? ("Course list for " + (me ? me.name : "this section")) : "Department minimum list";
+  var what = opts.what === "all" ? "Everything currently on the shared list"
+           : opts.what === "keepplus" ? "Agreed to keep, plus the structures still being discussed"
+           : "The structures the group agreed to keep";
+  return '<div class="printhead"><h1>' + esc(opts.title) + '</h1>' +
+    '<p>' + esc(whose) + '. ' + esc(what) + '. ' + list.length + ' structures.</p>' +
+    '<p>Solano Community College, BIOL 004 Human Anatomy. Dr. Sharilyn Rennie. ' +
+    esc(new Date().toLocaleDateString([], {year:"numeric", month:"long", day:"numeric"})) + '.</p></div>';
+}
+/* A complete file, ready to post. Self contained, height sender baked
+ * in for the iframe, same accessibility floor as this page. */
+function buildStandaloneHtml(opts){
+  var list = finalList(opts);
+  return '<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n' +
+'<meta name="viewport" content="width=device-width, initial-scale=1">\n' +
+'<title>' + esc(opts.title) + '</title>\n<style>\n' +
+':root{--navy:#1E3D4C;--terra-dark:#A0522D;--ink-mute:#54707D;--hair:rgba(30,61,76,0.18);' +
+'--ground:#FAFAF9;--card:#FFFFFF;--lift:0 1px 3px rgba(0,0,0,0.08)}\n' +
+'*{box-sizing:border-box}\n' +
+'body{margin:0;background:var(--ground);color:var(--navy);font-family:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6}\n' +
+'.wrap{max-width:900px;margin:0 auto;padding:28px 20px 64px}\n' +
+'.card{background:var(--card);border:1px solid var(--hair);border-radius:8px;box-shadow:var(--lift);padding:22px 24px;margin-top:18px}\n' +
+'h1{font-size:clamp(24px,4vw,34px);font-weight:800;margin:0 0 8px;line-height:1.2}\n' +
+'h2{font-size:19px;font-weight:800;margin:26px 0 0;padding-bottom:6px;border-bottom:1px solid var(--hair)}\n' +
+'h3{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--terra-dark);margin:18px 0 0}\n' +
+'p{margin:6px 0}\n.printhead p{color:var(--ink-mute);font-size:14px}\n' +
+'.secname{margin-top:12px;font-size:15px}\nul{margin:6px 0 0;padding-left:22px}\n' +
+'li{font-size:15px;line-height:1.55}\nli.sub{margin-left:18px;list-style-type:circle}\n' +
+'.where{color:var(--ink-mute);font-size:13.5px}\n' +
+'a{color:var(--terra-dark)}\n:focus-visible{outline:2px solid var(--terra-dark);outline-offset:2px}\n' +
+'@media print{body{background:#fff}.card{border:0;box-shadow:none;padding:0}li{break-inside:avoid}h2,h3{break-after:avoid}}\n' +
+'@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}\n' +
+'</style>\n</head>\n<body>\n<main class="wrap">\n<div class="card">\n' +
+publishHeaderHtml(opts, list) + '\n' + publishBodyHtml(opts, list) + '\n</div>\n</main>\n' +
+'<script>\n(function(){var FRAME_ID="anatomy-structure-list";function s(){var h=Math.max(' +
+'document.body.scrollHeight,document.body.offsetHeight,document.documentElement.scrollHeight,' +
+'document.documentElement.offsetHeight);try{parent.postMessage({id:FRAME_ID,frameId:FRAME_ID,height:h},"*");}catch(e){}}' +
+'window.addEventListener("load",s);window.addEventListener("resize",s);' +
+'if(window.ResizeObserver){try{new ResizeObserver(s).observe(document.body);}catch(e){}}' +
+'var ls=document.getElementsByTagName("a");for(var i=0;i<ls.length;i++){var hr=ls[i].getAttribute("href")||"";' +
+'if(!hr||hr.charAt(0)==="#"){continue;}var pr=document.createElement("a");pr.href=hr;' +
+'if(/^https?:/i.test(pr.protocol)&&pr.hostname&&pr.hostname!==location.hostname){ls[i].target="_blank";ls[i].rel="noopener";}' +
+'else{ls[i].target="_top";}}' +
+'s();})();\n<\/script>\n</body>\n</html>\n';
+}
+function buildFinalCsv(opts){
+  var list = finalList(opts);
+  var thr = ui.threshold;
+  var head = ["unit","worksheet","worksheet title","region","structure","tested on",
+              "shared note","recommendation","agreement percent","people who marked it",
+              "keep","condition","unsure","remove","status"];
+  var lines = [head.join(",")];
+  list.forEach(function(r){
+    var c = consensus(r, thr);
+    lines.push([
+      "Unit " + r.unit, r.worksheet, r.worksheetTitle, r.section, r.structureName,
+      whereTextFor(r), r.notes,
+      OUTCOMES[c.outcome].label, c.voters ? c.agreement : "", c.voters,
+      c.t.keep, c.t.cond, c.t.undecided, c.t.cut,
+      STATUS_LABEL[r.status] || r.status
+    ].map(csvCell).join(","));
+  });
+  return lines.join("\n");
+}
+function renderPrintArea(){
+  var opts = pubOpts();
+  var list = finalList(opts);
+  document.getElementById("printArea").innerHTML =
+    publishHeaderHtml(opts, list) + publishBodyHtml(opts, list);
+  return list.length;
+}
+/* Apps Script serves this page inside a sandboxed iframe, where a blob
+ * download sometimes will not fire. Try it, and if it does not take,
+ * fall back to showing the text so it can be copied. */
+function download(filename, text, mime){
+  try{
+    var blob = new Blob([text], {type: mime + ";charset=utf-8"});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    a.rel = "noopener";
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function(){ URL.revokeObjectURL(url); a.remove(); }, 1500);
+    return true;
+  }catch(e){
+    return false;
+  }
+}
+function showCopyText(text){
+  var area = document.getElementById("exportText");
+  document.getElementById("pubCopyWrap").hidden = false;
+  area.value = text;
+  area.focus();
+  area.select();
+}
 
 /* ------------------------------------------------------------------ *
  * Export
@@ -1900,10 +2798,14 @@ function bind(){
       return;
     }
 
-    if(t.matches("[data-review]")){
-      if(!requireName()){ t.checked = false; return; }
-      var rid = t.getAttribute("data-review");
-      saveFacultyReview(rid, {reviewed:t.checked}).then(function(){ render(); saved(); })["catch"](showTrouble);
+    if(t.matches("[data-mine]")){
+      if(!requireName()){ t.checked = false; render(); return; }
+      var mid = t.getAttribute("data-mine");
+      setMine(mid, t.value).then(function(){
+        render();
+        status(t.value === "in" ? "On your course list" :
+               t.value === "out" ? "Off your course list" : "Following the department on this one");
+      })["catch"](showTrouble);
       return;
     }
   });
@@ -2069,6 +2971,17 @@ function bind(){
     render();
   });
 
+  /* the key */
+  document.getElementById("keyBtn").addEventListener("click", function(){
+    setKeyOpen(document.getElementById("keyBtn").getAttribute("aria-expanded") !== "true", true);
+  });
+  document.getElementById("keyClose").addEventListener("click", function(){ setKeyOpen(false, true); });
+  document.addEventListener("keydown", function(e){
+    if(e.key !== "Escape") return;
+    var side = document.getElementById("keySide");
+    if(side.contains(document.activeElement)) setKeyOpen(false, true);
+  });
+
   /* the navy bar opens the framing panel rather than repeating it */
   document.getElementById("howBtn").addEventListener("click", function(){
     var d = document.querySelector("details.intro");
@@ -2080,8 +2993,9 @@ function bind(){
   });
 
   /* views */
-  document.getElementById("viewSections").addEventListener("click", function(){ ui.view = "sections"; render(); });
-  document.getElementById("viewTable").addEventListener("click", function(){ ui.view = "table"; render(); });
+  [["viewSections","sections"],["viewTable","table"],["viewResults","results"],["viewMine","mine"]].forEach(function(p){
+    document.getElementById(p[0]).addEventListener("click", function(){ ui.view = p[1]; render(); });
+  });
 
   /* refresh */
   document.getElementById("refreshBtn").addEventListener("click", function(){
@@ -2089,17 +3003,55 @@ function bind(){
     poll().then(function(){ status("Up to date"); })["catch"](function(){ status("Could not reach the shared record.", true); });
   });
 
-  /* export */
+  /* publishing */
   document.getElementById("exportBtn").addEventListener("click", function(){
-    var area = document.getElementById("exportText");
-    area.value = buildCsv();
-    document.getElementById("exportPanel").hidden = false;
-    area.focus();
-    area.select();
+    var panel = document.getElementById("printPanel");
+    panel.hidden = !panel.hidden;
+    this.setAttribute("aria-expanded", panel.hidden ? "false" : "true");
+    if(!panel.hidden){
+      renderPrintArea();
+      document.getElementById("pubWhose").focus();
+    }
   });
   document.getElementById("exportClose").addEventListener("click", function(){
-    document.getElementById("exportPanel").hidden = true;
+    document.getElementById("printPanel").hidden = true;
+    document.getElementById("exportBtn").setAttribute("aria-expanded", "false");
     document.getElementById("exportBtn").focus();
+  });
+  ["pubWhose","pubWhat","pubShowWhere","pubTitle"].forEach(function(id){
+    var el = document.getElementById(id);
+    el.addEventListener("change", function(){ renderPrintArea(); });
+  });
+  document.getElementById("pubBuild").addEventListener("click", function(){
+    var n = renderPrintArea();
+    status(n + " structures on the list below");
+  });
+  document.getElementById("pubPrint").addEventListener("click", function(){
+    renderPrintArea();
+    setTimeout(function(){ window.print(); }, 60);
+  });
+  document.getElementById("pubHtml").addEventListener("click", function(){
+    var opts = pubOpts();
+    var html = buildStandaloneHtml(opts);
+    if(download(slug(opts.title) + ".html", html, "text/html")){
+      status("Downloaded. Post it as it is, or paste it into a page.");
+    }else{
+      showCopyText(html);
+      status("Your browser blocked the download, so here is the file to copy.", true);
+    }
+  });
+  document.getElementById("pubCsv").addEventListener("click", function(){
+    var opts = pubOpts();
+    var csv = buildFinalCsv(opts);
+    if(download(slug(opts.title) + ".csv", csv, "text/csv")){
+      status("Downloaded.");
+    }else{
+      showCopyText(csv);
+      status("Your browser blocked the download, so here is the file to copy.", true);
+    }
+  });
+  document.getElementById("pubCopy").addEventListener("click", function(){
+    showCopyText(buildStandaloneHtml(pubOpts()));
   });
 
   /* propose a structure */
@@ -2222,7 +3174,14 @@ function startPolling(){
  * ------------------------------------------------------------------ */
 function boot(){
   fillFilters();
+  renderKey();
   bind();
+  setKeyOpen(keyOpenDefault(), false);
+  measureToolbar();
+  window.addEventListener("resize", measureToolbar);
+  if(window.ResizeObserver){
+    try{ new ResizeObserver(measureToolbar).observe(document.querySelector(".toolbar")); }catch(e){}
+  }
   rebuild();
   render();
   status("Loading the shared list…", true);

@@ -1,7 +1,3 @@
-
-Code_gs.txt
-
-100%
 /**
  * Master Anatomy List, shared record and web app
  * Solano Community College, BIOL 004 Human Anatomy
@@ -229,9 +225,61 @@ function detailOf(o) {
   if (o.t === 'where')    return (o.w || []).join(', ');
   if (o.t === 'comment')  return String(o.text || '');
   if (o.t === 'snote')    return String(o.text || '');
-  if (o.t === 'add')      return o.st ? (o.st.name + (o.st.why ? '. ' + o.st.why : '')) : '';
+  if (o.t === 'note')     return String(o.text || '');
+  if (o.t === 'status')   return String(o.s || '');
+  if (o.t === 'review')   return o.r ? 'read' : 'not read';
+  if (o.t === 'screview') return (o.r ? 'read the section ' : 'un-read the section ') + String(o.key || '');
+  if (o.t === 'sccomment')return String(o.text || '');
+  if (o.t === 'mine')     return o.m === 'in'  ? 'added to their own course list'
+                               : o.m === 'out' ? 'dropped from their own course list'
+                                               : 'following the department';
+  if (o.t === 'add')      return o.st ? ((o.st.structureName || o.st.name) + (o.st.notes ? '. ' + o.st.notes : '')) : '';
   if (o.t === 'user')     return 'signed in';
   return '';
+}
+
+/**
+ * The same slug the page uses, so a section key written by the page
+ * lines up with a worksheet and section on the Structures tab.
+ */
+function slugOf(s) {
+  return String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
+}
+function sectionKeyOf(worksheet, section) {
+  return slugOf(worksheet + '--' + section);
+}
+
+/**
+ * The department's decision rule, kept identical to the one on the page.
+ * Returns the recommendation and how strong the agreement behind it is.
+ */
+function recommendFor(counts, threshold) {
+  var voters = counts.keep + counts.cond + counts.undecided + counts.cut;
+  if (!voters) return {outcome: 'Keep', agreement: '', voters: 0, why: 'Nobody marked it, so it stays by default.'};
+
+  var pct = function (n) { return Math.round(n / voters * 100); };
+  var stay = counts.keep + counts.cond;
+  var top = Math.max(counts.keep, counts.cond, counts.undecided, counts.cut);
+  var out = {outcome: '', agreement: Math.round(top / voters * 100), voters: voters, why: ''};
+
+  if (pct(counts.cut) >= threshold) {
+    out.outcome = 'Remove';
+    out.why = pct(counts.cut) + ' percent of the ' + voters + ' who marked it want it off.';
+  } else if (pct(counts.keep) >= threshold) {
+    out.outcome = 'Keep';
+    out.why = pct(counts.keep) + ' percent of the ' + voters + ' who marked it want it kept.';
+  } else if (pct(stay) >= threshold && counts.cond > 0) {
+    out.outcome = 'Keep with a condition';
+    out.why = 'Keep and keep-with-conditions together reach ' + pct(stay) + ' percent.';
+  } else {
+    out.outcome = 'Needs a decision';
+    out.why = 'No single answer reaches ' + threshold + ' percent.';
+  }
+  if (counts.undecided && pct(counts.undecided) > 33 && out.outcome !== 'Remove') {
+    out.outcome = 'Needs a decision';
+    out.why = pct(counts.undecided) + ' percent are still undecided.';
+  }
+  return out;
 }
 
 function writeRoster(rows) {
@@ -262,14 +310,34 @@ function rebuildCurrent() {
     return;
   }
 
+  var THRESHOLD = 70;                   // the agreement bar, same as the page default
+
   var names = {};                       // user key to display name
   var votes = {}, where = {}, decisions = {}, reasons = {}, comments = {}, added = [];
+  var sectionRead = {};                 // section key -> {userId: true}
+  var structureRead = {};               // structure id -> {userId: true}, the older per-row ticks
+  var mine = {};                        // structure id -> {userId: "in"|"out"}
+  var notes = {};                       // structure id -> shared note
   var all = readOps(0).ops;
 
   for (var i = 0; i < all.length; i++) {
     var o = all[i].op;
     if (o.t === 'user') {
       names[o.id] = o.name;
+    } else if (o.t === 'screview') {
+      if (!sectionRead[o.key]) sectionRead[o.key] = {};
+      if (o.r) sectionRead[o.key][o.uid] = true;
+      else delete sectionRead[o.key][o.uid];
+    } else if (o.t === 'review') {
+      if (!structureRead[o.sid]) structureRead[o.sid] = {};
+      if (o.r) structureRead[o.sid][o.uid] = true;
+      else delete structureRead[o.sid][o.uid];
+    } else if (o.t === 'mine') {
+      if (!mine[o.sid]) mine[o.sid] = {};
+      if (o.m === 'in' || o.m === 'out') mine[o.sid][o.uid] = o.m;
+      else delete mine[o.sid][o.uid];
+    } else if (o.t === 'note') {
+      notes[o.sid] = String(o.text || '');
     } else if (o.t === 'vote') {
       if (!votes[o.sid]) votes[o.sid] = {};
       if (!o.v) { delete votes[o.sid][o.uid]; }
@@ -287,24 +355,32 @@ function rebuildCurrent() {
     }
   }
 
+  var facultyTotal = Math.max(1, Object.keys(names).length);
+
   var header = ['id', 'module', 'worksheet', 'section', 'indent', 'structure',
                 'keep', 'conditional', 'unsure', 'remove',
+                'people who marked it', 'agreement percent', 'recommendation', 'why',
+                'read by', 'of faculty', 'who has read it',
                 'flagged by', 'reasons given',
                 'tested on', 'skill', 'asked',
+                'shared note', 'on their own list', 'off their own list',
                 'decision', 'decision note', 'comments', 'proposed by'];
+
+  var ctx = {votes: votes, where: where, decisions: decisions, reasons: reasons,
+             comments: comments, names: names, notes: notes, mine: mine,
+             sectionRead: sectionRead, structureRead: structureRead,
+             facultyTotal: facultyTotal, threshold: THRESHOLD};
 
   var rows = [];
   var rv = roster.getRange(2, 1, roster.getLastRow() - 1, ROSTER_HEADER.length).getValues();
 
   for (var r = 0; r < rv.length; r++) {
-    rows.push(summaryRow(rv[r][0], rv[r][1], rv[r][2], rv[r][4], rv[r][5], rv[r][6], '',
-                         votes, where, decisions, reasons, comments, names));
+    rows.push(summaryRow(rv[r][0], rv[r][1], rv[r][2], rv[r][4], rv[r][5], rv[r][6], '', ctx));
   }
   for (var a = 0; a < added.length; a++) {
     var st = added[a];
-    rows.push(summaryRow(st.id, st.m, st.f, st.b || 'Faculty additions', st.lvl || 0, st.name,
-                         names[st.by] || st.by || '',
-                         votes, where, decisions, reasons, comments, names));
+    rows.push(summaryRow(st.id, st.m, st.f, st.b || 'Faculty additions', st.lvl || 0,
+                         st.structureName || st.name, names[st.by] || st.by || '', ctx));
   }
 
   var sh = ss.getSheetByName(SHEET_CURRENT);
@@ -318,8 +394,10 @@ function rebuildCurrent() {
   try { SpreadsheetApp.getUi().alert('Summary rebuilt: ' + rows.length + ' structures.'); } catch (e) {}
 }
 
-function summaryRow(id, mod, form, section, indent, name, proposedBy,
-                    votes, where, decisions, reasons, comments, names) {
+function summaryRow(id, mod, form, section, indent, name, proposedBy, ctx) {
+  var votes = ctx.votes, where = ctx.where, decisions = ctx.decisions;
+  var reasons = ctx.reasons, comments = ctx.comments, names = ctx.names;
+
   var v = votes[id] || {};
   var counts = { keep: 0, cond: 0, undecided: 0, cut: 0 };
   var flagged = [];
@@ -349,13 +427,37 @@ function summaryRow(id, mod, form, section, indent, name, proposedBy,
 
   var dec = decisions[id] || null;
 
+  /* Reading is recorded once, at the end of a section. The older
+   * per-structure ticks still count, so nothing anybody already
+   * recorded is lost. */
+  var readers = {};
+  var secKey = sectionKeyOf(form, section);
+  var fromSection = ctx.sectionRead[secKey] || {};
+  for (var sk in fromSection) { if (fromSection.hasOwnProperty(sk)) readers[sk] = true; }
+  var fromRow = ctx.structureRead[id] || {};
+  for (var rk2 in fromRow) { if (fromRow.hasOwnProperty(rk2)) readers[rk2] = true; }
+  var readerNames = [];
+  for (var rn in readers) { if (readers.hasOwnProperty(rn)) readerNames.push(names[rn] || rn); }
+
+  var rec = recommendFor(counts, ctx.threshold);
+
+  var mineIn = [], mineOut = [];
+  var mrow = ctx.mine[id] || {};
+  for (var mk in mrow) {
+    if (!mrow.hasOwnProperty(mk)) continue;
+    if (mrow[mk] === 'in') mineIn.push(names[mk] || mk);
+    else mineOut.push(names[mk] || mk);
+  }
+
   return [
     id, mod, form, section, indent, name,
     counts.keep, counts.cond, counts.undecided, counts.cut,
+    rec.voters, rec.agreement, rec.outcome, rec.why,
+    readerNames.length, ctx.facultyTotal, readerNames.join(', '),
     flagged.join(', '), whyList.join(' | '),
     placed.join(', '), tally.skill || 0, tally.knowledge || 0,
+    ctx.notes[id] || '', mineIn.join(', '), mineOut.join(', '),
     dec ? dec.d : '', dec ? dec.note : '',
     comments[id] || 0, proposedBy
   ];
 }
-Displaying Code_gs.txt.
