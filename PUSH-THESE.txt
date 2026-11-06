@@ -7,9 +7,20 @@ November 6, 2026
 GOES TO THE REPO AND TO APPS SCRIPT
 ------------------------------------------------------------------
 
-  faculty-intro.html   NEW. The introduction sheet, with the opening
-                       film and the animated walkthrough. Faculty-facing.
-                       Send them this link before the tool itself.
+  faculty-intro.html   NEW. The introduction sheet. Opening film with the
+                       greeting run and three pictures borrowed from your
+                       Rounds site, the animated walkthrough with the
+                       instruction in a maroon callout pinned to whatever
+                       the arrow is pointing at, a snapshot of the three
+                       things the tool produces, and the ground rules.
+                       Faculty-facing. Send them this before the tool.
+
+                       The montage pulls /rounds/images/larynx-anterior.png,
+                       bronchial-tree.png and larynx-superior.png from the
+                       same host, so there are no duplicate image files to
+                       keep in step. Opened from your desktop rather than
+                       from Pages those will not resolve, and the montage
+                       drops itself rather than showing grey boxes.
 
   index.html           CHANGED. Two things since the last drop:
                        worksheet 3.5 split into Major systemic veins and

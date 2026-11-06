@@ -52,6 +52,15 @@ button{font:inherit;cursor:pointer}
 .title-scene.on .eb,.title-scene.on h2{transform:none;opacity:1}
 .skipfilm{position:absolute;right:20px;bottom:20px;z-index:3;font:600 12px/1 "DM Sans";letter-spacing:.2em;text-transform:uppercase;color:#fff;background:transparent;border:1px solid rgba(255,255,255,.6);border-radius:4px;padding:12px 16px}
 .skipfilm:hover{background:rgba(255,255,255,.12)}
+.montage{grid-template-columns:repeat(3,1fr);gap:1.4vw;padding:8vh 6vw;place-items:stretch}
+.montage figure{margin:0;overflow:hidden;border-radius:8px;background:#0A1020;border:.5px solid rgba(255,255,255,.22)}
+.montage img{width:100%;height:100%;object-fit:cover;transform:scale(1.18);opacity:0;transition:transform 4.2s ease,opacity 1s ease}
+.montage.on img{transform:scale(1);opacity:1}
+.montage.on figure:nth-child(2) img{transition-delay:.25s}
+.montage.on figure:nth-child(3) img{transition-delay:.5s}
+.montage .cap{position:absolute;bottom:9vh;left:0;right:0;text-align:center;font-weight:600;font-size:13px;
+  letter-spacing:.3em;text-transform:uppercase;color:var(--gold);opacity:0;transition:opacity .8s ease .9s}
+.montage.on .cap{opacity:1}
 @media (prefers-reduced-motion:reduce){#film{display:none}}
 
 /* ---------- landing ---------- */
@@ -134,12 +143,29 @@ section > .lede{color:var(--ink-soft);margin:0 0 20px;max-width:70ch}
   text-transform:uppercase;white-space:nowrap;flex:none}
 .oc.keep{border-color:var(--navy);color:var(--navy);background:var(--tint)}
 .oc.talk{border-color:#7A5C1E;color:#7A5C1E}
-.cursor{position:absolute;width:16px;height:16px;border-radius:999px;background:rgba(139,46,46,.22);
-  border:2px solid var(--maroon);left:0;top:0;pointer-events:none;opacity:0;
-  transition:transform .85s cubic-bezier(.3,.7,.2,1),opacity .3s ease;z-index:5}
+.cursor{position:absolute;left:0;top:0;width:26px;height:30px;pointer-events:none;opacity:0;z-index:7;
+  transition:transform .85s cubic-bezier(.3,.7,.2,1),opacity .3s ease;
+  filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}
 .cursor.show{opacity:1}
-.cursor.tap{animation:tap .45s ease}
-@keyframes tap{0%{transform:var(--tx) scale(1)}45%{transform:var(--tx) scale(.5)}100%{transform:var(--tx) scale(1)}}
+.ring{position:absolute;left:0;top:0;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:999px;
+  border:3px solid var(--maroon);pointer-events:none;opacity:0;z-index:6;
+  transition:transform .85s cubic-bezier(.3,.7,.2,1)}
+.ring.pulse{animation:ping .75s ease-out}
+@keyframes ping{0%{opacity:.9}100%{opacity:0}}
+
+/* The callout. Maroon on purpose, so it never reads as part of the
+   interface underneath it, and the instruction sits on the thing it is
+   about rather than off at the side where nobody looks. */
+.coach{position:absolute;z-index:8;width:248px;background:var(--maroon);color:#fff;border-radius:10px;
+  padding:12px 14px;box-shadow:0 10px 24px rgba(0,0,0,.28);opacity:0;pointer-events:none;
+  transition:opacity .35s ease,transform .5s cubic-bezier(.3,.7,.2,1);transform:translateY(6px)}
+.coach.show{opacity:1;transform:none}
+.coach .cn{font-family:"Plus Jakarta Sans";font-weight:800;font-size:12px;letter-spacing:.14em;color:#F0C4C4}
+.coach .ch{display:block;font-weight:700;font-size:15px;margin-top:3px;line-height:1.25}
+.coach .cd{display:block;font-size:13.5px;margin-top:5px;color:#F7E7E7;line-height:1.4}
+.coach .tail{position:absolute;width:12px;height:12px;background:var(--maroon);transform:rotate(45deg)}
+.coach.below .tail{top:-6px}
+.coach.above .tail{bottom:-6px}
 
 .walkside{display:flex;flex-direction:column;gap:14px}
 .caps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;counter-reset:c -1}
@@ -152,6 +178,29 @@ section > .lede{color:var(--ink-soft);margin:0 0 20px;max-width:70ch}
 .wctl{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .wctl .btn{padding:9px 14px;font-size:11px}
 .wctl .pos{font-size:12px;color:var(--ink-soft);letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+
+/* ---------- output snapshot ---------- */
+.snap{display:grid;grid-template-columns:repeat(auto-fit,minmax(252px,1fr));gap:16px;margin:0 0 24px}
+.paper{background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow-rest);
+  padding:14px;display:flex;flex-direction:column;gap:9px;transition:transform 200ms ease,box-shadow 200ms ease}
+.paper:hover{transform:translateY(-2px);box-shadow:var(--shadow-hover)}
+.paper .tag{font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--maroon)}
+.paper .pt{font-weight:700;font-size:15px;color:var(--navy)}
+.paper .px{font-size:13px;color:var(--ink-soft)}
+.mini{border:1px solid var(--line);border-radius:7px;padding:10px;background:#fff;overflow:hidden}
+.mini .mh{font-family:"Plus Jakarta Sans";font-weight:800;font-size:11px;color:var(--navy)}
+.mini .ms{font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--maroon);margin-top:6px}
+.mini .ml{height:4px;border-radius:2px;background:var(--tint);margin-top:4px}
+.mini .ml.s{width:62%}.mini .ml.m{width:80%}.mini .ml.l{width:94%}
+.mini table{border-collapse:collapse;width:100%;font-size:8px;margin-top:5px}
+.mini td,.mini th{border:1px solid var(--line);padding:2px 3px;text-align:left;font-weight:400;color:var(--ink-soft)}
+.mini th{background:var(--navy);color:#fff;font-weight:700;font-size:7.5px}
+.mini .ag{display:flex;align-items:center;gap:6px;margin-top:5px;font-size:9px;color:var(--ink)}
+.mini .ag b{flex:1;font-weight:500}
+.mini .ag i{font-style:normal;border:1px solid var(--line);border-radius:3px;padding:1px 4px;font-size:7px;
+  font-weight:700;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.mini .ag i.t{border-color:#7A5C1E;color:#7A5C1E}
+.mini .ag i.k{border-color:var(--navy);color:var(--navy);background:var(--tint)}
 
 /* ---------- cards ---------- */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;margin-top:4px}
@@ -204,9 +253,15 @@ footer{max-width:1180px;margin:0 auto;padding:28px 24px 44px;color:var(--ink-sof
   </div>
   <div class="scene title-scene" id="s2" aria-hidden="true">
     <div>
-      <div class="eb">One list the whole department writes from</div>
-      <h2>Agree once. <span>Teach freely.</span></h2>
+      <div class="eb">Every structure we test in lab, in one place</div>
+      <h2>The faculty <span>anatomy</span> collaboration tool</h2>
     </div>
+  </div>
+  <div class="scene montage" id="s3" aria-hidden="true">
+    <figure><img src="/rounds/images/larynx-anterior.png" alt="" loading="lazy"></figure>
+    <figure><img src="/rounds/images/bronchial-tree.png" alt="" loading="lazy"></figure>
+    <figure><img src="/rounds/images/larynx-superior.png" alt="" loading="lazy"></figure>
+    <div class="cap">Models, cadaver, slides, bone box</div>
   </div>
   <button class="skipfilm" id="skipFilm" type="button">Skip intro</button>
 </div>
@@ -221,10 +276,10 @@ footer{max-width:1180px;margin:0 auto;padding:28px 24px 44px;color:var(--ink-sof
 
 <nav class="how" aria-label="What the review asks of you">
   <div class="step"><div class="num">00</div><span class="lab">Sign in</span><span class="st">Your name, nothing more</span></div>
-  <div class="step"><div class="num">01</div><span class="lab">Open a section</span><span class="st">Worksheet by worksheet</span></div>
-  <div class="step"><div class="num">02</div><span class="lab">Mark changes</span><span class="st">Keep is already the answer</span></div>
-  <div class="step"><div class="num">03</div><span class="lab">Where you test it</span><span class="st">Model, cadaver, slide</span></div>
-  <div class="step"><div class="num">04</div><span class="lab">Tick the block</span><span class="st">Records that you read it</span></div>
+  <div class="step"><div class="num">01</div><span class="lab">Open a section</span><span class="st">One block at a time</span></div>
+  <div class="step"><div class="num">02</div><span class="lab">Happy with it? Tick</span><span class="st">For most blocks, that is all</span></div>
+  <div class="step"><div class="num">03</div><span class="lab">Want one changed?</span><span class="st">Mark that row only</span></div>
+  <div class="step"><div class="num">04</div><span class="lab">Where you test it</span><span class="st">Model, cadaver, slide</span></div>
   <div class="step"><div class="num">05</div><span class="lab">See the result</span><span class="st">Where the group landed</span></div>
 </nav>
 
@@ -232,7 +287,7 @@ footer{max-width:1180px;margin:0 auto;padding:28px 24px 44px;color:var(--ink-sof
 
 <section aria-labelledby="walkTitle">
   <h2 id="walkTitle">Watch how it <span>works</span></h2>
-  <p class="lede">Six steps, about a minute. This is the real interface, moving on its own. Nothing here touches the live list.</p>
+  <p class="lede">Six steps, about a minute, moving on its own. Watch step 02: if a whole block already looks right to you, one tick is the entire job.</p>
 
   <div class="walk">
     <div class="stage" id="stage" role="img" aria-labelledby="stageCap">
@@ -302,17 +357,27 @@ footer{max-width:1180px;margin:0 auto;padding:28px 24px 44px;color:var(--ink-sof
         </div>
       </div>
 
-      <span class="cursor" id="cursor" aria-hidden="true"></span>
+      <span class="ring" id="ring" aria-hidden="true"></span>
+      <svg class="cursor" id="cursor" viewBox="0 0 26 30" aria-hidden="true">
+        <path d="M3 2 L3 23 L8.6 18.2 L12.4 27 L16.6 25.2 L12.9 16.7 L20 16.2 Z"
+              fill="#ffffff" stroke="#8B2E2E" stroke-width="2.2" stroke-linejoin="round"/>
+      </svg>
+      <div class="coach" id="coach" aria-hidden="true">
+        <span class="tail" id="coachTail"></span>
+        <span class="cn" id="coachN">00</span>
+        <span class="ch" id="coachH"></span>
+        <span class="cd" id="coachD"></span>
+      </div>
     </div>
 
     <div class="walkside">
       <ol class="caps" id="caps">
-        <li data-i="0"><span class="n">00</span><span><span class="h">Put your name in</span><span class="d">No account, no password. Everything you mark is filed under that name so we can all see who said what.</span></span></li>
-        <li data-i="1"><span class="n">01</span><span><span class="h">Open a section</span><span class="d">The list is grouped the way the worksheets are. Open one block at a time rather than scrolling a thousand rows.</span></span></li>
-        <li data-i="2"><span class="n">02</span><span><span class="h">Mark only what you would change</span><span class="d">Keep is already the standing answer, shown as the dashed circle. Click only when you want it cut, kept with a condition, or you are undecided.</span></span></li>
-        <li data-i="3"><span class="n">03</span><span><span class="h">Say where you test it</span><span class="d">Slide, model, cadaver, bone box, radiograph. Your ticks are kept separately, so they never replace anyone else's.</span></span></li>
-        <li data-i="4"><span class="n">04</span><span><span class="h">Tick the box at the end</span><span class="d">That one tick records that you went through the whole block, and every structure in it counts as read by you.</span></span></li>
-        <li data-i="5"><span class="n">05</span><span><span class="h">See where the group landed</span><span class="d">Results turns the marking into a recommendation per structure, with the agreement behind it, so a meeting can start from the disagreements.</span></span></li>
+        <li data-i="0"><span class="n">00</span><span><span class="h">Put your name in</span><span class="d">No account, no password. Your name is how the rest of us see who said what.</span></span></li>
+        <li data-i="1"><span class="n">01</span><span><span class="h">Open a section</span><span class="d">The list is grouped the way the worksheets are, so you take one block at a time instead of scrolling a thousand rows.</span></span></li>
+        <li data-i="2"><span class="n">02</span><span><span class="h">Happy with the whole block? Tick it and move on</span><span class="d">Keep is already the answer on every row, so a block you agree with needs no clicks at all. Tick the box at the end and you are finished with it. For most sections this is the only thing you will do.</span></span></li>
+        <li data-i="3"><span class="n">03</span><span><span class="h">Want one of them changed? Mark that row</span><span class="d">Only the rows you want different need a click. Cut it, keep it with a condition, or flag that you are undecided.</span></span></li>
+        <li data-i="4"><span class="n">04</span><span><span class="h">Say where you test it</span><span class="d">Slide, model, cadaver, bone box, radiograph. Your ticks are kept separately, so they never replace anyone else’s.</span></span></li>
+        <li data-i="5"><span class="n">05</span><span><span class="h">See where the group landed</span><span class="d">Results turns the marking into a recommendation per structure, with the agreement behind it, so a meeting can start from the real disagreements.</span></span></li>
       </ol>
 
       <div class="wctl">
@@ -361,6 +426,51 @@ footer{max-width:1180px;margin:0 auto;padding:28px 24px 44px;color:var(--ink-sof
 <section aria-labelledby="outTitle">
   <h2 id="outTitle">What comes out <span>of it</span></h2>
   <p class="lede">The marking is not the point. These are, and all three are built from the same records, so none of it is retyped and none of it can drift out of step with the review.</p>
+  <div class="snap">
+    <div class="paper">
+      <span class="tag">Output 01</span>
+      <div class="mini" aria-hidden="true">
+        <div class="mh">BIOL 004 Structure List</div>
+        <div class="ms">Unit 1 &middot; Worksheet 1.0</div>
+        <div class="ml l"></div><div class="ml m"></div><div class="ml s"></div>
+        <div class="ms">Body planes and sections</div>
+        <div class="ml m"></div><div class="ml l"></div><div class="ml s"></div><div class="ml m"></div>
+      </div>
+      <span class="pt">The handout</span>
+      <span class="px">Grouped by unit, worksheet and section, with where each structure is tested printed beside it. Prints, saves as PDF, or posts as a page.</span>
+    </div>
+
+    <div class="paper">
+      <span class="tag">Output 02</span>
+      <div class="mini" aria-hidden="true">
+        <div class="mh">Decision log</div>
+        <table>
+          <tr><th>Structure</th><th>Keep</th><th>Cut</th><th>Agree</th></tr>
+          <tr><td>Superior</td><td>2</td><td>0</td><td>100%</td></tr>
+          <tr><td>Oblique plane</td><td>1</td><td>1</td><td>50%</td></tr>
+          <tr><td>Proximal</td><td>2</td><td>0</td><td>100%</td></tr>
+          <tr><td>Lamp</td><td>0</td><td>0</td><td>&ndash;</td></tr>
+        </table>
+      </div>
+      <span class="pt">The spreadsheet</span>
+      <span class="px">Every structure with its counts, the agreement behind it and the recommendation. Seven tabs in all, including who has been through what.</span>
+    </div>
+
+    <div class="paper">
+      <span class="tag">Output 03</span>
+      <div class="mini" aria-hidden="true">
+        <div class="mh">Needs a decision</div>
+        <div class="ag"><b>Oblique plane</b><i class="t">Talk</i></div>
+        <div class="ag"><b>Lamp</b><i class="t">Talk</i></div>
+        <div class="ag"><b>Vertebrosternal ribs</b><i class="t">Talk</i></div>
+        <div class="ag"><b>The meninges</b><i class="k">Remove</i></div>
+        <div class="ms">Everything else agreed</div>
+      </div>
+      <span class="pt">The meeting agenda</span>
+      <span class="px">Only what the rule could not settle, most-marked first. A department meeting starts from the real disagreements instead of a thousand rows.</span>
+    </div>
+  </div>
+
   <div class="grid">
     <div class="mod">
       <div class="num">01</div><h3>A web page</h3>
@@ -433,16 +543,49 @@ footer{max-width:1180px;margin:0 auto;padding:28px 24px 44px;color:var(--ink-sof
   var seen=false; try{ seen=sessionStorage.getItem("slIntro")==="1"; }catch(e){}
   var end=function(){ f.classList.add("done"); try{ sessionStorage.setItem("slIntro","1"); }catch(e){} };
   document.getElementById("skipFilm").onclick=end;
+
+  /* The montage borrows three pictures from the Rounds site next door.
+   * Same host, so no copies to keep in step. If any of them cannot be
+   * reached, that frame drops out rather than leaving a grey hole, and
+   * if none of them load the whole scene is skipped. */
+  var montageOk=true;
+  (function(){
+    var figs=[].slice.call(document.querySelectorAll("#s3 figure"));
+    var live=figs.length;
+    figs.forEach(function(fig){
+      var img=fig.querySelector("img");
+      img.addEventListener("error", function(){
+        fig.style.display="none";
+        if(--live<=0) montageOk=false;
+      });
+    });
+  })();
   if(reduce||seen){ f.classList.add("done"); return; }
   document.getElementById("beginBtn").onclick=function(){
-    var s1=document.getElementById("s1"), s2=document.getElementById("s2");
+    var s1=document.getElementById("s1"), s2=document.getElementById("s2"), s3=document.getElementById("s3");
     var hw=document.getElementById("hw"), hl=document.getElementById("hl");
     document.getElementById("s0").classList.remove("on");
-    var greet=[["hello","Welcome"],["hola","Bienvenidos"],["kumusta","Maligayang pagdating"]][Math.floor(Math.random()*3)];
+
+    /* Three greetings in a row rather than one at random, because the
+     * run of them is the point: a lot of people, one list. */
+    var greets=[["hello","Welcome"],["hola","Bienvenidos"],["kumusta","Maligayang pagdating"]];
     var t=0, at=function(ms,fn){ setTimeout(fn,t+=ms); };
-    at(150,function(){ hw.textContent=greet[0]; hl.textContent=greet[1]; s1.classList.add("on"); });
-    at(3400,function(){ s1.classList.remove("on"); s2.classList.add("on"); });
-    at(3200,end);
+
+    greets.forEach(function(g,k){
+      at(k===0 ? 150 : 1500, function(){
+        hw.textContent=g[0]; hl.textContent=g[1];
+        s1.classList.remove("on");
+        void hw.getBBox ? hw.getBBox() : hw.offsetWidth;   /* restart the stroke */
+        s1.classList.add("on");
+      });
+    });
+
+    at(1800, function(){ s1.classList.remove("on"); s2.classList.add("on"); });
+    at(2600, function(){
+      s2.classList.remove("on");
+      if(montageOk){ s3.classList.add("on"); }
+    });
+    at(montageOk ? 3000 : 400, end);
   };
 })();
 
@@ -462,54 +605,85 @@ footer{max-width:1180px;margin:0 auto;padding:28px 24px 44px;color:var(--ink-sof
   var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   var reads=[document.getElementById("r1"),document.getElementById("r2"),document.getElementById("r3")];
-  var targets=[
-    function(){ return field; },
-    function(){ return document.getElementById("stHead"); },
-    function(){ return document.getElementById("v2"); },
-    function(){ return document.getElementById("w1"); },
-    function(){ return document.getElementById("stTick"); },
-    function(){ return document.getElementById("vRes"); }
+  var ring=document.getElementById("ring"), coach=document.getElementById("coach");
+  var tail=document.getElementById("coachTail");
+  var cN=document.getElementById("coachN"), cH=document.getElementById("coachH"), cD=document.getElementById("coachD");
+
+  /* what each step points at, and the short line that rides in the bubble */
+  var SPEC=[
+    {t:function(){ return field; }, h:"Put your name in",
+     d:"No account, no password. Your name is how we see who said what."},
+    {t:function(){ return document.getElementById("stHead"); }, h:"Open a section",
+     d:"One block at a time, grouped the way the worksheets are."},
+    {t:function(){ return document.getElementById("stTick"); }, h:"Happy with all of it? Tick here",
+     d:"Keep is already the answer on every row. Agree with the block and this one tick is the whole job."},
+    {t:function(){ return document.getElementById("v2"); }, h:"Want one changed? Mark that row",
+     d:"Only the rows you want different need a click."},
+    {t:function(){ return document.getElementById("w1"); }, h:"Say where you test it",
+     d:"Your ticks are kept separately and never replace anyone else's."},
+    {t:function(){ return document.getElementById("vRes"); }, h:"See where the group landed",
+     d:"A recommendation per structure, with the agreement behind it."}
   ];
 
   var i=0, playing=!reduce, timer=null;
 
   function paint(n){
     stage.classList.toggle("open",   n>=1);
-    stage.classList.toggle("ticked", n>=4);
+    stage.classList.toggle("ticked", n>=2);
     stage.classList.toggle("results",n>=5);
     for(var k=0;k<6;k++) stage.classList.toggle("s"+k, n>=k);
 
-    field.textContent = n>=0 ? "S. Rennie" : "Your name";
-    document.getElementById("v2").classList.toggle("hit", n>=2);
-    document.getElementById("w1").classList.toggle("hit", n>=3);
+    field.textContent="S. Rennie";
+    document.getElementById("v2").classList.toggle("hit", n>=3);
+    document.getElementById("w1").classList.toggle("hit", n>=4);
     document.getElementById("vSec").classList.toggle("on", n<5);
     document.getElementById("vRes").classList.toggle("on", n>=5);
     reads.forEach(function(el){
-      el.textContent = n>=4 ? "1 of 3" : "0 of 3";
-      el.classList.toggle("all", n>=4);
+      el.textContent = n>=2 ? "1 of 3" : "0 of 3";
+      el.classList.toggle("all", n>=2);
     });
 
     items.forEach(function(li,k){ li.classList.toggle("now", k===n); });
     pos.textContent = "Step " + (n+1) + " of 6";
     cap.textContent = items[n].querySelector(".h").textContent + ". " +
                       items[n].querySelector(".d").textContent;
+    cN.textContent = items[n].querySelector(".n").textContent;
+    cH.textContent = SPEC[n].h;
+    cD.textContent = SPEC[n].d;
   }
 
   function point(n){
     if(reduce) return;
-    var el = targets[n] && targets[n]();
+    var el = SPEC[n] && SPEC[n].t();
     if(!el) return;
     var a = stage.getBoundingClientRect(), b = el.getBoundingClientRect();
     if(!b.width && !b.height) return;              /* hidden, nothing to point at */
-    var x = b.left - a.left + b.width/2  - 8;
-    var y = b.top  - a.top  + b.height/2 - 8;
-    var tx = "translate(" + Math.round(x) + "px," + Math.round(y) + "px)";
-    cursor.style.setProperty("--tx", tx);
-    cursor.style.transform = tx;
+    var cx = b.left - a.left + b.width/2;
+    var cy = b.top  - a.top  + b.height/2;
+
+    /* the arrow's tip is its top-left corner, so sit that on the target */
+    cursor.style.transform = "translate(" + Math.round(cx-3) + "px," + Math.round(cy-2) + "px)";
     cursor.classList.add("show");
-    cursor.classList.remove("tap");
-    void cursor.offsetWidth;
-    setTimeout(function(){ cursor.classList.add("tap"); }, 820);
+    ring.style.transform = "translate(" + Math.round(cx) + "px," + Math.round(cy) + "px)";
+    ring.classList.remove("pulse");
+    void ring.offsetWidth;
+    setTimeout(function(){ ring.classList.add("pulse"); }, 820);
+
+    /* bubble below the target when there is room, above it when there is
+       not, and never hanging off the edge of the stage */
+    coach.classList.remove("show");
+    setTimeout(function(){
+      var w = coach.offsetWidth || 248, h = coach.offsetHeight || 96;
+      var below = (cy + 24 + h) < a.height;
+      var top  = below ? cy + 24 : cy - 24 - h;
+      var left = Math.min(Math.max(8, cx - w/2), Math.max(8, a.width - w - 8));
+      coach.classList.toggle("below", below);
+      coach.classList.toggle("above", !below);
+      coach.style.left = Math.round(left) + "px";
+      coach.style.top  = Math.round(top) + "px";
+      tail.style.left  = Math.round(Math.min(Math.max(12, cx - left - 6), w - 24)) + "px";
+      coach.classList.add("show");
+    }, 320);
   }
 
   function go(n, fromUser){
@@ -522,7 +696,7 @@ footer{max-width:1180px;margin:0 auto;padding:28px 24px 44px;color:var(--ink-sof
   }
 
   function tick(){ go(i+1); }
-  function start(){ if(reduce) return; playing=true; clearInterval(timer); timer=setInterval(tick,4600); setBtn(); }
+  function start(){ if(reduce) return; playing=true; clearInterval(timer); timer=setInterval(tick,5400); setBtn(); }
   function stop(){ playing=false; clearInterval(timer); setBtn(); }
   function setBtn(){
     var b=document.getElementById("wPlay");
@@ -542,6 +716,7 @@ footer{max-width:1180px;margin:0 auto;padding:28px 24px 44px;color:var(--ink-sof
     paint(5);
     items.forEach(function(li){ li.classList.remove("now"); });
     pos.textContent = "All six steps";
+    coach.classList.remove("show");
     stop();
   }else{
     paint(0);
