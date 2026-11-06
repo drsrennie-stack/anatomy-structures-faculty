@@ -74,18 +74,6 @@ button{font:inherit;cursor:pointer}
 .band .sub{margin-top:14px;color:#C8CCD6;font-size:18px;max-width:660px}
 .dot{display:inline-block;width:.17em;height:.17em;border-radius:50%;background:var(--maroon-on-dark);margin-left:.08em;vertical-align:baseline;transform:translateY(-.02em)}
 
-/* The step sequence, built the way the MedMasters site builds one:
-   a large maroon numeral, the heading beside it, a hairline between
-   each row, and no boxes. The size of the numerals carries the order. */
-.how{max-width:980px;margin:34px auto 0;padding:0 24px}
-.step{display:grid;grid-template-columns:104px 1fr;gap:10px;align-items:start;
-  padding:22px 0;border-top:1px solid var(--line)}
-.step:first-child{border-top:0}
-.step .num{font-family:"Plus Jakarta Sans";font-weight:800;font-size:46px;line-height:.9;
-  color:var(--maroon);letter-spacing:-.02em}
-.step .lab{display:block;font-weight:700;font-size:18px;color:var(--navy);line-height:1.3}
-.step .st{display:block;font-size:15px;color:var(--ink-soft);margin-top:7px;line-height:1.5;max-width:66ch}
-
 /* Section openers: letterspaced maroon eyebrow, navy headline with a
    word or two in maroon, closed with a full stop. */
 .eyebrow-s{font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
@@ -209,11 +197,12 @@ section > .lede{color:var(--ink-soft);margin:0 0 20px;max-width:70ch}
    and a short INCLUDES list. No shadows, no accent bars.
    ================================================================ */
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px;margin-top:22px}
-.pcard{border:1px solid var(--line);border-radius:10px;padding:24px 22px;background:var(--card);
-  display:flex;flex-direction:column;gap:8px}
-.pcard.lead{border:1.5px solid var(--maroon);position:relative}
+.pcard{position:relative;border:1.5px solid var(--line);border-radius:10px;padding:30px 22px 24px;
+  background:var(--card);display:flex;flex-direction:column;gap:8px}
+.pcard.lead{border-color:var(--maroon)}
 .pcard .pill{position:absolute;top:-11px;left:20px;background:var(--maroon);color:#fff;border-radius:4px;
-  padding:4px 10px;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+  padding:4px 10px;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  box-shadow:0 0 0 4px var(--ground)}   /* sits on the border rather than breaking it */
 .pcard .num{font-family:"Plus Jakarta Sans";font-weight:800;font-size:34px;line-height:1;color:var(--maroon)}
 .pcard h3{font-size:19px;color:var(--navy);margin-top:4px}
 .pcard .sub{font-size:14.5px;font-weight:600;color:var(--maroon)}
@@ -221,7 +210,9 @@ section > .lede{color:var(--ink-soft);margin:0 0 20px;max-width:70ch}
 .pcard .rule{border-top:1px solid var(--line);margin-top:14px;padding-top:14px}
 .pcard .inc{font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
 .pcard ul{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
-.pcard li{font-size:14px;color:var(--ink)}
+.pcard li{font-size:14px;color:var(--ink);position:relative;padding-left:16px}
+.pcard li::before{content:"";position:absolute;left:0;top:.52em;width:5px;height:5px;border-radius:999px;
+  background:var(--maroon)}
 .pcard .mini{margin-bottom:4px}
 
 /* ---------- output snapshot ---------- */
@@ -276,7 +267,7 @@ footer{max-width:1180px;margin:0 auto;padding:28px 24px 44px;color:var(--ink-sof
   display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 
 @media (max-width:980px){.walk{grid-template-columns:1fr}}
-@media (max-width:620px){.step{grid-template-columns:64px 1fr}.step .num{font-size:32px}}
+
 @media (max-width:620px){
   .st-q,.st-row{grid-template-columns:1fr;gap:6px}
   .st-q span:not(:first-child){display:none}
@@ -324,14 +315,7 @@ footer{max-width:1180px;margin:0 auto;padding:28px 24px 44px;color:var(--ink-sof
   </div>
 </header>
 
-<nav class="how" aria-label="The six steps, in order">
-  <div class="step"><div class="num">01</div><div><span class="lab">Put your name in</span><span class="st">No account, no password.</span></div></div>
-  <div class="step"><div class="num">02</div><div><span class="lab">Open one section</span><span class="st">Small blocks, same as the worksheets.</span></div></div>
-  <div class="step"><div class="num">03</div><div><span class="lab">If the block looks right to you, click it</span><span class="st">Everything stays unless someone asks to change it. One click and you are done.</span></div></div>
-  <div class="step"><div class="num">04</div><div><span class="lab">If something is wrong, say so</span><span class="st">Click just that row and say what you want instead.</span></div></div>
-  <div class="step"><div class="num">05</div><div><span class="lab">Add where you test it, if you want to</span><span class="st">Optional. Slide, model, cadaver, bone box.</span></div></div>
-  <div class="step"><div class="num">06</div><div><span class="lab">See what everybody said</span><span class="st">It adds up for you. A meeting starts with the few we disagree on.</span></div></div>
-</nav>
+
 
 <main id="main">
 
@@ -514,28 +498,8 @@ footer{max-width:1180px;margin:0 auto;padding:28px 24px 44px;color:var(--ink-sof
 
   <div class="cards">
     <div class="pcard">
+      <span class="pill">For the record</span>
       <div class="num">01</div>
-      <div class="mini" aria-hidden="true">
-        <div class="mh">BIOL 004 Structure List</div>
-        <div class="ms">Unit 1 &middot; Worksheet 1.0</div>
-        <div class="ml l"></div><div class="ml m"></div><div class="ml s"></div>
-        <div class="ms">Body planes and sections</div>
-        <div class="ml m"></div><div class="ml l"></div><div class="ml s"></div>
-      </div>
-      <h3>The structure list</h3>
-      <p class="sub">For students, and for the department</p>
-      <p class="desc">By unit, worksheet and section, with where each one is tested.</p>
-      <div class="rule"><span class="inc">Comes as</span>
-        <ul>
-          <li>A web page you can post or embed</li>
-          <li>A printable version, or a PDF</li>
-          <li>Either the whole list or just your own</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="pcard">
-      <div class="num">02</div>
       <div class="mini" aria-hidden="true">
         <div class="mh">Decision log</div>
         <table>
@@ -559,7 +523,7 @@ footer{max-width:1180px;margin:0 auto;padding:28px 24px 44px;color:var(--ink-sof
 
     <div class="pcard lead">
       <span class="pill">For the meeting</span>
-      <div class="num">03</div>
+      <div class="num">02</div>
       <div class="mini" aria-hidden="true">
         <div class="mh">Needs a decision</div>
         <div class="ag"><b>Oblique plane</b><i class="t">Talk</i></div>
@@ -575,6 +539,28 @@ footer{max-width:1180px;margin:0 auto;padding:28px 24px 44px;color:var(--ink-sof
           <li>What each person wanted, and why</li>
           <li>How close the split is</li>
           <li>Which proposals are still waiting</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pcard">
+      <span class="pill">For the students</span>
+      <div class="num">03</div>
+      <div class="mini" aria-hidden="true">
+        <div class="mh">BIOL 004 Structure List</div>
+        <div class="ms">Unit 1 &middot; Worksheet 1.0</div>
+        <div class="ml l"></div><div class="ml m"></div><div class="ml s"></div>
+        <div class="ms">Body planes and sections</div>
+        <div class="ml m"></div><div class="ml l"></div><div class="ml s"></div>
+      </div>
+      <h3>The structure list</h3>
+      <p class="sub">What the new worksheets are built from</p>
+      <p class="desc">By unit, worksheet and section, with where each one is tested.</p>
+      <div class="rule"><span class="inc">Comes as</span>
+        <ul>
+          <li>A web page you can post or embed</li>
+          <li>A printable version, or a PDF</li>
+          <li>Either the whole list or just your own</li>
         </ul>
       </div>
     </div>
