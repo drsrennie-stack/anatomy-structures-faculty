@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --navy:#02050F; --navy-2:#081026; --maroon:#8B2E2E; --maroon-2:#A33636; --maroon-on-dark:#CC5A5A; --gold:#E3B341; --gold-brushed:#B8924A;
+  --navy:#02050F; --navy-2:#081026; --maroon:#8B2E2E; --maroon-2:#A33636; --maroon-on-dark:#8B2E2E;   /* Dr. Rennie's call: brand maroon on dark, see compliance notes */ --gold:#E3B341; --gold-brushed:#B8924A;
   --ink:#1A1F2E; --ink-soft:#4A5064; --line:#D9DCE3; --control:#8A90A0; --page:#FAFAF9; --card:#FFFFFF; --tint:#EDF1F3;
   --shadow-rest:0 1px 3px rgba(0,0,0,.08); --shadow-hover:0 8px 16px rgba(0,0,0,.10);
 }
@@ -203,8 +203,29 @@ section > .lede{color:var(--ink-soft);margin:0 0 20px;max-width:70ch}
 .walk.off{grid-template-columns:minmax(0,1fr)}
 .wctl .pos{font-size:12px;color:var(--ink-soft);letter-spacing:.08em;text-transform:uppercase;font-weight:600}
 
+/* ================================================================
+   Cards built the way the MedMasters site builds them: a hairline
+   border, a large maroon numeral, a maroon sub-line, then a divider
+   and a short INCLUDES list. No shadows, no accent bars.
+   ================================================================ */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px;margin-top:22px}
+.pcard{border:1px solid var(--line);border-radius:10px;padding:24px 22px;background:var(--card);
+  display:flex;flex-direction:column;gap:8px}
+.pcard.lead{border:1.5px solid var(--maroon);position:relative}
+.pcard .pill{position:absolute;top:-11px;left:20px;background:var(--maroon);color:#fff;border-radius:4px;
+  padding:4px 10px;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.pcard .num{font-family:"Plus Jakarta Sans";font-weight:800;font-size:34px;line-height:1;color:var(--maroon)}
+.pcard h3{font-size:19px;color:var(--navy);margin-top:4px}
+.pcard .sub{font-size:14.5px;font-weight:600;color:var(--maroon)}
+.pcard .desc{font-size:14.5px;color:var(--ink-soft);line-height:1.55;margin-top:2px}
+.pcard .rule{border-top:1px solid var(--line);margin-top:14px;padding-top:14px}
+.pcard .inc{font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
+.pcard ul{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
+.pcard li{font-size:14px;color:var(--ink)}
+.pcard .mini{margin-bottom:4px}
+
 /* ---------- output snapshot ---------- */
-.snap{display:grid;grid-template-columns:repeat(auto-fit,minmax(252px,1fr));gap:16px;margin:0 0 24px}
+.snap{display:none}
 .paper{background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow-rest);
   padding:14px;display:flex;flex-direction:column;gap:9px;transition:transform 200ms ease,box-shadow 200ms ease}
 .paper:hover{transform:translateY(-2px);box-shadow:var(--shadow-hover)}
@@ -299,17 +320,17 @@ footer{max-width:1180px;margin:0 auto;padding:28px 24px 44px;color:var(--ink-sof
   <div class="wrap">
     <div class="eyebrow">BIO 004 &middot; Human Anatomy &middot; Faculty</div>
     <h1>Structure List <span>Review</span><span class="dot" aria-hidden="true"></span></h1>
-    <p class="sub">One shared list of every structure we test in lab, put together by all of us. It is the minimum we all cover. It does not limit what you teach in your own section. Most of it you will simply agree with, and agreeing takes one click.</p>
+    <p class="sub">The structures we all test in lab, agreed on together. Most of it you will just agree with, and agreeing takes one click.</p>
   </div>
 </header>
 
 <nav class="how" aria-label="The six steps, in order">
-  <div class="step"><div class="num">01</div><div><span class="lab">Put your name in</span><span class="st">Just your name. There is no account to set up and no password to remember.</span></div></div>
-  <div class="step"><div class="num">02</div><div><span class="lab">Open one section</span><span class="st">The list is split into small blocks, the same ones that are on the worksheets. You never have to face all of it at once.</span></div></div>
-  <div class="step"><div class="num">03</div><div><span class="lab">If the block looks right to you, click it</span><span class="st">Every structure stays on the list unless somebody asks for a change, so agreeing with a block takes one click and nothing else.</span></div></div>
-  <div class="step"><div class="num">04</div><div><span class="lab">If something is wrong, say so</span><span class="st">Click only the row you would change, and choose what you want instead. You can do this before or after you click that box.</span></div></div>
-  <div class="step"><div class="num">05</div><div><span class="lab">Add where you test it, if you want to</span><span class="st">Slide, model, cadaver, bone box. This part is optional. It is there because it helps when we are planning lab.</span></div></div>
-  <div class="step"><div class="num">06</div><div><span class="lab">See what everybody said</span><span class="st">The tool adds it all up for you, so a meeting can start with the handful we disagree on instead of reading a thousand rows out loud.</span></div></div>
+  <div class="step"><div class="num">01</div><div><span class="lab">Put your name in</span><span class="st">No account, no password.</span></div></div>
+  <div class="step"><div class="num">02</div><div><span class="lab">Open one section</span><span class="st">Small blocks, same as the worksheets.</span></div></div>
+  <div class="step"><div class="num">03</div><div><span class="lab">If the block looks right to you, click it</span><span class="st">Everything stays unless someone asks to change it. One click and you are done.</span></div></div>
+  <div class="step"><div class="num">04</div><div><span class="lab">If something is wrong, say so</span><span class="st">Click just that row and say what you want instead.</span></div></div>
+  <div class="step"><div class="num">05</div><div><span class="lab">Add where you test it, if you want to</span><span class="st">Optional. Slide, model, cadaver, bone box.</span></div></div>
+  <div class="step"><div class="num">06</div><div><span class="lab">See what everybody said</span><span class="st">It adds up for you. A meeting starts with the few we disagree on.</span></div></div>
 </nav>
 
 <main id="main">
@@ -317,7 +338,7 @@ footer{max-width:1180px;margin:0 auto;padding:28px 24px 44px;color:var(--ink-sof
 <section aria-labelledby="walkTitle">
   <p class="eyebrow-s">How it works</p>
   <h2 id="walkTitle">Watch how it <span>works</span>.</h2>
-  <p class="lede">Six steps, about a minute. It plays by itself, and you can stop it or turn it off. Step 03 is the one that matters: if a block already looks right to you, one click finishes it.</p>
+  <p class="lede">About a minute. Plays itself, or turn it off.</p>
 
   <p class="walkoff" id="walkOff" hidden>
     The walkthrough is off. The six steps are written out underneath, and nothing moves.
@@ -413,12 +434,12 @@ footer{max-width:1180px;margin:0 auto;padding:28px 24px 44px;color:var(--ink-sof
 
     <div class="walkside">
       <ol class="caps" id="caps">
-        <li data-i="0"><span class="n">01</span><span><span class="h">Put your name in</span><span class="d">No account and no password. Your name is simply how the rest of us see who said what.</span></span></li>
-        <li data-i="1"><span class="n">02</span><span><span class="h">Open a section</span><span class="d">The list is grouped the way the worksheets are, so you work through one block at a time instead of scrolling a thousand rows.</span></span></li>
-        <li data-i="2"><span class="n">03</span><span><span class="h">Agree with the whole block? Click it and move on</span><span class="d">Keep is already the answer on every row, so a block you agree with needs no clicks at all. Click the box at the end and you are finished with it. For most sections this is the only thing you will do.</span></span></li>
-        <li data-i="3"><span class="n">04</span><span><span class="h">Only if one of them is wrong: mark that row</span><span class="d">Click the row you disagree with and say what you want instead. Cut it, keep it with a condition, or flag that you are undecided. You can do this before or after you click that box.</span></span></li>
-        <li data-i="4"><span class="n">05</span><span><span class="h">Optional: say where you test it</span><span class="d">Slide, model, cadaver, bone box, radiograph. Useful for lab planning later. Your marks are kept separately, so they never replace anyone else’s.</span></span></li>
-        <li data-i="5"><span class="n">06</span><span><span class="h">See where the group landed</span><span class="d">Results turns all the marking into a recommendation for each structure, with the agreement behind it, so a meeting can start from the real disagreements.</span></span></li>
+        <li data-i="0"><span class="n">01</span><span><span class="h">Put your name in</span><span class="d">No account, no password.</span></span></li>
+        <li data-i="1"><span class="n">02</span><span><span class="h">Open one section</span><span class="d">Small blocks, same as the worksheets.</span></span></li>
+        <li data-i="2"><span class="n">03</span><span><span class="h">Looks right? Click the box</span><span class="d">Everything stays unless someone asks to change it. For most blocks this is all you do.</span></span></li>
+        <li data-i="3"><span class="n">04</span><span><span class="h">Something wrong? Click that row</span><span class="d">Say what you want instead. Before or after the box.</span></span></li>
+        <li data-i="4"><span class="n">05</span><span><span class="h">Where you test it</span><span class="d">Optional. Helps when we plan lab.</span></span></li>
+        <li data-i="5"><span class="n">06</span><span><span class="h">See what everyone said</span><span class="d">Adds up on its own.</span></span></li>
       </ol>
 
       <div class="wctl">
@@ -436,32 +457,52 @@ footer{max-width:1180px;margin:0 auto;padding:28px 24px 44px;color:var(--ink-sof
 <section aria-labelledby="doTitle">
   <p class="eyebrow-s">Your options</p>
   <h2 id="doTitle">What you can <span>do</span>.</h2>
-  <p class="lede">None of this is required. If a whole unit looks right to you, click your way through it and you are done.</p>
-  <div class="grid">
-    <div class="mod">
-      <div class="num">01</div><h3>Cut something</h3>
-      <p>Mark a structure to come off the shared minimum. It stays on the record and stays available to you in your own section.</p>
+  <p class="lede">None of it is required.</p>
+
+  <div class="cards">
+    <div class="pcard">
+      <div class="num">01</div>
+      <h3>Say what you think</h3>
+      <p class="sub">One click per row, only where you disagree</p>
+      <p class="desc">Only for the handful you would do differently.</p>
+      <div class="rule"><span class="inc">Includes</span>
+        <ul>
+          <li>Take it off the shared list</li>
+          <li>Keep it, but only under a condition you write down</li>
+          <li>Flag that you have not made up your mind</li>
+          <li>Say where you test it, if you want to</li>
+        </ul>
+      </div>
     </div>
-    <div class="mod">
-      <div class="num">02</div><h3>Add something</h3>
-      <p>Propose a structure straight into the section where it belongs. It lands marked Recommend Add so the group can talk about it.</p>
+
+    <div class="pcard">
+      <div class="num">02</div>
+      <h3>Add what is missing</h3>
+      <p class="sub">Straight into the section it belongs in</p>
+      <p class="desc">Goes on as a proposal, so the group sees it.</p>
+      <div class="rule"><span class="inc">Includes</span>
+        <ul>
+          <li>Propose a structure, with your reason</li>
+          <li>Record what the faculty decided, in one line</li>
+          <li>Leave a comment under your name</li>
+          <li>Comment on a whole block at once</li>
+        </ul>
+      </div>
     </div>
-    <div class="mod">
-      <div class="num">03</div><h3>Keep it with a condition</h3>
-      <p>For the ones that stay only on the model, or that students name rather than identify. Write the condition in the reason box.</p>
-    </div>
-    <div class="mod">
-      <div class="num">04</div><h3>Record a decision</h3>
-      <p>One line per structure saying where it landed. That is the line that prints beside the structure on the final handout.</p>
-    </div>
-    <div class="mod">
-      <div class="num">05</div><h3>Talk it through</h3>
-      <p>Comments sit under your name and nothing overwrites them. Use them for the reasoning, and the decision line for the outcome.</p>
-    </div>
-    <div class="mod">
-      <div class="num">06</div><h3>Build your own list</h3>
-      <p>Switch structures on or off for your own course, then print a handout that is yours. It changes nothing for anybody else.</p>
-      <span class="pill">Yours alone</span>
+
+    <div class="pcard">
+      <div class="num">03</div>
+      <h3>Keep your own version</h3>
+      <p class="sub">Yours alone, nobody else sees it</p>
+      <p class="desc">Switch things on or off for your section. The shared list does not move.</p>
+      <div class="rule"><span class="inc">Includes</span>
+        <ul>
+          <li>Add something the group left off</li>
+          <li>Drop something you do not cover</li>
+          <li>Or follow the department, row by row</li>
+          <li>Print or post your own version</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
@@ -469,23 +510,32 @@ footer{max-width:1180px;margin:0 auto;padding:28px 24px 44px;color:var(--ink-sof
 <section aria-labelledby="outTitle">
   <p class="eyebrow-s">What it produces</p>
   <h2 id="outTitle">What you get at <span>the end</span>.</h2>
-  <p class="lede">Here is what all the clicking is for. Each of these is made from what we mark, so nobody has to retype anything and none of it can fall out of date.</p>
-  <div class="snap">
-    <div class="paper">
-      <span class="tag">Output 01</span>
+  <p class="lede">All built from what we mark. Nothing is retyped.</p>
+
+  <div class="cards">
+    <div class="pcard">
+      <div class="num">01</div>
       <div class="mini" aria-hidden="true">
         <div class="mh">BIOL 004 Structure List</div>
         <div class="ms">Unit 1 &middot; Worksheet 1.0</div>
         <div class="ml l"></div><div class="ml m"></div><div class="ml s"></div>
         <div class="ms">Body planes and sections</div>
-        <div class="ml m"></div><div class="ml l"></div><div class="ml s"></div><div class="ml m"></div>
+        <div class="ml m"></div><div class="ml l"></div><div class="ml s"></div>
       </div>
-      <span class="pt">The handout</span>
-      <span class="px">Laid out by unit, worksheet and section, with where each structure is tested next to it. Print it, save it as a PDF, or put it on a page.</span>
+      <h3>The structure list</h3>
+      <p class="sub">For students, and for the department</p>
+      <p class="desc">By unit, worksheet and section, with where each one is tested.</p>
+      <div class="rule"><span class="inc">Comes as</span>
+        <ul>
+          <li>A web page you can post or embed</li>
+          <li>A printable version, or a PDF</li>
+          <li>Either the whole list or just your own</li>
+        </ul>
+      </div>
     </div>
 
-    <div class="paper">
-      <span class="tag">Output 02</span>
+    <div class="pcard">
+      <div class="num">02</div>
       <div class="mini" aria-hidden="true">
         <div class="mh">Decision log</div>
         <table>
@@ -493,56 +543,40 @@ footer{max-width:1180px;margin:0 auto;padding:28px 24px 44px;color:var(--ink-sof
           <tr><td>Superior</td><td>2</td><td>0</td><td>100%</td></tr>
           <tr><td>Oblique plane</td><td>1</td><td>1</td><td>50%</td></tr>
           <tr><td>Proximal</td><td>2</td><td>0</td><td>100%</td></tr>
-          <tr><td>Lamp</td><td>0</td><td>0</td><td>&ndash;</td></tr>
         </table>
       </div>
-      <span class="pt">The spreadsheet</span>
-      <span class="px">Every structure, how everyone marked it, and how much we agreed. Seven tabs, including one showing who has been through what.</span>
+      <h3>The record</h3>
+      <p class="sub">Seven tabs, nothing typed by hand</p>
+      <p class="desc">How everyone marked it and how much we agreed. Still there next year.</p>
+      <div class="rule"><span class="inc">Includes</span>
+        <ul>
+          <li>Every vote and every comment</li>
+          <li>Which structures are on models, cadaver, slides</li>
+          <li>Who has been through which sections</li>
+        </ul>
+      </div>
     </div>
 
-    <div class="paper">
-      <span class="tag">Output 03</span>
+    <div class="pcard lead">
+      <span class="pill">For the meeting</span>
+      <div class="num">03</div>
       <div class="mini" aria-hidden="true">
         <div class="mh">Needs a decision</div>
         <div class="ag"><b>Oblique plane</b><i class="t">Talk</i></div>
         <div class="ag"><b>Lamp</b><i class="t">Talk</i></div>
         <div class="ag"><b>Vertebrosternal ribs</b><i class="t">Talk</i></div>
-        <div class="ag"><b>The meninges</b><i class="k">Remove</i></div>
         <div class="ms">Everything else agreed</div>
       </div>
-      <span class="pt">The meeting agenda</span>
-      <span class="px">Just the handful we did not agree on, busiest first. A meeting can start there instead of reading the whole list out loud.</span>
-    </div>
-  </div>
-
-  <div class="grid">
-    <div class="mod">
-      <div class="num">01</div><h3>A web page</h3>
-      <p>The agreed list as a finished page, ready to post or drop into Canvas. It carries its own height sender, so it sits correctly in a frame without anyone touching the embed code.</p>
-      <span class="pill">Self contained HTML</span>
-    </div>
-    <div class="mod">
-      <div class="num">02</div><h3>A printable handout</h3>
-      <p>The same list laid out for paper or PDF, grouped by unit, worksheet and section, with where each structure is tested printed beside it if you want that shown.</p>
-      <span class="pill">Print or save as PDF</span>
-    </div>
-    <div class="mod">
-      <div class="num">03</div><h3>A spreadsheet</h3>
-      <p>Every structure with its vote counts, the agreement behind it and what the rule recommends. Build it for the department list or for your own course.</p>
-      <span class="pill">CSV</span>
-    </div>
-    <div class="mod">
-      <div class="num">04</div><h3>A meeting agenda</h3>
-      <p>Only the structures the rule could not settle, most-marked first. A department meeting can start from the real disagreements instead of reading a thousand rows aloud.</p>
-    </div>
-    <div class="mod">
-      <div class="num">05</div><h3>A lab planning view</h3>
-      <p>Which structures are tested on the cadaver, the models, the slides, the bone box. Useful well beyond this review when you are deciding what to set out.</p>
-    </div>
-    <div class="mod">
-      <div class="num">06</div><h3>Your own course list</h3>
-      <p>Everything above, filtered to what you switched on for your own section, with your name on it rather than the department's.</p>
-      <span class="pill">Yours alone</span>
+      <h3>The short list</h3>
+      <p class="sub">Only what we did not agree on</p>
+      <p class="desc">The few we are split on, busiest first.</p>
+      <div class="rule"><span class="inc">Shows</span>
+        <ul>
+          <li>What each person wanted, and why</li>
+          <li>How close the split is</li>
+          <li>Which proposals are still waiting</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
@@ -557,17 +591,17 @@ footer{max-width:1180px;margin:0 auto;padding:28px 24px 44px;color:var(--ink-sof
       <div>
         <div class="rnum">01</div>
         <h3>You are not signing up to teach less</h3>
-        <p>This list is the minimum we all cover, so any exam in any section can draw on it. What you add on top in your own section is entirely up to you, same as always.</p>
+        <p>The minimum we all cover. What you add on top is yours, same as always.</p>
       </div>
       <div>
         <div class="rnum">02</div>
         <h3>You cannot break anything</h3>
-        <p>Nothing is ever deleted, everything saves as you go, and you can stop half way through and pick it up whenever. If you change your mind, click again.</p>
+        <p>Nothing is deleted. It saves as you go. Stop any time. Changed your mind? Click again.</p>
       </div>
       <div>
         <div class="rnum">03</div>
         <h3>Nobody can write over your answers</h3>
-        <p>Every mark is saved under your name on its own. Two of us can work on the same section at the same time without getting in each other's way.</p>
+        <p>Your marks are yours. Two of us can work on the same section at once.</p>
       </div>
     </div>
   </div>
@@ -575,7 +609,7 @@ footer{max-width:1180px;margin:0 auto;padding:28px 24px 44px;color:var(--ink-sof
 
 <div class="cta">
   <a class="btn maroon" id="openTool" href="https://script.google.com/macros/s/AKfycbzuXqoZz6S3kyEm9c2019t6TSnBT8EOr6ko-7k668HglgWOg42t9oOtnrrxWgFLOWiJVQ/exec" target="_blank" rel="noopener">Open the review tool</a>
-  <p>Opens in a new tab. Put your name in and start wherever you like. You do not have to go in order.</p>
+  <p>Opens in a new tab. Start anywhere.</p>
 </div>
 
 <footer>
@@ -660,17 +694,17 @@ footer{max-width:1180px;margin:0 auto;padding:28px 24px 44px;color:var(--ink-sof
   /* what each step points at, and the short line that rides in the bubble */
   var SPEC=[
     {t:function(){ return field; }, h:"Put your name in",
-     d:"No account, no password. Your name is how we see who said what."},
+     d:"No account, no password."},
     {t:function(){ return document.getElementById("stHead"); }, h:"Open a section",
-     d:"One block at a time, grouped the way the worksheets are."},
-    {t:function(){ return document.getElementById("stTick"); }, h:"Agree with all of it? Click here",
-     d:"Keep is already the answer on every row, so this one click finishes the whole block. For most sections you will do nothing else."},
-    {t:function(){ return document.getElementById("v2"); }, h:"Only if one is wrong: mark that row",
-     d:"The other path. Click the row you disagree with, before or after clicking that box."},
-    {t:function(){ return document.getElementById("w1"); }, h:"Optional: say where you test it",
-     d:"Useful for lab planning. Your marks never replace anyone else's."},
+     d:"One block at a time."},
+    {t:function(){ return document.getElementById("stTick"); }, h:"Looks right? Click here",
+     d:"Everything stays unless someone asks to change it. This finishes the block."},
+    {t:function(){ return document.getElementById("v2"); }, h:"Something wrong? Click that row",
+     d:"Say what you want instead."},
+    {t:function(){ return document.getElementById("w1"); }, h:"Where you test it",
+     d:"Optional. Helps when we plan lab."},
     {t:function(){ return document.getElementById("vRes"); }, h:"See where the group landed",
-     d:"A recommendation per structure, with the agreement behind it."}
+     d:"Adds up on its own."}
   ];
 
   var i=0, playing=!reduce, timer=null;
