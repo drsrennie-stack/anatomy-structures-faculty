@@ -14,6 +14,7 @@
   --navy-deep:#081026;
   --navy-tint:#EDF1F3;
   --maroon:#8B2E2E;
+  --maroon-on-dark:#CC5A5A;   /* brand maroon is 2.45:1 on this navy, unreadable */
   --gold:#E3B341;
   --terra:#8B2E2E;
   --white:#FFFFFF;
@@ -576,7 +577,7 @@ footer{border-top:1px solid var(--hair);margin-top:54px;padding-block:22px 60px;
           <p>So marking something Recommend Remove is about what all of us must cover. It is not a vote to stop anyone covering it.</p>
         </section>
         <p class="keeprule">The dashed Keep circle on a row means that is where the row currently stands. Mark Cut if it should come off, Cond. if it stays only under certain circumstances, Unsure if you want to think about it, and Keep only when you want to push back on somebody else who flagged it.</p>
-        <p class="keeprule">At the end of every section there is one box to record that you have been through that block. That box is the only place reading is recorded. Tick it and every structure in the block counts as read by you, which is what the Read column on each row is counting.</p>
+        <p class="keeprule">At the end of every section there is one box to record that you have been through that block. That box is the only place reading is recorded. Click it and every structure in the block counts as read by you, which is what the Read column on each row is counting.</p>
         <p class="keeprule">There are two places to write on a structure, and the heading on each one tells you which. If the faculty has decided something about the structure, that goes in the decision box, one line per structure, for example model only, we have no clear cadaver view. That line prints next to the structure on the handout. If you want to say what you think, that goes in the comment box underneath, kept under your name, never overwritten, and it stays on this page. Everyone sees both.</p>
       </div>
     </details>
@@ -854,7 +855,7 @@ var PALETTE = ["#B3261E","#1B5E20","#0B4F6C","#6A1B9A","#8D4E00","#00695C","#AD1
 var COLUMN_QUESTIONS = {
   name:    {q:"Which structure?",            why:"The structure as it is worded on the worksheet. An indented name is a part of the structure above it."},
   votes:   {q:"Should it stay on the list?", why:"Your answer only. Leave a row alone and it stays. The number inside a mark is how many people have chosen it."},
-  wheres:  {q:"Where would a student encounter it?", why:"Tick every place you test it. Everyone's ticks are kept separately, so yours never replace anyone else's."},
+  wheres:  {q:"Where would a student encounter it?", why:"Click every place you test it. Everyone's marks are kept separately, so yours never replace anyone else's."},
   stat:    {q:"What is happening with it?",  why:"Whether this structure is settled, still being discussed, or somebody has proposed a change to it. Anyone can change this."},
   rev:     {q:"Who has read this block?",    why:"How many of us have been through the section this structure sits in. You set it once at the end of the section."},
   act:     {q:"More",                        why:"Opens everything about this one structure: locations, your reason, the shared note and the comments."}
@@ -1818,7 +1819,7 @@ function renderKey(){
 
   h.push('<div class="keygroup">' +
     '<p class="keyq">' + esc(COLUMN_QUESTIONS.rev.q) + '</p>' +
-    '<p class="keywhy">There is one place to record this, the box at the end of each section. Ticking it says you went through that whole block, and every structure in the block then counts as read by you. You do not tick anything on the individual rows.</p>' +
+    '<p class="keywhy">There is one place to record this, the box at the end of each section. Clicking it says you went through that whole block, and every structure in the block then counts as read by you. You do not tick anything on the individual rows.</p>' +
     '<ul class="keyrows">' +
     keyRow('<span class="keymark" aria-hidden="true">0/3</span>', "Nobody yet", "No one has been through the section this structure sits in.") +
     keyRow('<span class="keymark gold" aria-hidden="true">2/3</span>', "Some of us", "Two of the three people signed in have been through it.") +
@@ -1979,7 +1980,7 @@ function whereCellsHtml(r){
     return '<span class="wherecell">' +
       '<input type="checkbox" id="' + esc(id) + '" value="' + w.k + '"' +
       (mine.indexOf(w.k) > -1 ? " checked" : "") + ' data-where="' + esc(r.id) + '">' +
-      '<label for="' + esc(id) + '" title="' + esc(w.full + (n ? ". " + n + (n === 1 ? " person has" : " people have") + " ticked this." : "")) + '">' +
+      '<label for="' + esc(id) + '" title="' + esc(w.full + (n ? ". " + n + (n === 1 ? " person has" : " people have") + " marked this." : "")) + '">' +
       '<span class="sr-only">' + esc(w.full) + ", " + esc(r.structureName) + '</span>' +
       (n ? '<span class="count" aria-hidden="true">' + n + '</span>' : '') + '</label></span>';
   }).join("");
@@ -2005,7 +2006,7 @@ function detailHtml(r){
     var opts = whereOptionsFor(r);
     var mine = myWhere(r);
     h.push('<div class="dsec"><h4>Teaching and assessment locations</h4>' +
-      '<p class="dhint">Tick where you test this. Everyone\'s marks are kept separately, so nothing you tick removes anyone else\'s.</p>' +
+      '<p class="dhint">Click every place you test this. Everyone\'s marks are kept separately, so nothing you click removes anyone else\'s.</p>' +
       '<div class="dwhere">' + opts.map(function(w){
         var id = "dw-" + r.id + "-" + w.k;
         return '<label class="pill" for="' + esc(id) + '">' +
@@ -2090,7 +2091,7 @@ function detailHtml(r){
 
   /* who has been through the block this structure sits in */
   h.push('<div class="dsec"><h4>Who has read this block</h4>' +
-    '<p class="dhint">Set once, at the end of the section, not here. Ticking the box at the bottom of a section records that you went through every structure in it.</p>');
+    '<p class="dhint">Set once, at the end of the section, not here. Clicking the box at the bottom of a section records that you went through every structure in it.</p>');
   var roster = Object.keys(people).map(function(k){ return people[k]; });
   var rdrs = readersOf(r);
   if(!roster.length){
@@ -2166,9 +2167,9 @@ function sectionBarHtml(key, rows, title){
     ' data-screview="' + esc(key) + '"> I have been through this section</label>' +
     (mineCount
       ? '<span class="secbar-note">You have marked ' + mineCount + (mineCount === 1 ? ' structure' : ' structures') +
-        ' above. Tick this once you are finished with the block, and all ' + rows.length +
+        ' above. Click this once you are finished with the block, and all ' + rows.length +
         ' structures in it count as read by you.</span>'
-      : '<span class="secbar-note">Read the block above, then tick this to record that you went through it and had no changes. All ' +
+      : '<span class="secbar-note">Read the block above, then click this to record that you went through it and had no changes. All ' +
         rows.length + ' structures in the block then count as read by you, which is what the Read column on each row is counting.</span>') +
     '</div>');
 
