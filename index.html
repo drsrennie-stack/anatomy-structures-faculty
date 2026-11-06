@@ -6,31 +6,31 @@
 <title>Master Anatomy List</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  /* Primary teaching palette */
-  --navy:#1E3D4C;
-  --navy-deep:#142a36;
+  /* Rounds palette, so the tool and its introduction sheet read as one thing */
+  --navy:#02050F;
+  --navy-deep:#081026;
   --navy-tint:#EDF1F3;
-  --gold:#B8924A;
-  --terra:#C2734D;
+  --maroon:#8B2E2E;
+  --gold:#E3B341;
+  --terra:#8B2E2E;
   --white:#FFFFFF;
 
   --ground:#FAFAF9;
   --card:#FFFFFF;
-  --ink:#1E3D4C;
-  --ink-soft:#43616F;
-  --ink-mute:#54707D;
-  --control:#5E7885;
-  --hair:rgba(30,61,76,0.18);
-  --hair-strong:rgba(30,61,76,0.34);
-  --tint:#F6EDE7;
+  --ink:#1A1F2E;
+  --ink-soft:#4A5064;
+  --ink-mute:#4A5064;
+  --control:#8A90A0;
+  --hair:#D9DCE3;
+  --hair-strong:#B6BBC6;
+  --tint:#F3EBEB;
   --gold-dark:#7A5C1E;
-  --terra-dark:#A0522D;
+  --terra-dark:#8B2E2E;
   --wash:#F2F5F6;
   --lift:0 1px 3px rgba(0,0,0,0.08);
-  --toolh:120px;                 /* measured from the real toolbar at runtime */
   --lift-hover:0 8px 16px rgba(0,0,0,0.10);
   --r:8px;
   --maxw:1180px;
@@ -42,10 +42,10 @@ body{
   margin:0;
   background:var(--ground);
   color:var(--ink);
-  font-family:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-family:"DM Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
   font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;
 }
-h1,h2,h3,h4{margin:0;text-wrap:balance;line-height:1.2}
+h1,h2,h3,h4{margin:0;text-wrap:balance;line-height:1.2;font-family:"Plus Jakarta Sans",system-ui,sans-serif}
 p{margin:0}
 button,input,select,textarea{font:inherit;color:inherit}
 a{color:var(--terra-dark)}
@@ -66,10 +66,10 @@ a{color:var(--terra-dark)}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
 
 /* ---------- masthead ---------- */
-.masthead{padding-block:26px 14px}
+
 .eyebrow{font-size:11px;font-weight:700;letter-spacing:3.3px;text-transform:uppercase;color:var(--terra-dark);margin-bottom:8px}
 .course{font-size:9.5px;font-weight:700;letter-spacing:2.09px;text-transform:uppercase;color:var(--ink-mute);margin-bottom:14px}
-h1{font-family:"Open Sans",Georgia,serif;font-weight:800;letter-spacing:-0.6px;font-size:clamp(28px,4.6vw,40px)}
+h1{font-weight:800;letter-spacing:-.02em;font-size:clamp(32px,5.4vw,56px)}
 .kicker{font-size:9.5px;font-weight:700;letter-spacing:2.09px;text-transform:uppercase;color:var(--terra-dark);margin-top:12px}
 .lede{margin-top:12px;font-size:15.5px;color:var(--ink-soft);max-width:72ch}
 
@@ -90,6 +90,19 @@ h1{font-family:"Open Sans",Georgia,serif;font-weight:800;letter-spacing:-0.6px;f
 .floor h2{font-size:9.5px;font-weight:700;letter-spacing:2.09px;text-transform:uppercase;color:var(--terra-dark);margin-bottom:10px}
 .floor p{font-size:14.5px;color:var(--ink-soft);margin-bottom:8px}
 .floor p:last-child{margin-bottom:0}
+
+/* ================================================================
+   The band, so the tool opens the same way its introduction sheet
+   does. Nothing below it changes but the colours it inherits.
+   ================================================================ */
+.masthead{padding-block:0 14px}
+.band{background:var(--navy);color:#fff;padding:44px 0 40px;margin-bottom:22px}
+.band .eyebrow{color:var(--gold)}
+.band .course{color:#C8CCD6}
+.band h1{color:#fff}
+.band .kicker{color:var(--gold)}
+.band .lede{color:#C8CCD6;max-width:70ch}
+.band .lede strong{color:#fff}
 
 /* ---------- identity ---------- */
 .identity{
@@ -194,7 +207,7 @@ h1{font-family:"Open Sans",Georgia,serif;font-weight:800;letter-spacing:-0.6px;f
 
 /* ---------- headings in the list ---------- */
 .unithead{
-  font-family:"Open Sans",Georgia,serif;font-weight:800;font-size:19px;
+  font-weight:800;font-size:19px;
   margin-top:34px;padding-bottom:8px;border-bottom:1px solid var(--hair);
 }
 .wshead{font-size:9.5px;font-weight:700;letter-spacing:2.09px;text-transform:uppercase;color:var(--terra-dark);margin-top:22px}
@@ -529,7 +542,7 @@ footer{border-top:1px solid var(--hair);margin-top:54px;padding-block:22px 60px;
   .toolbar{position:static}
 }
 @media (max-width:640px){
-  .masthead{padding-block:30px 14px}
+  .band{padding:34px 0 30px}
   .detail{grid-template-columns:1fr;gap:18px}
   .wrap{padding:0 16px}
 }
@@ -542,12 +555,16 @@ footer{border-top:1px solid var(--hair);margin-top:54px;padding-block:22px 60px;
 <a class="skip" href="#list">Skip to the structure list</a>
 
 <header class="masthead">
+  <div class="band">
+    <div class="wrap">
+      <p class="eyebrow">Solano Community College</p>
+      <p class="course">BIOL 004 &middot; Human Anatomy</p>
+      <h1>Master Anatomy List</h1>
+      <p class="kicker">Faculty collaboration workspace</p>
+      <p class="lede">One shared list of every structure we currently test in lab, worked on by the whole anatomy faculty. <strong>Everything on here stays unless somebody marks it</strong>, so you only click the rows you want to change. Everything you do mark is filed under your name and sits alongside everyone else's, so nothing you do replaces anybody else's work.</p>
+    </div>
+  </div>
   <div class="wrap">
-    <p class="eyebrow">Solano Community College</p>
-    <p class="course">BIOL 004 &middot; Human Anatomy</p>
-    <h1>Master Anatomy List</h1>
-    <p class="kicker">Faculty collaboration workspace</p>
-    <p class="lede">One shared list of every structure we currently test in lab, worked on by the whole anatomy faculty. <strong>Everything on here stays unless somebody marks it</strong>, so you only click the rows you want to change. Everything you do mark is filed under your name and sits alongside everyone else's, so nothing you do replaces anybody else's work.</p>
 
     <details class="intro">
       <summary>What this list is, and how marking works</summary>
@@ -2643,11 +2660,15 @@ function buildStandaloneHtml(opts){
   var list = finalList(opts);
   return '<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n' +
 '<meta name="viewport" content="width=device-width, initial-scale=1">\n' +
-'<title>' + esc(opts.title) + '</title>\n<style>\n' +
-':root{--navy:#1E3D4C;--terra-dark:#A0522D;--ink-mute:#54707D;--hair:rgba(30,61,76,0.18);' +
+'<title>' + esc(opts.title) + '</title>\n' +
+'<link rel="preconnect" href="https://fonts.googleapis.com">\n' +
+'<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">\n' +
+'<style>\n' +
+':root{--navy:#02050F;--maroon:#8B2E2E;--terra-dark:#8B2E2E;--ink:#1A1F2E;--ink-mute:#4A5064;--hair:#D9DCE3;' +
 '--ground:#FAFAF9;--card:#FFFFFF;--lift:0 1px 3px rgba(0,0,0,0.08)}\n' +
 '*{box-sizing:border-box}\n' +
-'body{margin:0;background:var(--ground);color:var(--navy);font-family:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6}\n' +
+'body{margin:0;background:var(--ground);color:var(--ink);font-family:"DM Sans",system-ui,-apple-system,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6}\n' +
+'h1,h2,h3{font-family:"Plus Jakarta Sans",system-ui,sans-serif}\n' +
 '.wrap{max-width:900px;margin:0 auto;padding:28px 20px 64px}\n' +
 '.card{background:var(--card);border:1px solid var(--hair);border-radius:8px;box-shadow:var(--lift);padding:22px 24px;margin-top:18px}\n' +
 'h1{font-size:clamp(24px,4vw,34px);font-weight:800;margin:0 0 8px;line-height:1.2}\n' +

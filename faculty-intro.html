@@ -107,7 +107,12 @@ section > .lede{color:var(--ink-soft);margin:0 0 20px;max-width:70ch}
 .stage.open .st-body{grid-template-rows:1fr}
 .st-inner{overflow:hidden;min-height:0}
 .st-q{display:grid;grid-template-columns:minmax(96px,1fr) 128px 96px 62px;gap:8px;background:var(--tint);
-  padding:8px 14px;font-size:10.5px;font-weight:600;color:var(--navy);border-top:1px solid var(--line)}
+  padding:8px 14px 2px;font-size:10.5px;font-weight:600;color:var(--navy);border-top:1px solid var(--line);line-height:1.25}
+.st-k{display:grid;grid-template-columns:minmax(96px,1fr) 128px 96px 62px;gap:8px;padding:3px 14px 7px;
+  background:var(--tint);border-bottom:1px solid var(--line)}
+.st-k i{font-style:normal;width:20px;text-align:center;font-size:6.5px;font-weight:700;letter-spacing:-.2px;
+  text-transform:uppercase;color:var(--ink-soft);white-space:nowrap;line-height:1.2}
+.st-k .st-votes i,.st-k .st-wheres i{display:block}
 .st-row{display:grid;grid-template-columns:minmax(96px,1fr) 128px 96px 62px;gap:8px;align-items:center;
   padding:9px 14px;border-top:1px solid var(--line);font-size:13.5px}
 .st-votes,.st-wheres{display:flex;gap:8px}
@@ -177,6 +182,12 @@ section > .lede{color:var(--ink-soft);margin:0 0 20px;max-width:70ch}
 .caps li.now{border-color:var(--navy);box-shadow:var(--shadow-hover)}
 .wctl{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .wctl .btn{padding:9px 14px;font-size:11px}
+.wctl .wqu{margin-left:auto}
+.walkoff{display:flex;gap:14px;align-items:center;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);
+  border-radius:12px;box-shadow:var(--shadow-rest);padding:14px 16px;margin-bottom:18px;font-size:14.5px;color:var(--ink-soft)}
+.walkoff[hidden]{display:none}
+.walk.off .stage,.walk.off .wctl{display:none}
+.walk.off{grid-template-columns:minmax(0,1fr)}
 .wctl .pos{font-size:12px;color:var(--ink-soft);letter-spacing:.08em;text-transform:uppercase;font-weight:600}
 
 /* ---------- output snapshot ---------- */
@@ -275,21 +286,26 @@ footer{max-width:1180px;margin:0 auto;padding:28px 24px 44px;color:var(--ink-sof
 </header>
 
 <nav class="how" aria-label="What the review asks of you">
-  <div class="step"><div class="num">00</div><span class="lab">Sign in</span><span class="st">Your name, nothing more</span></div>
-  <div class="step"><div class="num">01</div><span class="lab">Open a section</span><span class="st">One block at a time</span></div>
-  <div class="step"><div class="num">02</div><span class="lab">Happy with it? Tick</span><span class="st">For most blocks, that is all</span></div>
-  <div class="step"><div class="num">03</div><span class="lab">Want one changed?</span><span class="st">Mark that row only</span></div>
-  <div class="step"><div class="num">04</div><span class="lab">Where you test it</span><span class="st">Model, cadaver, slide</span></div>
-  <div class="step"><div class="num">05</div><span class="lab">See the result</span><span class="st">Where the group landed</span></div>
+  <div class="step"><div class="num">01</div><span class="lab">Sign in</span><span class="st">Your name, nothing more</span></div>
+  <div class="step"><div class="num">02</div><span class="lab">Open a section</span><span class="st">One block at a time</span></div>
+  <div class="step"><div class="num">03</div><span class="lab">Agree? Tick it</span><span class="st">For most blocks, that is all</span></div>
+  <div class="step"><div class="num">04</div><span class="lab">Only if one is wrong</span><span class="st">Mark that row</span></div>
+  <div class="step"><div class="num">05</div><span class="lab">Where you test it</span><span class="st">Model, cadaver, slide</span></div>
+  <div class="step"><div class="num">06</div><span class="lab">See the result</span><span class="st">Where the group landed</span></div>
 </nav>
 
 <main id="main">
 
 <section aria-labelledby="walkTitle">
   <h2 id="walkTitle">Watch how it <span>works</span></h2>
-  <p class="lede">Six steps, about a minute, moving on its own. Watch step 02: if a whole block already looks right to you, one tick is the entire job.</p>
+  <p class="lede">Six steps, about a minute, moving on its own. Step 03 is the one that matters: if a block already looks right to you, one tick finishes it and you move on.</p>
 
-  <div class="walk">
+  <p class="walkoff" id="walkOff" hidden>
+    The walkthrough is off. The six steps are written out underneath, and nothing moves.
+    <button class="btn ghost" type="button" id="wOn">Turn it back on</button>
+  </p>
+
+  <div class="walk" id="walkWrap">
     <div class="stage" id="stage" role="img" aria-labelledby="stageCap">
       <div class="st-top">
         <span class="st-name">
@@ -308,7 +324,13 @@ footer{max-width:1180px;margin:0 auto;padding:28px 24px 44px;color:var(--ink-sof
         </div>
         <div class="st-body"><div class="st-inner">
           <div class="st-q" aria-hidden="true">
-            <span>Which structure?</span><span>Should it stay?</span><span>Where tested?</span><span>Read</span>
+            <span>Which structure?</span><span>Should it stay on the list?</span><span>Where would a student encounter it?</span><span>Who has read this block?</span>
+          </div>
+          <div class="st-k" aria-hidden="true">
+            <span></span>
+            <span class="st-votes"><i>Keep</i><i>Cond</i><i>Unsure</i><i>Cut</i></span>
+            <span class="st-wheres"><i>Model</i><i>Cadav</i><i>Asked</i></span>
+            <span></span>
           </div>
 
           <div class="st-row">
@@ -372,12 +394,12 @@ footer{max-width:1180px;margin:0 auto;padding:28px 24px 44px;color:var(--ink-sof
 
     <div class="walkside">
       <ol class="caps" id="caps">
-        <li data-i="0"><span class="n">00</span><span><span class="h">Put your name in</span><span class="d">No account, no password. Your name is how the rest of us see who said what.</span></span></li>
-        <li data-i="1"><span class="n">01</span><span><span class="h">Open a section</span><span class="d">The list is grouped the way the worksheets are, so you take one block at a time instead of scrolling a thousand rows.</span></span></li>
-        <li data-i="2"><span class="n">02</span><span><span class="h">Happy with the whole block? Tick it and move on</span><span class="d">Keep is already the answer on every row, so a block you agree with needs no clicks at all. Tick the box at the end and you are finished with it. For most sections this is the only thing you will do.</span></span></li>
-        <li data-i="3"><span class="n">03</span><span><span class="h">Want one of them changed? Mark that row</span><span class="d">Only the rows you want different need a click. Cut it, keep it with a condition, or flag that you are undecided.</span></span></li>
-        <li data-i="4"><span class="n">04</span><span><span class="h">Say where you test it</span><span class="d">Slide, model, cadaver, bone box, radiograph. Your ticks are kept separately, so they never replace anyone else’s.</span></span></li>
-        <li data-i="5"><span class="n">05</span><span><span class="h">See where the group landed</span><span class="d">Results turns the marking into a recommendation per structure, with the agreement behind it, so a meeting can start from the real disagreements.</span></span></li>
+        <li data-i="0"><span class="n">01</span><span><span class="h">Put your name in</span><span class="d">No account and no password. Your name is simply how the rest of us see who said what.</span></span></li>
+        <li data-i="1"><span class="n">02</span><span><span class="h">Open a section</span><span class="d">The list is grouped the way the worksheets are, so you work through one block at a time instead of scrolling a thousand rows.</span></span></li>
+        <li data-i="2"><span class="n">03</span><span><span class="h">Agree with the whole block? Tick it and move on</span><span class="d">Keep is already the answer on every row, so a block you agree with needs no clicks at all. Tick the box at the end and you are finished with it. For most sections this is the only thing you will do.</span></span></li>
+        <li data-i="3"><span class="n">04</span><span><span class="h">Only if one of them is wrong: mark that row</span><span class="d">Click the row you disagree with and say what you want instead. Cut it, keep it with a condition, or flag that you are undecided. You can do this before or after you tick the block.</span></span></li>
+        <li data-i="4"><span class="n">05</span><span><span class="h">Optional: say where you test it</span><span class="d">Slide, model, cadaver, bone box, radiograph. Useful for lab planning later. Your ticks are kept separately, so they never replace anyone else’s.</span></span></li>
+        <li data-i="5"><span class="n">06</span><span><span class="h">See where the group landed</span><span class="d">Results turns all the marking into a recommendation for each structure, with the agreement behind it, so a meeting can start from the real disagreements.</span></span></li>
       </ol>
 
       <div class="wctl">
@@ -385,6 +407,7 @@ footer{max-width:1180px;margin:0 auto;padding:28px 24px 44px;color:var(--ink-sof
         <button class="btn" type="button" id="wPlay" aria-pressed="true">Pause</button>
         <button class="btn ghost" type="button" id="wNext">Next</button>
         <span class="pos" id="wPos">Step 1 of 6</span>
+        <button class="btn ghost wqu" type="button" id="wOff">Turn the walkthrough off</button>
       </div>
       <p class="sr-only" id="stageCap" aria-live="polite"></p>
     </div>
@@ -615,12 +638,12 @@ footer{max-width:1180px;margin:0 auto;padding:28px 24px 44px;color:var(--ink-sof
      d:"No account, no password. Your name is how we see who said what."},
     {t:function(){ return document.getElementById("stHead"); }, h:"Open a section",
      d:"One block at a time, grouped the way the worksheets are."},
-    {t:function(){ return document.getElementById("stTick"); }, h:"Happy with all of it? Tick here",
-     d:"Keep is already the answer on every row. Agree with the block and this one tick is the whole job."},
-    {t:function(){ return document.getElementById("v2"); }, h:"Want one changed? Mark that row",
-     d:"Only the rows you want different need a click."},
-    {t:function(){ return document.getElementById("w1"); }, h:"Say where you test it",
-     d:"Your ticks are kept separately and never replace anyone else's."},
+    {t:function(){ return document.getElementById("stTick"); }, h:"Agree with all of it? Tick here",
+     d:"Keep is already the answer on every row, so this one tick finishes the whole block. For most sections you will do nothing else."},
+    {t:function(){ return document.getElementById("v2"); }, h:"Only if one is wrong: mark that row",
+     d:"The other path. Click the row you disagree with, before or after ticking the block."},
+    {t:function(){ return document.getElementById("w1"); }, h:"Optional: say where you test it",
+     d:"Useful for lab planning. Your ticks never replace anyone else's."},
     {t:function(){ return document.getElementById("vRes"); }, h:"See where the group landed",
      d:"A recommendation per structure, with the agreement behind it."}
   ];
@@ -712,12 +735,34 @@ footer{max-width:1180px;margin:0 auto;padding:28px 24px 44px;color:var(--ink-sof
   });
   window.addEventListener("resize", function(){ point(i); });
 
+  /* Some people would rather read than be shown. Off hides the moving
+   * part and leaves the six steps as plain text, and the choice is
+   * remembered in this browser so nobody has to make it twice. */
+  var OFF_KEY="mal-walk-off";
+  var wrap=document.getElementById("walkWrap");
+  var offNote=document.getElementById("walkOff");
+  function setOff(off, moveFocus){
+    wrap.classList.toggle("off", off);
+    offNote.hidden=!off;
+    try{ localStorage.setItem(OFF_KEY, off ? "1" : "0"); }catch(e){}
+    if(off){ stop(); cap.textContent="Walkthrough turned off. The six steps are written out below."; }
+    else { paint(i); setTimeout(function(){ point(i); }, 80); }
+    if(moveFocus){ (off ? document.getElementById("wOn") : document.getElementById("wOff")).focus(); }
+  }
+  document.getElementById("wOff").onclick=function(){ setOff(true,true); };
+  document.getElementById("wOn").onclick=function(){ setOff(false,true); };
+  var savedOff=false;
+  try{ savedOff = localStorage.getItem(OFF_KEY)==="1"; }catch(e){}
+
   if(reduce){
     paint(5);
     items.forEach(function(li){ li.classList.remove("now"); });
     pos.textContent = "All six steps";
     coach.classList.remove("show");
     stop();
+  }else if(savedOff){
+    paint(0);
+    setOff(true,false);
   }else{
     paint(0);
     setTimeout(function(){ point(0); }, 300);

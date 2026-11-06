@@ -22,11 +22,19 @@ GOES TO THE REPO AND TO APPS SCRIPT
                        from Pages those will not resolve, and the montage
                        drops itself rather than showing grey boxes.
 
-  index.html           CHANGED. Two things since the last drop:
-                       worksheet 3.5 split into Major systemic veins and
-                       Pulmonary circulation, and a fix to the link
-                       targeting so an outside link is not pulled back
-                       into the frame when the page is opened from a file.
+  index.html           CHANGED. Restyled to the Rounds palette so the
+                       tool and the introduction sheet read as one thing.
+                       Near-black navy, maroon, gold, DM Sans over Plus
+                       Jakarta Sans, and a navy band across the title
+                       block that was already there. No wording, no
+                       structure and no behaviour changed.
+
+                       Also since the last drop: worksheet 3.5 split into
+                       Major systemic veins and Pulmonary circulation, and
+                       a fix to the link targeting so an outside link is
+                       not pulled back into the frame when the page is
+                       opened from a file. The handout the tool generates
+                       now carries the same palette and typefaces.
 
   code.gs              UNCHANGED since the September drop. Included only
                        because every zip has used the same filename and

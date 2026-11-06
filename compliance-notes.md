@@ -3,7 +3,7 @@
 **Project:** Master Anatomy List, faculty collaboration workspace
 **Files covered:** index.html (the application), faculty-intro.html (the introduction sheet and animated walkthrough), code.gs (server, no user interface), and the handout the application generates
 **Course:** Solano Community College, BIOL 004 Human Anatomy
-**Date:** November 6, 2026
+**Date:** November 6, 2026 (rebranded)
 **Reviewer:** Dr. Sharilyn Rennie
 
 ---
@@ -188,3 +188,38 @@ The page carries the iframe height sender under the id `structure-list-intro`. L
 
 The live screen reader pass listed in section 6 is still outstanding and now covers this page too. The walkthrough in particular is worth hearing out loud, since its value to a screen reader rests entirely on the caption list and the live region rather than on anything visual.
 
+---
+
+## 9. The November 6 rebrand
+
+index.html was restyled to the Rounds palette so the tool and its introduction sheet read as one thing. No wording, structure or behaviour changed; the swap is tokens, two typefaces and a navy band wrapped around the title block that was already there.
+
+This improved the contrast floor rather than threatening it. Every text pair on the rebranded tool now clears AAA:
+
+| Pair | Ratio |
+|---|---|
+| Gold eyebrow on the navy band | 10.46:1 |
+| Title on the navy band | 20.36:1 |
+| Supporting text on the navy band | 12.67:1 |
+| Body text on a white card | 16.41:1 |
+| Hint text on a white card | 8.01:1 |
+| Hint text on the wash | 7.31:1 |
+| Maroon label on a white card | 8.31:1 |
+| White on a maroon fill | 8.31:1 |
+| White on a navy fill | 20.36:1 |
+| Navy on the navy tint | 17.92:1 |
+| Maroon on the proposed-row tint | 7.08:1 |
+
+The previous build had six text pairs sitting between 4.8:1 and 6.7:1, all of which are now above 7:1. One colour remains below AAA: gold-dark at 6.22:1, used for the keep-with-a-condition and needs-a-decision labels. It passes AA comfortably and is never the only signal, since both carry words.
+
+Non-text: the control border is 3.19:1, clearing the 3:1 floor. The chip hairline at 1.92:1 is decoration on non-interactive chips only.
+
+axe-core was re-run across the section view with a structure open, the results view, the personal list view, the publish panel and the page at 390 pixels. Zero violations in every state. The generated handout inherits the same palette and the same two typefaces and was audited again: zero.
+
+### Turning the walkthrough off
+
+The introduction sheet's walkthrough can be switched off entirely. Off hides the moving stage and its controls, leaves all six steps as plain text, explains in a sentence what has happened, and announces it through the live region. The choice is remembered per browser and wrapped so the page still works when storage is unavailable. Turning it off moves focus to the control that turns it back on, and turning it on moves focus back, so a keyboard user is never left on a button that has vanished.
+
+### Step numbering
+
+The step badges, the six-across strip and the position counter were brought into line. They all read 01 through 06. The earlier build labelled the badges 00 to 05 while the counter said Step 1 of 6, which asked the reader to do arithmetic to work out where they were.
