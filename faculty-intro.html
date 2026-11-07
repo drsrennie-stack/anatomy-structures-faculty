@@ -196,7 +196,7 @@ section > .lede{color:var(--ink-soft);margin:0 0 20px;max-width:70ch}
    border, a large maroon numeral, a maroon sub-line, then a divider
    and a short INCLUDES list. No shadows, no accent bars.
    ================================================================ */
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px;margin-top:22px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px;margin-top:22px;align-items:start}
 .pcard{position:relative;border:1.5px solid var(--line);border-radius:10px;padding:30px 22px 24px;
   background:var(--card);display:flex;flex-direction:column;gap:8px}
 .pcard.lead{border-color:var(--maroon)}
@@ -223,8 +223,27 @@ section > .lede{color:var(--ink-soft);margin:0 0 20px;max-width:70ch}
 .onnavy h2{color:#fff;font-size:28px;font-weight:800}
 .onnavy h2 span{color:var(--maroon-on-dark)}
 .onnavy .lede{color:#C8CCD6;margin:0 0 4px}
-.onnavy .pcard{border-color:var(--gold)}
-.onnavy .pcard .pill{background:var(--gold);color:var(--navy);box-shadow:0 0 0 4px var(--navy)}
+.onnavy .pcard .pill{background:var(--gold);color:var(--navy)}
+
+/* On the dark band the options collapse to three titles. Nobody should
+   have to read nine bullets to find out they can skip the whole thing.
+   Native details and summary, so keyboard and screen readers work. */
+/* no overflow:hidden here, it clipped the focus ring to a stray line */
+.onnavy .pcard{border:0;border-radius:10px;padding:0;gap:0;display:block}
+.onnavy .pcard > summary{border-radius:10px}
+.onnavy .pcard > summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:1fr 20px;
+  align-items:start;gap:10px;padding:18px 20px}
+.onnavy .pcard > summary::-webkit-details-marker{display:none}
+.onnavy .pcard .pill{position:static;box-shadow:none;display:inline-block;margin-bottom:12px}
+.onnavy .pcard .num{font-size:30px;display:block}
+.onnavy .pcard .t{display:block;font-family:"Plus Jakarta Sans";font-weight:700;font-size:19px;
+  color:var(--navy);margin-top:4px;line-height:1.25}
+.onnavy .pcard .chev{width:9px;height:9px;border-right:2px solid var(--maroon);
+  border-bottom:2px solid var(--maroon);transform:rotate(45deg);margin-top:36px;justify-self:end;
+  transition:transform 200ms ease}
+.onnavy .pcard[open] .chev{transform:rotate(-135deg)}
+.onnavy .pcard .body{padding:0 20px 20px}
+.onnavy .pcard:hover > summary .t{color:var(--maroon)}
 
 /* ---------- output snapshot ---------- */
 .snap{display:none}
@@ -451,59 +470,81 @@ footer{max-width:1180px;margin:0 auto;padding:28px 24px 44px;color:var(--ink-sof
 
 <section class="onnavy" aria-labelledby="doTitle">
   <div class="inner">
-  <p class="eyebrow-s">Your options</p>
-  <h2 id="doTitle">What you can <span>do</span>.</h2>
-  <p class="lede">None of it is required.</p>
+    <p class="eyebrow-s">Your options</p>
+    <h2 id="doTitle">What you can <span>do</span>.</h2>
+    <p class="lede">None of it is required. Open one if you want the detail.</p>
 
-  <div class="cards">
-    <div class="pcard">
-      <span class="pill">If you disagree</span>
-      <div class="num">01</div>
-      <h3>Say what you think</h3>
-      <p class="sub">One click per row, only where you disagree</p>
-      <p class="desc">Only for the handful you would do differently.</p>
-      <div class="rule"><span class="inc">Includes</span>
-        <ul>
-          <li>Take it off the shared list</li>
-          <li>Keep it, but only under a condition you write down</li>
-          <li>Flag that you have not made up your mind</li>
-          <li>Say where you test it, if you want to</li>
-        </ul>
-      </div>
-    </div>
+    <div class="cards">
+      <details class="pcard">
+        <summary>
+          <span>
+            <span class="pill">If you disagree</span>
+            <span class="num">01</span>
+            <span class="t">Say what you think</span>
+          </span>
+          <span class="chev" aria-hidden="true"></span>
+        </summary>
+        <div class="body">
+          <p class="sub">One click per row, only where you disagree</p>
+          <p class="desc">Only for the handful you would do differently.</p>
+          <div class="rule"><span class="inc">Includes</span>
+            <ul>
+              <li>Take it off the shared list</li>
+              <li>Keep it, but only under a condition you write down</li>
+              <li>Flag that you have not made up your mind</li>
+              <li>Say where you test it, if you want to</li>
+            </ul>
+          </div>
+        </div>
+      </details>
 
-    <div class="pcard">
-      <span class="pill">If something is missing</span>
-      <div class="num">02</div>
-      <h3>Add what is missing</h3>
-      <p class="sub">Straight into the section it belongs in</p>
-      <p class="desc">Goes on as a proposal, so the group sees it.</p>
-      <div class="rule"><span class="inc">Includes</span>
-        <ul>
-          <li>Propose a structure, with your reason</li>
-          <li>Record what the faculty decided, in one line</li>
-          <li>Leave a comment under your name</li>
-          <li>Comment on a whole block at once</li>
-        </ul>
-      </div>
-    </div>
+      <details class="pcard">
+        <summary>
+          <span>
+            <span class="pill">If something is missing</span>
+            <span class="num">02</span>
+            <span class="t">Add what is missing</span>
+          </span>
+          <span class="chev" aria-hidden="true"></span>
+        </summary>
+        <div class="body">
+          <p class="sub">Straight into the section it belongs in</p>
+          <p class="desc">Goes on as a proposal, so the group sees it.</p>
+          <div class="rule"><span class="inc">Includes</span>
+            <ul>
+              <li>Propose a structure, with your reason</li>
+              <li>Record what the faculty decided, in one line</li>
+              <li>Leave a comment under your name</li>
+              <li>Comment on a whole block at once</li>
+            </ul>
+          </div>
+        </div>
+      </details>
 
-    <div class="pcard">
-      <span class="pill">For your own section</span>
-      <div class="num">03</div>
-      <h3>Keep your own version</h3>
-      <p class="sub">Yours alone, nobody else sees it</p>
-      <p class="desc">Switch things on or off for your section. The shared list does not move.</p>
-      <div class="rule"><span class="inc">Includes</span>
-        <ul>
-          <li>Add something the group left off</li>
-          <li>Drop something you do not cover</li>
-          <li>Or follow the department, row by row</li>
-          <li>Print or post your own version</li>
-        </ul>
-      </div>
+      <details class="pcard">
+        <summary>
+          <span>
+            <span class="pill">For your own section</span>
+            <span class="num">03</span>
+            <span class="t">Keep your own version</span>
+          </span>
+          <span class="chev" aria-hidden="true"></span>
+        </summary>
+        <div class="body">
+          <p class="sub">Yours alone, nobody else sees it</p>
+          <p class="desc">Switch things on or off for your section. The shared list does not move.</p>
+          <div class="rule"><span class="inc">Includes</span>
+            <ul>
+              <li>Add something the group left off</li>
+              <li>Drop something you do not cover</li>
+              <li>Or follow the department, row by row</li>
+              <li>Print or post your own version</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
     </div>
-  </div>
   </div>
 </section>
 
